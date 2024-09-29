@@ -21,20 +21,20 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
+                    <li class="nav-item">
+                            <a class="nav-link" href="<?= url('/');?>">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="servicios">Servicios</a>
+                            <a class="nav-link" href="<?= url('servicios');?>">Servicios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="blog">Blog</a>
+                            <a class="nav-link" href="<?= url('blog');?>">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="quienes-somos">Quienes Somos</a>
+                            <a class="nav-link" href="<?= url('quienes-somos');?>">Quienes Somos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact">Contacto</a>
+                            <a class="nav-link" href="<?= url('contacto');?>">Contacto</a>
                         </li>
                     </ul>
                 </div>
