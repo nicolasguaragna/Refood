@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->id();
-            $table->string('name'); // Nombre del servicio
+            $table->id('service_id'); //método generado automaticamente
+            $table->string('name'); // Nombre del servicio (ej, rescate A)
             $table->text('description'); // Descripción del servicio
-            $table->string('type'); // Tipo de servicio (S, M, L, XL)
-            $table->decimal('contribution', 8, 2)->nullable(); // Contribución económica (si aplica)
-            $table->integer('minimum_kg')->nullable(); // Cantidad mínima de alimentos
-            $table->string('logistics_required')->nullable(); // Si se necesita logística especial
-            $table->timestamps();
+            $table->string('type'); // Tipo de servicio  Para identificar si es un rescate pequeño, mediano, grande, o un programa de apoyo.
+            $table->decimal('contribution', 8, 2)->nullable(); // Contribución económica, Un bono económico que algunas categorías de rescates requieren para cubrir logística.
+            $table->integer('minimum_kg')->nullable(); // Cantidad mínima de kg de alimentos,dependiendo el rescate.
+            $table->string('logistics_required')->nullable(); // Si se necesita logística especial (por ejemplo, kits de recolección).
+            $table->timestamps(); //método generado automaticamente, define create_at y updated_at
         });
     }
 

@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('donations_sponsorships', function (Blueprint $table) {
-            $table->id();
+            $table->id('donations_sponsorships_id');
             $table->string('donor_name'); // Nombre del donante o patrocinador
             $table->decimal('amount', 8, 2); // Monto donado o patrocinado
             $table->string('payment_method'); // Mercado Pago o transferencia
-            $table->string('transaction_id')->nullable(); // ID de transacción (si aplica)
-            $table->string('type'); // donation o sponsorship
-            $table->timestamps();
+            $table->string('transaction_id')->nullable(); // ID de transacción, útil para seguimiento o auditoría.
+            $table->string('type'); // Indica si es una "donación" o "patrocinio".
+            $table->timestamps(); //método generado automaticamente, define create_at y updated_at
         });
     }
 
