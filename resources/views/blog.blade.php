@@ -41,7 +41,8 @@
             </div>
         </nav>
         <main class="container p-4">
-            <h1 class="mb-3">Quiénes Somos</h1>
+            <h1 class="mb-3">Blog</h1>
+            <p>Bienvenido al blog de Refood, donde compartimos novedades y artículos.</p>
         </main>
         <footer class="footer">
             <p>Copyright &copy; Da vinci 2024</p>

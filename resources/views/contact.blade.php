@@ -41,11 +41,11 @@
             </div>
         </nav>
         <main class="container p-4">
-            <h1 class="mb-3">Quiénes Somos</h1>
+            <h1 class="mb-3">Contacto</h1>
         </main>
         <footer class="footer">
             <p>Copyright &copy; Da vinci 2024</p>
-        </footer>
+        </footer> 
     </div>
 </body>
 
