@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?= $title;?> :: Refood</title>
+    <title>{{ $title }} :: Refood</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
@@ -42,7 +42,9 @@
         </nav>
         <main class="container p-4">
             {{--<h1 class="mb-3">Pagina principal</h1> --}}
-            <?= $slot;?> 
+            {{ $slot }}
+
+
         </main>
         <footer class="footer">
             <p>Copyright &copy; Da vinci 2024</p>
