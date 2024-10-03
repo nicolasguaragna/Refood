@@ -14,7 +14,7 @@ class ServiciosController extends Controller
         $services = Service::all(); // Obtener todos los servicios
 
         //dump and die.
-        dd($services);
+        //dd($services);
 
         return view('servicios', [
             'services' => $services,
