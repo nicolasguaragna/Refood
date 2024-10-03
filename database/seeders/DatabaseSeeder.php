@@ -15,9 +15,13 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //    'name' => 'Test User',
+        //  'email' => 'test@example.com',
+        //]);
+
+        //Invoca un seeder a traves de su FQN , o un array de FQNS
+        //Para multiples clases.
+        $this->call(ServiceSeeder::class);
     }
 }
