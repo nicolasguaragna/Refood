@@ -16,6 +16,8 @@ class ServiciosController extends Controller
         //dump and die.
         dd($services);
 
-        return view('servicios');
+        return view('servicios', [
+            'services' => $services,
+        ]);
     }
 }
