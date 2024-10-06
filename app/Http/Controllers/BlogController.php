@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller; // Asegúrate de importar esta clase
+
 
 class BlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['create', 'store', 'edit', 'update', 'destroy']);
+    }
+
     // Mostrar todos los posts
     public function index()
     {
@@ -33,11 +41,14 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
-            'author_id' => 'required|exists:users,id',
         ]);
 
-        BlogPost::create($request->all());
-
+        BlogPost::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'author_id' => auth()->id(), // Obtener el ID del usuario autenticado
+        ]);
+    
         return redirect()->route('blog.index')->with('success', 'Post creado con éxito.');
     }
 
@@ -54,14 +65,18 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
-            'author_id' => 'required|exists:users,id',
         ]);
-
+    
         $post = BlogPost::findOrFail($id);
-        $post->update($request->all());
-
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'author_id' => auth()->id(), // Actualizar el autor si es necesario
+        ]);
+    
         return redirect()->route('blog.index')->with('success', 'Post actualizado con éxito.');
     }
+    
 
     // Eliminar un post
     public function destroy($id)
