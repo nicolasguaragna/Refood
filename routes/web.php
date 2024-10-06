@@ -12,3 +12,4 @@ Route::get('contact', [\App\Http\Controllers\ContactController::class, 'index'])
 Route::get('/donations', [\App\Http\Controllers\DonationsController::class, 'index']);
 Route::get('/donations/create', [\App\Http\Controllers\DonationsController::class, 'create']);
 Route::post('/donations', [\App\Http\Controllers\DonationsController::class, 'store']);
+Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show']);

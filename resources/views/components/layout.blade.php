@@ -7,8 +7,8 @@
 
     <title>{{ $title }} :: Refood</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 
 <body>
@@ -22,29 +22,26 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= url('/');?>">Home</a>
+                            <a class="nav-link" href="{{ url('/') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= url('servicios');?>">Servicios</a>
+                            <a class="nav-link" href="{{ url('servicios') }}">Servicios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= url('blog');?>">Blog</a>
+                            <a class="nav-link" href="{{ url('blog') }}">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= url('quienes-somos');?>">Quienes Somos</a>
+                            <a class="nav-link" href="{{ url('quienes-somos') }}">Quienes Somos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= url('contact');?>">Contacto</a>
+                            <a class="nav-link" href="{{ url('contact') }}">Contacto</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
         <main class="container p-4">
-            {{--<h1 class="mb-3">Pagina principal</h1> --}}
             {{ $slot }}
-
-
         </main>
         <footer class="footer">
             <p>Copyright &copy; Da vinci 2024</p>
