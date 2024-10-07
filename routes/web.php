@@ -11,9 +11,6 @@ Route::get('contact', [\App\Http\Controllers\ContactController::class, 'index'])
 Route::get('/donations', [\App\Http\Controllers\DonationsController::class, 'index']);
 Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show']);
 Route::get('blog/{id}', [\App\Http\Controllers\BlogController::class, 'show']);
-Route::get('login', [\App\Http\Controllers\AuthController::class, 'login'])->name('auth.login');
-Route::post('login', [\App\Http\Controllers\AuthController::class, 'authenticate'])->name('auth.authenticate');
-
 
 // Protejo las rutas del blog que requieren autenticación con el middleware 'auth'
 Route::middleware('auth')->group(function () {
