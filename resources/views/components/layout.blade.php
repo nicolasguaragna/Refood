@@ -36,6 +36,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('contact') }}">Contacto</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('auth.login') }}">Iniciar Sesión</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -45,7 +48,7 @@
         </main>
         <footer class="footer">
             <p>Copyright &copy; Da vinci 2024</p>
-        </footer> 
+        </footer>
     </div>
 </body>
 

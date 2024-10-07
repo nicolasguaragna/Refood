@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
+            'id' => 1,
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => Hash::make('password'), // Encriptar la contraseña
