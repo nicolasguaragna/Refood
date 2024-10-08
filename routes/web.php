@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'destroy']);
 });
 
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('cerrar-sesion', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('auth.logout');
