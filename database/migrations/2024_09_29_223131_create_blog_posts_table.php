@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('blog_posts', function (Blueprint $table) {
-            $table->id('blog_posts_id');//método generado automaticamente
+            $table->id();//método generado automaticamente
             $table->string('title'); // Título del post
             $table->text('content'); // Contenido del post
             $table->foreignId('author_id')->constrained('users')->onDelete('cascade'); // ID del autor, que es una clave foránea relacionada con la tabla de users, lo que permite identificar al usuario que escribió el post.

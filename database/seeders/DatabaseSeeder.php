@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
         //Para multiples clases.
         $this->call([
             UserSeeder::class,
-            ServiceSeeder::class,
             BlogSeeder::class,
+            ServiceSeeder::class,
         ]);
     }
 }
