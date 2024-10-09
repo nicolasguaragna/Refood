@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller; 
+use App\Http\Controllers\Controller;
 
 
 class BlogController extends Controller
@@ -18,8 +18,9 @@ class BlogController extends Controller
     // Mostrar todos los posts
     public function index()
     {
-        // Obtener todas las entradas de blog, incluyendo la relación con el autor
-        $posts = BlogPost::with('author')->get();
+        $user = Auth::user(); // Obtener el usuario autenticado
+        $posts = BlogPost::where('author_id', $user->id)->get(); // Filtrar por autor
+
         return view('blog.admin', compact('posts')); // Mostrar la vista admin con los posts
     }
 
@@ -49,7 +50,7 @@ class BlogController extends Controller
             'content' => $request->content,
             'author_id' => auth()->id(), // Obtener el ID del usuario autenticado
         ]);
-    
+
         return redirect()->route('blog.index')->with('success', 'Post creado con éxito.');
     }
 
@@ -57,6 +58,12 @@ class BlogController extends Controller
     public function edit($id)
     {
         $post = BlogPost::findOrFail($id);
+
+        // Asegurarse de que el usuario solo puede editar sus propios posts
+        if ($post->author_id !== auth()->id()) {
+            return redirect()->route('blog.index')->with('error', 'No tienes permiso para editar este post.');
+        }
+
         return view('blog.edit', compact('post'));
     }
 
@@ -67,24 +74,28 @@ class BlogController extends Controller
             'title' => 'required|max:255',
             'content' => 'required',
         ]);
-    
+
         $post = BlogPost::findOrFail($id);
         $post->update([
             'title' => $request->title,
             'content' => $request->content,
             'author_id' => auth()->id(), // Actualizar el autor si es necesario
         ]);
-    
+
         return redirect()->route('blog.index')->with('success', 'Post actualizado con éxito.');
     }
-    
 
     // Eliminar un post
     public function destroy($id)
     {
         $post = BlogPost::findOrFail($id);
-        $post->delete();
 
+        // Asegurarse de que el usuario solo puede eliminar sus propios posts
+        if ($post->author_id !== auth()->id()) {
+            return redirect()->route('blog.index')->with('error', 'No tienes permiso para eliminar este post.');
+        }
+
+        $post->delete();
         return redirect()->route('blog.index')->with('success', 'Post eliminado con éxito.');
     }
 }

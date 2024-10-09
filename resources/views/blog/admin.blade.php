@@ -19,21 +19,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($posts as $post)
+                    @foreach ($posts as $post)
                     <tr>
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->author->name }}</td>
                         <td>
-                            <a href="{{ route('blog.destroy', $post->id) }}" class="btn btn-warning">Editar</a>
+                            @if ($post->author_id === auth()->id()) <!-- Solo mostrar si el post pertenece al usuario autenticado -->
+                            <a href="{{ route('blog.edit', $post->id) }}" class="btn btn-warning">Editar</a>
                             <form action="{{ route('blog.destroy', $post->id) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta entrada?')">Eliminar</button>
                             </form>
+                            @endif
                         </td>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 </x-layout>
