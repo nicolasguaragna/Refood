@@ -40,6 +40,41 @@ class BlogSeeder extends Seeder
                 'author_id' => 4,
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'title' => 'Técnicas para una alimentación saludable',
+                'content' => 'En este artículo, exploramos diversas técnicas para mejorar tu alimentación diaria sin hacer grandes sacrificios.',
+                'author_id' => 4, // Nicolas Guaragna
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'Recetas rápidas y saludables para el día a día',
+                'content' => 'Te presentamos una colección de recetas rápidas que no solo son saludables sino también deliciosas.',
+                'author_id' => 4, // Nicolas Guaragna
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'El impacto del desperdicio alimentario en el medio ambiente',
+                'content' => 'El desperdicio de alimentos tiene un gran impacto en el medio ambiente. En este artículo analizamos cómo reducirlo.',
+                'author_id' => 4, // Nicolas Guaragna
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'Beneficios del reciclaje en la industria alimentaria',
+                'content' => 'En este artículo, discutimos los beneficios que el reciclaje puede tener en la reducción de residuos dentro de la industria alimentaria.',
+                'author_id' => 4, // Nicolas Guaragna
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'Cómo reducir el uso de plásticos en el hogar',
+                'content' => 'Reducir el uso de plásticos es esencial para el medio ambiente. Aquí te contamos cómo hacerlo desde casa.',
+                'author_id' => 4, // Nicolas Guaragna
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }

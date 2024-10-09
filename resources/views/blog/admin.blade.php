@@ -24,8 +24,8 @@
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->author->name }}</td>
                         <td>
-                            <a href="{{ route('blog.edit', ['id' => $post->id]) }}" class="btn btn-warning">Editar</a>
-                            <form action="{{ route('blog.destroy', ['id' => $post->id]) }}" method="POST" style="display:inline-block;">
+                            <a href="{{ route('blog.destroy', $post->id) }}" class="btn btn-warning">Editar</a>
+                            <form action="{{ route('blog.destroy', $post->id) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta entrada?')">Eliminar</button>
