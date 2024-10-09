@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('quienes-somos', [\App\Http\Controllers\AboutController::class, 'about']);
 Route::get('servicios', [\App\Http\Controllers\ServiciosController::class, 'index']);
-Route::get('blog', [\App\Http\Controllers\BlogController::class, 'index']);
+Route::get('blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
 Route::get('contact', [\App\Http\Controllers\ContactController::class, 'index']);
 Route::get('/donations', [\App\Http\Controllers\DonationsController::class, 'index']);
 Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show']);
@@ -23,7 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/blog/{id}/edit', [\App\Http\Controllers\BlogController::class, 'edit'])->name('blog.edit');
     Route::put('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'update'])->name('blog.update');
     Route::delete('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'destroy'])->name('blog.destroy');
-    Route::get('/blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
     Route::get('/blog/admin', [\App\Http\Controllers\BlogController::class, 'index']);
 });
 

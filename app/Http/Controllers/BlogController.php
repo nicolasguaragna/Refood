@@ -18,10 +18,16 @@ class BlogController extends Controller
     // Mostrar todos los posts
     public function index()
     {
-        $user = Auth::user(); // Obtener el usuario autenticado
-        $posts = BlogPost::where('author_id', $user->id)->get(); // Filtrar por autor
-
-        return view('blog.admin', compact('posts')); // Mostrar la vista admin con los posts
+        if (Auth::check()) {
+            // Si el usuario está autenticado, muestra solo sus posts
+            $user = Auth::user();
+            $posts = BlogPost::where('author_id', $user->id)->get();
+        } else {
+            // Si no está autenticado, muestra todos los posts
+            $posts = BlogPost::all();
+        }
+    
+        return view('blog.admin', compact('posts')); // Vista de administración o index del blog
     }
 
     // Mostrar un post específico
