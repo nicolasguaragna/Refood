@@ -22,13 +22,22 @@ class BlogController extends Controller
             // Si el usuario está autenticado, muestra solo sus posts
             $user = Auth::user();
             $posts = BlogPost::where('author_id', $user->id)->get();
+            return view('blog.admin', compact('posts')); // Vista de administración para usuarios autenticados
         } else {
-            // Si no está autenticado, muestra todos los posts
-            $posts = BlogPost::all();
+        // Para usuarios no autenticados, mostramos todos los posts
+        $posts = BlogPost::all();
+        return view('blog.index', compact('posts')); // Vista pública
         }
-    
-        return view('blog.admin', compact('posts')); // Vista de administración o index del blog
     }
+
+    
+    public function admin()
+    {
+        $user = Auth::user(); // Usuario autenticado
+        $posts = BlogPost::where('author_id', $user->id)->get(); // Posts del autor autenticado
+        return view('blog.admin', compact('posts')); // Vista de administración
+    }
+    
 
     // Mostrar un post específico
     public function show($id)
