@@ -23,8 +23,9 @@ class DatabaseSeeder extends Seeder
         //Invoca un seeder a traves de su FQN , o un array de FQNS
         //Para multiples clases.
         $this->call([
-            ServiceSeeder::class,
             UserSeeder::class,
+            ServiceSeeder::class,
+            BlogSeeder::class,
         ]);
     }
 }

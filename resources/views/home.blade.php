@@ -1,32 +1,37 @@
 <x-layout>
     <x-slot:title>Página Principal</x-slot>
 
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Bienvenido a Refood</h1>
-        <p class="text-center">Bienvenido a nuestro sitio web. Aquí podrás acceder a nuestros servicios y leer nuestras últimas entradas de blog.</p>
+    <div class="container mt-1 d-flex flex-column align-items-center justify-content-center bg-light p-5" style="min-height: 100vh;">
+        <!-- Logo de la marca -->
+        <div class="mb-4">
+            <img src="{{ asset('images/refood2.jpg') }}" alt="Logo Refood" style="max-width: 500px;" class="img-fluid rounded shadow-lg">
+        </div>
+
+        <p class="text-center lead text-muted mb-5">Somos una comunidad de concientización alimentaria. 
+        <br>Rescatamos alimentos y los entregamos a comedores comunitarios de forma gratuita.</p>
 
         <!-- Contadores de Kilos rescatados y Platos entregados -->
         <div class="row text-center mt-5">
-            <div class="col-md-6">
-                <div>
-                    <img src="/path/to/your/image1.png" alt="Kilos Rescatados" style="max-width: 150px;">
+            <div class="col-md-6 mb-4">
+                <div class="mb-3">
+                    <img src="{{ asset('images/comida-rescatada.jpg') }}" alt="Kilos Rescatados" class="img-fluid rounded shadow" style="max-width: 250px;">
                 </div>
-                <h2><span id="kilos-rescatados">0</span></h2>
-                <p>Kilos rescatados en el 2024</p>
+                <h2 class="display-5 text-primary"><span id="kilos-rescatados">0</span></h2>
+                <p class="text-muted">Kilos rescatados en el 2024</p>
                 <p>Rescatamos alimentos en excelente estado que por algún motivo salen de la cadena de comercialización.</p>
             </div>
-            <div class="col-md-6">
-                <div>
-                    <img src="/path/to/your/image2.png" alt="Platos Entregados" style="max-width: 150px;">
+            <div class="col-md-6 mb-4">
+                <div class="mb-3">
+                    <img src="{{ asset('images/platos-entregados.jpg') }}" alt="Platos Entregados" class="img-fluid rounded shadow" style="max-width: 350px;">
                 </div>
-                <h2><span id="platos-entregados">0</span></h2>
-                <p>Platos entregados en el 2024</p>
-                <p>Los alimentos son entregados de forma totalmente gratuita en comedores comunitarios.</p>
+                <h2 class="display-5 text-success"><span id="platos-entregados">0</span></h2>
+                <p class="text-muted">Platos entregados en el 2024</p>
+                <p>Los alimentos son entregados de forma totalmente gratuita en comedores comunitarios. Cada Plato Cuenta.</p>
             </div>
         </div>
 
         <div class="text-center mt-4">
-            <button class="btn btn-primary">Quiero contactarme</button>
+            <button class="btn btn-primary btn-lg">Quiero contactarme</button>
         </div>
     </div>
 
