@@ -1,10 +1,10 @@
 <x-layout>
-    <x-slot:title>Crear Nueva Entrada de Blog</x-slot:title>
+    <x-slot:title>Crear Nueva Entrada de Blog</x-slot>
 
     <div class="container mt-5">
         <h1 class="text-center mb-4">Nueva Entrada de Blog</h1>
 
-        <!-- Mostrar errores de validación -->
+        <!-- Mostrar mensajes de error si los hay -->
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -15,8 +15,9 @@
             </div>
         @endif
 
-        <form action="{{ url('/blog') }}" method="POST">
-            @csrf  <!-- Protege contra ataques CSRF -->
+        <!-- Formulario para crear un nuevo post -->
+        <form action="{{ route('blog.store') }}" method="POST">
+            @csrf
 
             <div class="mb-3">
                 <label for="title" class="form-label">Título</label>
@@ -28,7 +29,10 @@
                 <textarea class="form-control" id="content" name="content" rows="5" required>{{ old('content') }}</textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Crear Entrada</button>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Crear Entrada</button>
+            </div>
         </form>
     </div>
 </x-layout>
+

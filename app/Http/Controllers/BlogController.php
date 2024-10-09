@@ -51,7 +51,7 @@ class BlogController extends Controller
             'author_id' => auth()->id(), // Obtener el ID del usuario autenticado
         ]);
 
-        return redirect()->route('blog.index')->with('success', 'Post creado con éxito.');
+        return redirect()->route('blog.index')->with('success', 'Entrada de blog creada con éxito.');
     }
 
     // Mostrar formulario para editar un post existente

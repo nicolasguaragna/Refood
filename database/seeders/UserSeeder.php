@@ -16,29 +16,29 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name' => 'Micaela Guaragna',
-                'email' => 'test2@example.com',
-                'password' => Hash::make('password'), // Encriptar la contraseña
+                'email' => 'micag@example.com',
+                'password' => Hash::make('1234'),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Tatiana Barrios',
-                'email' => 'test3@example.com',
-                'password' => Hash::make('password'),
+                'email' => 'tatianab@example.com',
+                'password' => Hash::make('1234'),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Brian Guaragna',
-                'email' => 'test4@example.com',
-                'password' => Hash::make('password'),
+                'email' => 'briang@example.com',
+                'password' => Hash::make('1234'),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Nico Guaragna',
                 'email' => 'nico_guaragna@hotmail.com',
-                'password' => Hash::make('1234'), // Encriptar la contraseña
+                'password' => Hash::make('1234'), 
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
