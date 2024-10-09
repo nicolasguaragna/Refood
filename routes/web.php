@@ -16,11 +16,15 @@ Route::get('blog/{id}', [\App\Http\Controllers\BlogController::class, 'show']);
 Route::middleware('auth')->group(function () {
     Route::get('/donations/create', [\App\Http\Controllers\DonationsController::class, 'create']);
     Route::post('/donations', [\App\Http\Controllers\DonationsController::class, 'store']);
-    Route::get('/blog/create', [\App\Http\Controllers\BlogController::class, 'create']);
-    Route::post('/blog', [\App\Http\Controllers\BlogController::class, 'store']);
-    Route::get('/blog/{id}/edit', [\App\Http\Controllers\BlogController::class, 'edit']);
-    Route::put('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'update']);
-    Route::delete('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'destroy']);
+    
+    // Rutas CRUD para el blog
+    Route::get('/blog/create', [\App\Http\Controllers\BlogController::class, 'create'])->name('blog.create');
+    Route::post('/blog', [\App\Http\Controllers\BlogController::class, 'store'])->name('blog.store');
+    Route::get('/blog/{id}/edit', [\App\Http\Controllers\BlogController::class, 'edit'])->name('blog.edit');
+    Route::put('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'update'])->name('blog.update');
+    Route::delete('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'destroy'])->name('blog.destroy');
+    
+    Route::get('/blog/admin', [\App\Http\Controllers\BlogController::class, 'index']);
 });
 
 Auth::routes();

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller; // Asegúrate de importar esta clase
+use App\Http\Controllers\Controller; 
 
 
 class BlogController extends Controller
@@ -18,8 +18,9 @@ class BlogController extends Controller
     // Mostrar todos los posts
     public function index()
     {
-        $posts = BlogPost::all();
-        return view('blog.index', compact('posts'));
+        // Obtener todas las entradas de blog, incluyendo la relación con el autor
+        $posts = BlogPost::with('author')->get();
+        return view('blog.admin', compact('posts')); // Mostrar la vista admin con los posts
     }
 
     // Mostrar un post específico
