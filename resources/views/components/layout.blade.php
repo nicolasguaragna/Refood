@@ -85,7 +85,7 @@
         <main class="container p-4">
             {{ $slot }}
         </main>
-        <footer class="footer">
+        <footer class="footer bg-dark text-white py-4">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">

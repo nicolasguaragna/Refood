@@ -3,4 +3,28 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+.footer {
+    background-color: #15cc15; /* Verde oscuro */
+    color: white;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer h4 {
+    font-weight: bold;
+    color: #d7dfba; /* Verde claro */
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #d7dfba;
+}
+
+
 
