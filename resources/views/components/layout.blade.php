@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -11,8 +11,10 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
     <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    
 </head>
 
 <body>
@@ -28,52 +30,52 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}">Home</a>
+                            <a class="nav-link text-success" href="{{ url('/') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('servicios') }}">Servicios</a>
+                            <a class="nav-link text-success" href="{{ url('servicios') }}">Servicios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('blog') }}">Blog</a>
+                            <a class="nav-link text-success" href="{{ url('blog') }}">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('quienes-somos') }}">Quienes Somos</a>
+                            <a class="nav-link text-success" href="{{ url('quienes-somos') }}">Quienes Somos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('contact') }}">Contacto</a>
+                            <a class="nav-link text-success" href="{{ url('contact') }}">Contacto</a>
                         </li>
-                        
+
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
-                                </li>
-                            @endif
+                        @if (Route::has('login'))
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="{{ route('login') }}">Iniciar Sesión</a>
+                        </li>
+                        @endif
 
-                            <!-- @if (Route::has('register'))
+                        <!-- @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
                                 </li>
                             @endif-->
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ Auth::user()->name }}
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('auth.logout') }}"
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('auth.logout') }}"
                                         onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                            {{ __('Cerrar Sesión') }}
-                                        </a>
-                                    </li>
-                                    <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </ul>
-                            </li>
+                                        {{ __('Cerrar Sesión') }}
+                                    </a>
+                                </li>
+                                <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </ul>
+                        </li>
                         @endguest
                     </ul>
                 </div>
@@ -84,8 +86,21 @@
             {{ $slot }}
         </main>
         <footer class="footer">
-            <p>Copyright &copy; Da vinci 2024</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{ asset('images/refood2.jpg') }}" alt="Refood Logo" style="max-width: 150px;">
+                        <p>Cada plato cuenta</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <h4>CONTACTO</h4>
+                        <p><strong>11 3312 4697</strong></p>
+                        <p><strong>refood@refood.com.ar</strong></p>
+                    </div>
+                </div>
+            </div>
         </footer>
+
     </div>
 
     <!-- Bootstrap JS -->

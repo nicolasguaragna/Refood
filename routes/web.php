@@ -7,7 +7,7 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('quienes-somos', [\App\Http\Controllers\AboutController::class, 'about']);
 Route::get('servicios', [\App\Http\Controllers\ServiciosController::class, 'index']);
 Route::get('blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
-Route::get('contact', [\App\Http\Controllers\ContactController::class, 'index']);
+Route::get('contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');
 Route::get('/donations', [\App\Http\Controllers\DonationsController::class, 'index']);
 Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show']);
 Route::get('blog/{id}', [\App\Http\Controllers\BlogController::class, 'show']);
@@ -30,3 +30,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('cerrar-sesion', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('auth.logout');
+Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');

@@ -30,9 +30,6 @@
             </div>
         </div>
 
-        <div class="text-center mt-4">
-            <button class="btn btn-primary btn-lg">Quiero contactarme</button>
-        </div>
     </div>
 
     <!-- Script para animar los contadores -->

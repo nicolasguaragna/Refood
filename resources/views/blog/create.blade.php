@@ -16,9 +16,8 @@
         @endif
 
         <!-- Formulario para crear un nuevo post -->
-        <form action="{{ route('blog.store') }}" method="POST">
+        <form action="{{ route('blog.store') }}" method="POST" class="shadow p-4 rounded bg-light">
             @csrf
-
             <div class="mb-3">
                 <label for="title" class="form-label">Título</label>
                 <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>

@@ -1,7 +1,7 @@
 <x-layout>
     <x-slot:title>Nuestros Servicios</x-slot:title>
     
-    <div class="container mt-5">
+    <div class="container mt-1">
         <h1 class="text-center mb-4">Nuestros Servicios</h1>
         <div class="row">
             @foreach($services as $service)
