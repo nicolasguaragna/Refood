@@ -4,7 +4,7 @@
     <div class="container mt-1 d-flex flex-column align-items-center justify-content-center bg-light p-5" style="min-height: 100vh;">
         <!-- Logo de la marca -->
         <div class="mb-4">
-            <img src="{{ asset('images/refood2.jpg') }}" alt="Logo Refood" style="max-width: 500px;" class="img-fluid rounded shadow-lg">
+            <img src="{{ asset('images/marca.jpg') }}" alt="Logo Refood" style="max-width: 500px;" class="img-fluid rounded shadow-lg">
         </div>
 
         <p class="text-center lead text-muted mb-5">Somos una comunidad de concientización alimentaria. 
