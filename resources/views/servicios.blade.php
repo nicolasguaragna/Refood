@@ -8,7 +8,7 @@
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $service->name }}</h5>
+                            <h2 class="card-title">{{ $service->name }}</h2>
                             <p class="card-text">{{ $service->description }}</p>
                             <p class="card-text"><strong>Precio:</strong> ${{ number_format($service->price, 2) }}</p>
                         <!-- Botón "Ver más" -->

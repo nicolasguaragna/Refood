@@ -93,7 +93,7 @@
                         <p>Cada plato cuenta</p>
                     </div>
                     <div class="col-md-6 text-end">
-                        <h4>CONTACTO</h4>
+                        <h2>Contacto</h2>
                         <p><strong>11 3312 4697</strong></p>
                         <p><strong>refood@refood.com.ar</strong></p>
                     </div>

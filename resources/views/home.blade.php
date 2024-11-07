@@ -7,8 +7,8 @@
             <img src="{{ asset('images/marca.jpg') }}" alt="Logo Refood" style="max-width: 500px;" class="img-fluid rounded shadow-lg">
         </div>
 
-        <p class="text-center lead text-muted mb-5">Somos una comunidad de concientización alimentaria. 
-        <br>Rescatamos alimentos y los entregamos a comedores comunitarios de forma gratuita.</p>
+        <h1 class="text-center text-muted mb-5">Somos una comunidad de concientización alimentaria. 
+        <br>Rescatamos alimentos y los entregamos a comedores comunitarios de forma gratuita.</h1>
 
         <!-- Contadores de Kilos rescatados y Platos entregados -->
         <div class="row text-center mt-5">
