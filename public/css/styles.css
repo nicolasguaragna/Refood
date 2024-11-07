@@ -60,3 +60,25 @@ body {
     resize: none;
 }
 
+/* Estilo para el contenedor principal */
+.full-height-container {
+    min-height: 100vh;
+}
+
+/* Estilo para la imagen del logo de la marca */
+.logo-image {
+    max-width: 500px;
+}
+
+/* Estilo para las imágenes de los contadores */
+.counter-image {
+    max-width: 250px;
+}
+
+.counter-image-large {
+    max-width: 350px;
+}
+
+.inline-form {
+    display: inline-block;
+}

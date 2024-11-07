@@ -26,7 +26,7 @@
                         <td>
                             @if ($post->author_id === auth()->id()) <!-- Solo mostrar si el post pertenece al usuario autenticado -->
                             <a href="{{ route('blog.edit', $post->id) }}" class="btn btn-warning">Editar</a>
-                            <form action="{{ route('blog.destroy', $post->id) }}" method="POST" style="display:inline-block;">
+                            <form action="{{ route('blog.destroy', $post->id) }}" method="POST" class="inline-form">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta entrada?')">Eliminar</button>

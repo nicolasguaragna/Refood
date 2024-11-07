@@ -1,10 +1,10 @@
 <x-layout>
     <x-slot:title>Página Principal</x-slot>
 
-    <div class="container mt-1 d-flex flex-column align-items-center justify-content-center bg-light p-5" style="min-height: 100vh;">
+    <div class="container mt-1 d-flex flex-column align-items-center justify-content-center bg-light p-5 full-height-container">
         <!-- Logo de la marca -->
         <div class="mb-4">
-            <img src="{{ asset('images/marca.jpg') }}" alt="Logo Refood" style="max-width: 500px;" class="img-fluid rounded shadow-lg">
+            <img src="{{ asset('images/marca.jpg') }}" alt="Logo Refood" class="img-fluid rounded shadow-lg logo-image">
         </div>
 
         <h1 class="text-center text-muted mb-5">Somos una comunidad de concientización alimentaria. 
@@ -14,7 +14,7 @@
         <div class="row text-center mt-5">
             <div class="col-md-6 mb-4">
                 <div class="mb-3">
-                    <img src="{{ asset('images/comida-rescatada.jpg') }}" alt="Kilos Rescatados" class="img-fluid rounded shadow" style="max-width: 250px;">
+                <img src="{{ asset('images/comida-rescatada.jpg') }}" alt="Kilos Rescatados" class="img-fluid rounded shadow counter-image">
                 </div>
                 <h2 class="display-5 text-primary"><span id="kilos-rescatados">0</span></h2>
                 <p class="text-muted">Kilos rescatados en el 2024</p>
@@ -22,7 +22,7 @@
             </div>
             <div class="col-md-6 mb-4">
                 <div class="mb-3">
-                    <img src="{{ asset('images/platos-entregados.jpg') }}" alt="Platos Entregados" class="img-fluid rounded shadow" style="max-width: 350px;">
+                <img src="{{ asset('images/platos-entregados.jpg') }}" alt="Platos Entregados" class="img-fluid rounded shadow counter-image-large">
                 </div>
                 <h2 class="display-5 text-success"><span id="platos-entregados">0</span></h2>
                 <p class="text-muted">Platos entregados en el 2024</p>
