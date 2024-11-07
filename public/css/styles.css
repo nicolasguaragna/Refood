@@ -12,11 +12,6 @@ body {
     margin: 0;
 }
 
-.footer h4 {
-    font-weight: bold;
-    color: #d7dfba; /* Verde claro */
-}
-
 .footer a {
     color: white;
     text-decoration: none;
@@ -26,5 +21,42 @@ body {
     color: #d7dfba;
 }
 
+.footer-logo {
+    max-width: 150px;
+}
 
+/* Estilo para la columna de información de contacto */
+.contact-info {
+    background-color: #a5c923;
+    color: black;
+    padding: 20px;
+}
+
+/* Estilo para el formulario de contacto */
+.contact-form {
+    border: 2px solid #a5c923;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Estilo para los campos de entrada en el formulario */
+.contact-input {
+    border: 1px solid #a5c923;
+}
+
+/* Estilo para el botón de envío */
+.contact-button {
+    background-color: #a5c923;
+    border-color: #a5c923;
+}
+
+.contact-button:hover {
+    background-color: #8bbf20; /* Un color ligeramente más oscuro para el efecto hover */
+}
+
+/* Para desactivar el redimensionamiento del textarea */
+.no-resize {
+    resize: none;
+}
 

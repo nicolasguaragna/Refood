@@ -89,7 +89,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="{{ asset('images/marca.jpg') }}" alt="Refood Logo" style="max-width: 150px;">
+                        <img src="{{ asset('images/marca.jpg') }}" alt="Refood Logo" class="footer-logo">
                         <p>Cada plato cuenta</p>
                     </div>
                     <div class="col-md-6 text-end">
