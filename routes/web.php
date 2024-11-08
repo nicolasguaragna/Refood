@@ -10,6 +10,7 @@ Route::get('blog', [\App\Http\Controllers\BlogController::class, 'index'])->name
 Route::get('contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');
 Route::get('/donations', [\App\Http\Controllers\DonationsController::class, 'index']);
 Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show']);
+Route::get('/blog/create', [\App\Http\Controllers\BlogController::class, 'create'])->name('blog.create');
 Route::get('blog/{id}', [\App\Http\Controllers\BlogController::class, 'show']);
 
 // Protejo las rutas del blog que requieren autenticación con el middleware 'auth'
@@ -19,7 +20,6 @@ Route::middleware('auth')->group(function () {
     
     // Rutas CRUD para el blog
     Route::get('blog/admin', [\App\Http\Controllers\BlogController::class, 'admin'])->name('blog.admin');
-    Route::get('/blog/create', [\App\Http\Controllers\BlogController::class, 'create'])->name('blog.create');
     Route::post('/blog', [\App\Http\Controllers\BlogController::class, 'store'])->name('blog.store');
     Route::get('/blog/{id}/edit', [\App\Http\Controllers\BlogController::class, 'edit'])->name('blog.edit');
     Route::put('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'update'])->name('blog.update');
