@@ -4,6 +4,19 @@
         <div class="container mt-5">
             <h1 class="text-center mb-4">Administrar Entradas del Blog</h1>
 
+        <!-- Mostrar mensajes de éxito o error -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
             <!-- Botón para crear una nueva entrada -->
             <div class="text-center mb-3">
                 <a href="{{ route('blog.create') }}" class="btn btn-primary">Nueva Entrada de Blog</a>

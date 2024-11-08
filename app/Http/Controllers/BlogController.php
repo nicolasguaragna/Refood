@@ -22,11 +22,11 @@ class BlogController extends Controller
             // Si el usuario está autenticado, muestra solo sus posts
             $user = Auth::user();
             $posts = BlogPost::where('author_id', $user->id)->get();
-            return view('blog.admin', compact('posts')); // Vista de administración para usuarios autenticados
+            return view('blog.admin', compact('posts'))->with('success', 'Bienvenido al panel de administración de blogs.');
         } else {
         // Para usuarios no autenticados, mostramos todos los posts
         $posts = BlogPost::all();
-        return view('blog.index', compact('posts')); // Vista pública
+        return view('blog.index', compact('posts'))->with('success', 'Bienvenido al blog público.');
         }
     }
 
@@ -35,7 +35,7 @@ class BlogController extends Controller
     {
         $user = Auth::user(); // Usuario autenticado
         $posts = BlogPost::where('author_id', $user->id)->get(); // Posts del autor autenticado
-        return view('blog.admin', compact('posts')); // Vista de administración
+        return view('blog.admin', compact('posts'))->with('success', 'Administración de entradas del blog.');
     }
     
 
@@ -43,13 +43,13 @@ class BlogController extends Controller
     public function show($id)
     {
         $post = BlogPost::findOrFail($id);
-        return view('blog.show', compact('post'));
+        return view('blog.show', compact('post'))->with('success', 'Post cargado con éxito.');
     }
 
     // Mostrar formulario para crear un nuevo post
     public function create()
     {
-        return view('blog.create');
+        return view('blog.create')->with('success', 'Formulario de creación de entrada cargado.');
     }
 
     // Guardar un nuevo post
@@ -79,7 +79,7 @@ class BlogController extends Controller
             return redirect()->route('blog.index')->with('error', 'No tienes permiso para editar este post.');
         }
 
-        return view('blog.edit', compact('post'));
+        return view('blog.edit', compact('post'))->with('success', 'Formulario de edición cargado.');
     }
 
     // Actualizar un post existente
