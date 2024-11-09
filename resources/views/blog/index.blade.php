@@ -5,16 +5,16 @@
         <h1 class="text-center mb-4">Blog</h1>
 
         @auth
-    <p>Usuario autenticado: {{ auth()->user()->id }}</p>
-@endauth
+            <p>Usuario autenticado: {{ auth()->user()->id }}</p>
+        @endauth
 
-        <!-- Verifica si el usuario está autenticado -->
-        @auth
+        <!-- Verifica si el usuario está autenticado y está en la vista de administración -->
+        @if(request()->is('blog/admin'))
             <div class="text-end mb-4">
-                <!-- Botón para crear una nueva entrada -->
+                <!-- Botón para crear una nueva entrada (solo en la vista de administración) -->
                 <a href="{{ url('/blog/create') }}" class="btn btn-success">Nueva entrada de Blog</a>
             </div>
-        @endauth
+        @endif
 
         <div class="row">
             @foreach($posts as $post)

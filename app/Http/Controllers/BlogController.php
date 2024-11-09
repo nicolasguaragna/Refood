@@ -80,7 +80,7 @@ class BlogController extends Controller
             'author_id' => auth()->id(), // Obtener el ID del usuario autenticado
         ]);
 
-        return redirect()->route('blog.index')->with([
+        return redirect()->route('blog.admin')->with([
             'message' => 'Entrada de blog creada con éxito.',
             'alert-type' => 'success'
         ]);
@@ -93,7 +93,7 @@ class BlogController extends Controller
 
         // Asegurarse de que el usuario solo puede editar sus propios posts
         if ($post->author_id !== auth()->id()) {
-            return redirect()->route('blog.index')->with([
+            return redirect()->route('blog.admin')->with([
                 'message' => 'No tienes permiso para editar este post.',
                 'alert-type' => 'error'
             ]);
@@ -120,7 +120,7 @@ class BlogController extends Controller
             'author_id' => auth()->id(), // Actualizar el autor si es necesario
         ]);
 
-        return redirect()->route('blog.index')->with([
+        return redirect()->route('blog.admin')->with([
             'message' => 'Post actualizado con éxito.',
             'alert-type' => 'success'
         ]);
@@ -133,14 +133,14 @@ class BlogController extends Controller
 
         // Asegurarse de que el usuario solo puede eliminar sus propios posts
         if ($post->author_id !== auth()->id()) {
-            return redirect()->route('blog.index')->with([
+            return redirect()->route('blog.admin')->with([
                 'message' => 'No tienes permiso para eliminar este post.',
                 'alert-type' => 'error'
             ]);
         }
 
         $post->delete();
-        return redirect()->route('blog.index')->with([
+        return redirect()->route('blog.admin')->with([
             'message' => 'Post eliminado con éxito.',
             'alert-type' => 'warning'
         ]);
