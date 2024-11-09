@@ -23,7 +23,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <p class="card-text">{{ $post->content }}</p>
-                            <p class="text-muted">Escrito por: {{ $post->author->name }}</p> <!-- Aquí mostramos el nombre del autor -->
+                            <p class="text-muted">{{ $post->author->name }}</p> 
                             <a href="{{ url('/blog/' . $post->id) }}" class="btn btn-primary">Leer más</a>
                         </div>
                     </div>
