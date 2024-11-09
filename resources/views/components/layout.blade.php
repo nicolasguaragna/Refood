@@ -52,22 +52,20 @@
                             <a class="nav-link text-success" href="{{ route('login') }}">Iniciar Sesión</a>
                         </li>
                         @endif
-
-                        <!-- @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
-                                </li>
-                            @endif-->
                         @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <!-- Nueva opción para "Administrar Entradas del Blog" -->
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('blog.admin') }}">Administrar Entradas del Blog</a>
+                                </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('auth.logout') }}"
                                         onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
+                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Cerrar Sesión') }}
                                     </a>
                                 </li>
@@ -100,7 +98,6 @@
                 </div>
             </div>
         </footer>
-
     </div>
 
     <!-- Bootstrap JS -->

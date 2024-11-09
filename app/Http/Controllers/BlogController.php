@@ -15,18 +15,19 @@ class BlogController extends Controller
     }
 
     // Mostrar todos los posts
-    public function index()
+    public function index(Request $request)
     {
-        if (Auth::check()) {
-            // Si el usuario está autenticado, muestra solo sus posts
-            $user = Auth::user();
+        $user = Auth::user();
+
+        if ($user && $request->query('admin')) {
+            // Si el usuario está autenticado y solicita ver la vista de administración
             $posts = BlogPost::where('author_id', $user->id)->get();
             return view('blog.admin', compact('posts'))->with([
                 'message' => 'Bienvenido al panel de administración de blogs.',
                 'alert-type' => 'success'
             ]);
         } else {
-            // Para usuarios no autenticados, mostramos todos los posts
+            // Vista pública para todos los usuarios
             $posts = BlogPost::all();
             return view('blog.index', compact('posts'))->with([
                 'message' => 'Bienvenido al blog público.',
@@ -35,6 +36,7 @@ class BlogController extends Controller
         }
     }
 
+    // Método para la vista de administración (mantener para acceso directo si es necesario)
     public function admin()
     {
         $user = Auth::user(); // Usuario autenticado
