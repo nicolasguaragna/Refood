@@ -11,12 +11,11 @@
             </div>
         @endif
 
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-
+        @if (session('message'))
+    <div class="alert alert-{{ session('alert-type') }}">
+        {{ session('message') }}
+    </div>
+@endif
             <!-- Botón para crear una nueva entrada -->
             <div class="text-center mb-3">
                 <a href="{{ route('blog.create') }}" class="btn btn-primary">Nueva Entrada de Blog</a>

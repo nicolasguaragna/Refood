@@ -82,3 +82,8 @@ body {
 .inline-form {
     display: inline-block;
 }
+
+.alert-warning {
+    background-color: #ffcccc; 
+    color: #df1512;
+}

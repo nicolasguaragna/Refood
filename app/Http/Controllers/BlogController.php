@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers;
 
@@ -6,7 +6,6 @@ use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-
 
 class BlogController extends Controller
 {
@@ -22,34 +21,47 @@ class BlogController extends Controller
             // Si el usuario está autenticado, muestra solo sus posts
             $user = Auth::user();
             $posts = BlogPost::where('author_id', $user->id)->get();
-            return view('blog.admin', compact('posts'))->with('success', 'Bienvenido al panel de administración de blogs.');
+            return view('blog.admin', compact('posts'))->with([
+                'message' => 'Bienvenido al panel de administración de blogs.',
+                'alert-type' => 'success'
+            ]);
         } else {
-        // Para usuarios no autenticados, mostramos todos los posts
-        $posts = BlogPost::all();
-        return view('blog.index', compact('posts'))->with('success', 'Bienvenido al blog público.');
+            // Para usuarios no autenticados, mostramos todos los posts
+            $posts = BlogPost::all();
+            return view('blog.index', compact('posts'))->with([
+                'message' => 'Bienvenido al blog público.',
+                'alert-type' => 'info'
+            ]);
         }
     }
 
-    
     public function admin()
     {
         $user = Auth::user(); // Usuario autenticado
         $posts = BlogPost::where('author_id', $user->id)->get(); // Posts del autor autenticado
-        return view('blog.admin', compact('posts'))->with('success', 'Administración de entradas del blog.');
+        return view('blog.admin', compact('posts'))->with([
+            'message' => 'Administración de entradas del blog.',
+            'alert-type' => 'success'
+        ]);
     }
     
-
     // Mostrar un post específico
     public function show($id)
     {
         $post = BlogPost::findOrFail($id);
-        return view('blog.show', compact('post'))->with('success', 'Post cargado con éxito.');
+        return view('blog.show', compact('post'))->with([
+            'message' => 'Post cargado con éxito.',
+            'alert-type' => 'success'
+        ]);
     }
 
     // Mostrar formulario para crear un nuevo post
     public function create()
     {
-        return view('blog.create')->with('success', 'Formulario de creación de entrada cargado.');
+        return view('blog.create')->with([
+            'message' => 'Formulario de creación de entrada cargado.',
+            'alert-type' => 'info'
+        ]);
     }
 
     // Guardar un nuevo post
@@ -66,7 +78,10 @@ class BlogController extends Controller
             'author_id' => auth()->id(), // Obtener el ID del usuario autenticado
         ]);
 
-        return redirect()->route('blog.index')->with('success', 'Entrada de blog creada con éxito.');
+        return redirect()->route('blog.index')->with([
+            'message' => 'Entrada de blog creada con éxito.',
+            'alert-type' => 'success'
+        ]);
     }
 
     // Mostrar formulario para editar un post existente
@@ -76,10 +91,16 @@ class BlogController extends Controller
 
         // Asegurarse de que el usuario solo puede editar sus propios posts
         if ($post->author_id !== auth()->id()) {
-            return redirect()->route('blog.index')->with('error', 'No tienes permiso para editar este post.');
+            return redirect()->route('blog.index')->with([
+                'message' => 'No tienes permiso para editar este post.',
+                'alert-type' => 'error'
+            ]);
         }
 
-        return view('blog.edit', compact('post'))->with('success', 'Formulario de edición cargado.');
+        return view('blog.edit', compact('post'))->with([
+            'message' => 'Formulario de edición cargado.',
+            'alert-type' => 'info'
+        ]);
     }
 
     // Actualizar un post existente
@@ -97,7 +118,10 @@ class BlogController extends Controller
             'author_id' => auth()->id(), // Actualizar el autor si es necesario
         ]);
 
-        return redirect()->route('blog.index')->with('success', 'Post actualizado con éxito.');
+        return redirect()->route('blog.index')->with([
+            'message' => 'Post actualizado con éxito.',
+            'alert-type' => 'success'
+        ]);
     }
 
     // Eliminar un post
@@ -107,10 +131,16 @@ class BlogController extends Controller
 
         // Asegurarse de que el usuario solo puede eliminar sus propios posts
         if ($post->author_id !== auth()->id()) {
-            return redirect()->route('blog.index')->with('error', 'No tienes permiso para eliminar este post.');
+            return redirect()->route('blog.index')->with([
+                'message' => 'No tienes permiso para eliminar este post.',
+                'alert-type' => 'error'
+            ]);
         }
 
         $post->delete();
-        return redirect()->route('blog.index')->with('success', 'Post eliminado con éxito.');
+        return redirect()->route('blog.index')->with([
+            'message' => 'Post eliminado con éxito.',
+            'alert-type' => 'warning'
+        ]);
     }
 }
