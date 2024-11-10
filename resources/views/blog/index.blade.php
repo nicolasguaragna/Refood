@@ -4,17 +4,21 @@
     <div class="container mt-5">
         <h1 class="text-center mb-4">Blog</h1>
 
-        @auth
-            <p>Usuario autenticado: {{ auth()->user()->id }}</p>
-        @endauth
-
-        <!-- Verifica si el usuario está autenticado y está en la vista de administración -->
-        @if(request()->is('blog/admin'))
-            <div class="text-end mb-4">
-                <!-- Botón para crear una nueva entrada (solo en la vista de administración) -->
-                <a href="{{ url('/blog/create') }}" class="btn btn-success">Nueva entrada de Blog</a>
+        <!-- Mostrar mensaje de feedback -->
+        @if(session('message'))
+            <div class="alert alert-{{ session('alert-type') }}">
+                {{ session('message') }}
             </div>
         @endif
+
+        @auth
+            <p>Usuario autenticado: {{ auth()->user()->id }}</p>
+
+            <!-- Botón para crear una nueva entrada (disponible para cualquier usuario autenticado) -->
+            <div class="text-end mb-4">
+                <a href="{{ route('blog.create') }}" class="btn btn-success">Nueva entrada de Blog</a>
+            </div>
+        @endauth
 
         <div class="row">
             @foreach($posts as $post)
@@ -23,7 +27,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <p class="card-text">{{ $post->content }}</p>
-                            <p class="text-muted">{{ $post->author->name }}</p> 
+                            <p class="text-muted">Autor: {{ $post->author->name }}</p>
                             <a href="{{ url('/blog/' . $post->id) }}" class="btn btn-primary">Leer más</a>
                         </div>
                     </div>

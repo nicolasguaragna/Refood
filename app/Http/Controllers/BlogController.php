@@ -77,7 +77,7 @@ class BlogController extends Controller
             'author_id' => auth()->id(),
         ]);
 
-        return redirect()->route('blog.admin')->with([
+        return redirect()->route('blog.index')->with([
             'message' => 'Entrada de blog creada con éxito.',
             'alert-type' => 'success'
         ]);

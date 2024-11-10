@@ -31,9 +31,10 @@
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->author->name }}</td>
                         <td>
-                            @if ($post->author_id === auth()->id()) <!-- Solo mostrar si el post pertenece al usuario autenticado -->
+                            <!-- Mostrar botones de edición/eliminación para admins y autores de la entrada -->
+                            @if (auth()->user()->hasRole('admin') || $post->author_id === auth()->id())
                                 <a href="{{ route('blog.edit', $post->id) }}" class="btn btn-warning">Editar</a>
-                                <form action="{{ route('blog.destroy', $post->id) }}" method="POST" class="inline-form d-inline">
+                                <form action="{{ route('blog.destroy', $post->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta entrada?')">Eliminar</button>

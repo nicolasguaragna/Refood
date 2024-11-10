@@ -3,6 +3,14 @@
     
     <div class="container mt-1">
         <h1 class="text-center mb-4">Nuestros Servicios</h1>
+        
+        <!-- Mostrar mensajes de feedback -->
+        @if(session('message'))
+            <div class="alert alert-{{ session('alert-type') }} mt-3">
+                {{ session('message') }}
+            </div>
+        @endif
+
         <div class="row">
             @foreach($services as $service)
                 <div class="col-md-4">
@@ -11,8 +19,20 @@
                             <h2 class="card-title">{{ $service->name }}</h2>
                             <p class="card-text">{{ $service->description }}</p>
                             <p class="card-text"><strong>Precio:</strong> ${{ number_format($service->price, 2) }}</p>
-                        <!-- Botón "Ver más" -->
-                        <a href="{{ url('servicios/' . $service->service_id) }}" class="btn btn-primary">Ver más</a>
+                            
+                            <!-- Botón "Ver más" -->
+                            <a href="{{ url('servicios/' . $service->service_id) }}" class="btn btn-primary">Ver más</a>
+                            
+                            <!-- Botón "Rescatar" solo visible para usuarios comunes autenticados -->
+                            @auth
+                                @if(auth()->user()->hasRole('user'))
+                                    <form action="{{ route('rescue.request') }}" method="POST" class="d-inline-block mt-2">
+                                        @csrf
+                                        <input type="hidden" name="service_id" value="{{ $service->service_id }}">
+                                        <button type="submit" class="btn btn-warning">Rescatar</button>
+                                    </form>
+                                @endif
+                            @endauth
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,9 @@ Route::get('quienes-somos', [\App\Http\Controllers\AboutController::class, 'abou
 Route::get('servicios', [\App\Http\Controllers\ServiciosController::class, 'index']);
 Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show']);
 
+// Ruta para solicitar rescate (solo para usuarios autenticados)
+Route::middleware('auth')->post('servicios/rescatar', [\App\Http\Controllers\ServiciosController::class, 'requestRescue'])->name('rescue.request');
+
 // Rutas de autenticación personalizadas (registro y login)
 Route::get('register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [\App\Http\Controllers\Auth\RegisterController::class, 'register']);
