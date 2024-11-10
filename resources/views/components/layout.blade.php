@@ -63,10 +63,13 @@
                                 {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <!-- Nueva opción para "Administrar Entradas del Blog" -->
+
+                                @if(Auth::user()->hasRole('admin'))
+                                <!-- Solo los administradores pueden ver este enlace -->
                                 <li>
                                     <a class="dropdown-item" href="{{ route('blog.admin') }}">Administrar Entradas del Blog</a>
                                 </li>
+                                @endif
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();

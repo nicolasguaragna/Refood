@@ -1,52 +1,49 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
 
 class BlogController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['create', 'store', 'edit', 'update', 'destroy']);
+        $this->middleware('auth')->only(['create', 'store', 'edit', 'update', 'destroy', 'admin']);
     }
 
-    // Mostrar todos los posts
-    public function index(Request $request)
+    // Mostrar todos los posts (público)
+    public function index()
+    {
+        $posts = BlogPost::all();
+        return view('blog.index', compact('posts'))->with([
+            'message' => 'Bienvenido al blog público.',
+            'alert-type' => 'info'
+        ]);
+    }
+
+    // Método para la vista de administración (diferente para admins y usuarios comunes)
+    public function admin()
     {
         $user = Auth::user();
 
-        if ($user && $request->query('admin')) {
-            // Si el usuario está autenticado y solicita ver la vista de administración
-            $posts = BlogPost::where('author_id', $user->id)->get();
-            return view('blog.admin', compact('posts'))->with([
-                'message' => 'Bienvenido al panel de administración de blogs.',
-                'alert-type' => 'success'
-            ]);
-        } else {
-            // Vista pública para todos los usuarios
+        if ($user->hasRole('admin')) {
+            // Los administradores ven todas las entradas
             $posts = BlogPost::all();
-            return view('blog.index', compact('posts'))->with([
-                'message' => 'Bienvenido al blog público.',
-                'alert-type' => 'info'
-            ]);
+            $message = 'Panel de administración: Todos los blogs';
+        } else {
+            // Los usuarios comunes ven solo sus propias entradas
+            $posts = BlogPost::where('author_id', $user->id)->get();
+            $message = 'Tus entradas de blog';
         }
-    }
 
-    // Método para la vista de administración (mantener para acceso directo si es necesario)
-    public function admin()
-    {
-        $user = Auth::user(); // Usuario autenticado
-        $posts = BlogPost::where('author_id', $user->id)->get(); // Posts del autor autenticado
         return view('blog.admin', compact('posts'))->with([
-            'message' => 'Administración de entradas del blog.',
+            'message' => $message,
             'alert-type' => 'success'
         ]);
     }
-    
+
     // Mostrar un post específico
     public function show($id)
     {
@@ -77,7 +74,7 @@ class BlogController extends Controller
         BlogPost::create([
             'title' => $request->title,
             'content' => $request->content,
-            'author_id' => auth()->id(), // Obtener el ID del usuario autenticado
+            'author_id' => auth()->id(),
         ]);
 
         return redirect()->route('blog.admin')->with([
@@ -91,8 +88,7 @@ class BlogController extends Controller
     {
         $post = BlogPost::findOrFail($id);
 
-        // Asegurarse de que el usuario solo puede editar sus propios posts
-        if ($post->author_id !== auth()->id()) {
+        if ($post->author_id !== auth()->id() && !auth()->user()->hasRole('admin')) {
             return redirect()->route('blog.admin')->with([
                 'message' => 'No tienes permiso para editar este post.',
                 'alert-type' => 'error'
@@ -114,10 +110,17 @@ class BlogController extends Controller
         ]);
 
         $post = BlogPost::findOrFail($id);
+        
+        if ($post->author_id !== auth()->id() && !auth()->user()->hasRole('admin')) {
+            return redirect()->route('blog.admin')->with([
+                'message' => 'No tienes permiso para actualizar este post.',
+                'alert-type' => 'error'
+            ]);
+        }
+
         $post->update([
             'title' => $request->title,
             'content' => $request->content,
-            'author_id' => auth()->id(), // Actualizar el autor si es necesario
         ]);
 
         return redirect()->route('blog.admin')->with([
@@ -131,8 +134,7 @@ class BlogController extends Controller
     {
         $post = BlogPost::findOrFail($id);
 
-        // Asegurarse de que el usuario solo puede eliminar sus propios posts
-        if ($post->author_id !== auth()->id()) {
+        if ($post->author_id !== auth()->id() && !auth()->user()->hasRole('admin')) {
             return redirect()->route('blog.admin')->with([
                 'message' => 'No tienes permiso para eliminar este post.',
                 'alert-type' => 'error'
@@ -146,3 +148,4 @@ class BlogController extends Controller
         ]);
     }
 }
+
