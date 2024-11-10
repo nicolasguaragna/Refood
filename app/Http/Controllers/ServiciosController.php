@@ -27,18 +27,15 @@ class ServiciosController extends Controller
 
     public function submitRescueRequest(Request $request)
     {
-        // Verificar que el usuario esté autenticado
         if (Auth::check()) {
-            // Validar los datos de la solicitud de rescate
             $request->validate([
                 'name' => 'required|string|max:255',
                 'contact' => 'required|string|max:255',
                 'location' => 'required|string|max:255',
                 'details' => 'required|string',
-                'service_id' => 'required|exists:services,service_id', // Asegurarse de que el servicio existe
+                'service_id' => 'required|exists:services,service_id', // Cambiado para usar la clave primaria correcta
             ]);
-
-            // Guardar la solicitud en la base de datos
+    
             RescueRequest::create([
                 'user_id' => Auth::id(),
                 'name' => $request->name,
@@ -47,16 +44,17 @@ class ServiciosController extends Controller
                 'details' => $request->details,
                 'service_id' => $request->service_id,
             ]);
-
+    
             return redirect()->route('servicios')->with([
-                'message' => 'Tu solicitud de rescate ha sido enviada exitosamente. ¡Gracias!',
-                'alert-type' => 'success'
+                'message' => 'Gracias por tu aporte, ¡Cada Plato Cuenta!',
+                'alert-type' => 'success',
             ]);
         }
-
+    
         return redirect()->back()->with([
             'message' => 'Debes iniciar sesión para solicitar un rescate.',
             'alert-type' => 'danger'
         ]);
     }
+    
 }
