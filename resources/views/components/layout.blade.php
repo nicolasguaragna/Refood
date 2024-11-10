@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    
+
 </head>
 
 <body>
@@ -52,6 +52,11 @@
                             <a class="nav-link text-success" href="{{ route('login') }}">Iniciar Sesión</a>
                         </li>
                         @endif
+                        @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="{{ route('register') }}">Registrarse</a>
+                        </li>
+                        @endif
                         @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -63,13 +68,13 @@
                                     <a class="dropdown-item" href="{{ route('blog.admin') }}">Administrar Entradas del Blog</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('auth.logout') }}"
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                                        document.getElementById('logout-form').submit();">
                                         {{ __('Cerrar Sesión') }}
                                     </a>
                                 </li>
-                                <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
                             </ul>
