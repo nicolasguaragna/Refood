@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckAdmin;
@@ -8,6 +8,14 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('quienes-somos', [\App\Http\Controllers\AboutController::class, 'about']);
 Route::get('servicios', [\App\Http\Controllers\ServiciosController::class, 'index']);
 Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show']);
+
+// Rutas de autenticación personalizadas (registro y login)
+Route::get('register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [\App\Http\Controllers\Auth\RegisterController::class, 'register']);
+
+Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
+Route::post('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 // Ruta del blog para administración (protegida con CheckAdmin middleware)
 Route::middleware([CheckAdmin::class])->group(function () {
@@ -33,10 +41,8 @@ Route::middleware('auth')->group(function () {
 Route::get('contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
 
-// Rutas de autenticación
-Auth::routes();
-Route::post('cerrar-sesion', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('auth.logout');
+// Rutas de autenticación (incluyendo restablecimiento de contraseña)
+Auth::routes(['reset' => true]);
 
 // Ruta para el home después de iniciar sesión
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
