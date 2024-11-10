@@ -38,6 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'destroy'])->name('blog.destroy');
     Route::get('/donations/create', [\App\Http\Controllers\DonationsController::class, 'create']);
     Route::post('/donations', [\App\Http\Controllers\DonationsController::class, 'store']);
+    
+    // Ruta para enviar una solicitud de rescate
+Route::post('/servicios/rescatar', [\App\Http\Controllers\ServiciosController::class, 'submitRescueRequest'])->name('rescue.request');
+
 });
 
 // Rutas de contacto

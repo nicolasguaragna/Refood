@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
+use App\Models\RescueRequest; // Asegúrate de tener este modelo
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,31 +19,43 @@ class ServiciosController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show($service_id)
     {
-        $service = Service::findOrFail($id); // Buscar el servicio por ID
-        return view('show', compact('service')); // Pasar el servicio a la vista
+        $service = Service::findOrFail($service_id); // Aquí usamos service_id en lugar de id
+        return view('show', compact('service'));
     }
 
-    public function requestRescue(Request $request)
+    public function submitRescueRequest(Request $request)
     {
-        // Verificar que el usuario esté autenticado y sea un usuario común
-        if (Auth::check() && Auth::user()->hasRole('user')) {
-            // Lógica para registrar la solicitud de rescate
-            // Aquí puedes guardar el rescate en una tabla o enviar una notificación, según tus necesidades
-            $serviceId = $request->input('service_id');
+        // Verificar que el usuario esté autenticado
+        if (Auth::check()) {
+            // Validar los datos de la solicitud de rescate
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'contact' => 'required|string|max:255',
+                'location' => 'required|string|max:255',
+                'details' => 'required|string',
+                'service_id' => 'required|exists:services,id', // Asegurarse de que el servicio existe
+            ]);
 
-            // Simulación de registro del rescate (puedes adaptar esto a tus necesidades)
-            // Ejemplo: Rescues::create(['user_id' => Auth::id(), 'service_id' => $serviceId]);
+            // Guardar la solicitud en la base de datos
+            RescueRequest::create([
+                'user_id' => Auth::id(),
+                'name' => $request->name,
+                'contact' => $request->contact,
+                'location' => $request->location,
+                'details' => $request->details,
+                'service_id' => $request->service_id,
+            ]);
 
-            return redirect()->back()->with([
-                'message' => 'Solicitud de rescate enviada con éxito.',
+            return redirect()->route('servicios')->with([
+                'message' => 'Tu solicitud de rescate ha sido enviada exitosamente. ¡Gracias!',
                 'alert-type' => 'success'
             ]);
         }
 
         return redirect()->back()->with([
-            'message' => 'Acceso denegado. Solo los usuarios comunes pueden solicitar rescates.',
+            'message' => 'Debes iniciar sesión para solicitar un rescate.',
             'alert-type' => 'danger'
         ]);
     }
