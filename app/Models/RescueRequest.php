@@ -9,11 +9,21 @@ class RescueRequest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'name', 'contact', 'location', 'details'];
+    protected $table = 'rescue_requests';
+
+    protected $fillable = [
+        'user_id', 'name', 'contact', 'location', 'details', 'service_id'
+    ];
 
     // Relación con el usuario
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // Relación con el servicio
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
     }
 }

@@ -19,10 +19,10 @@ class ServiciosController extends Controller
         ]);
     }
 
-    public function show($service_id)
+    public function showRescueForm($service_id)
     {
-        $service = Service::findOrFail($service_id); // Aquí usamos service_id en lugar de id
-        return view('show', compact('service'));
+        $service = Service::findOrFail($service_id); // Encuentra el servicio por ID
+        return view('rescues.rescue', compact('service')); // Pasa el servicio a la vista
     }
 
     public function submitRescueRequest(Request $request)
@@ -35,7 +35,7 @@ class ServiciosController extends Controller
                 'contact' => 'required|string|max:255',
                 'location' => 'required|string|max:255',
                 'details' => 'required|string',
-                'service_id' => 'required|exists:services,id', // Asegurarse de que el servicio existe
+                'service_id' => 'required|exists:services,service_id', // Asegurarse de que el servicio existe
             ]);
 
             // Guardar la solicitud en la base de datos

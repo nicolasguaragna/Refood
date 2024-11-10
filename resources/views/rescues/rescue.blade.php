@@ -16,11 +16,11 @@
         @endif
 
         <!-- Formulario de solicitud de rescate -->
-        <form action="{{ route('servicios.rescatar') }}" method="POST" class="shadow p-4 rounded bg-light">
+        <form action="{{ route('rescue.request') }}" method="POST" class="shadow p-4 rounded bg-light">
             @csrf
 
             <!-- Campo oculto para el ID del servicio -->
-            <input type="hidden" name="service_id" value="{{ $service->id }}">
+            <input type="hidden" name="service_id" value="{{ $service->service_id }}">
 
             <div class="mb-3">
                 <label for="details" class="form-label">Detalles del Rescate</label>

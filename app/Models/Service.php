@@ -10,4 +10,6 @@ class Service extends Model
     use HasFactory;
     
     protected $primaryKey = "service_id";
+    public $incrementing = true;
+    protected $keyType = 'int';
 }

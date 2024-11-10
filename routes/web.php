@@ -10,7 +10,8 @@ Route::get('servicios', [\App\Http\Controllers\ServiciosController::class, 'inde
 Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show']);
 
 // Ruta para solicitar rescate (solo para usuarios autenticados)
-Route::middleware('auth')->post('servicios/rescatar', [\App\Http\Controllers\ServiciosController::class, 'requestRescue'])->name('rescue.request');
+Route::middleware('auth')->get('/servicios/{service_id}/rescatar', [\App\Http\Controllers\ServiciosController::class, 'showRescueForm'])->name('rescue.form');
+
 
 // Rutas de autenticación personalizadas (registro y login)
 Route::get('register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -38,9 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'destroy'])->name('blog.destroy');
     Route::get('/donations/create', [\App\Http\Controllers\DonationsController::class, 'create']);
     Route::post('/donations', [\App\Http\Controllers\DonationsController::class, 'store']);
-    
-    // Ruta para enviar una solicitud de rescate
-Route::post('/servicios/rescatar', [\App\Http\Controllers\ServiciosController::class, 'submitRescueRequest'])->name('rescue.request');
+
+    Route::middleware('auth')->post('/servicios/rescatar', [\App\Http\Controllers\ServiciosController::class, 'submitRescueRequest'])->name('rescue.request');
 
 });
 

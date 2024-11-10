@@ -26,11 +26,7 @@
                             <!-- Botón "Rescatar" solo visible para usuarios comunes autenticados -->
                             @auth
                                 @if(auth()->user()->hasRole('user'))
-                                    <form action="{{ route('rescue.request') }}" method="POST" class="d-inline-block mt-2">
-                                        @csrf
-                                        <input type="hidden" name="service_id" value="{{ $service->service_id }}">
-                                        <button type="submit" class="btn btn-warning">Rescatar</button>
-                                    </form>
+                                    <a href="{{ route('rescue.form', ['service_id' => $service->service_id]) }}" class="btn btn-warning mt-2">Rescatar</a>
                                 @endif
                             @endauth
                         </div>
