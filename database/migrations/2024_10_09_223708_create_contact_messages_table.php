@@ -13,7 +13,7 @@ class CreateContactMessagesTable extends Migration
     {
         Schema::create('contact_messages', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('name');
             $table->string('email');
             $table->text('mensaje');
             $table->timestamps(); // Esto añadirá las columnas created_at y updated_at

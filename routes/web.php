@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckAdmin;
 
 // Página principal y rutas informativas
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
@@ -8,8 +9,12 @@ Route::get('quienes-somos', [\App\Http\Controllers\AboutController::class, 'abou
 Route::get('servicios', [\App\Http\Controllers\ServiciosController::class, 'index']);
 Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show']);
 
+// Ruta del blog para administración (protegida con CheckAdmin middleware)
+Route::middleware([CheckAdmin::class])->group(function () {
+    Route::get('blog/admin', [\App\Http\Controllers\BlogController::class, 'admin'])->name('blog.admin');
+});
+
 // Rutas del blog (asegúrate de que las rutas específicas estén antes que las dinámicas)
-Route::get('blog/admin', [\App\Http\Controllers\BlogController::class, 'admin'])->name('blog.admin'); // Colocada antes para evitar conflictos
 Route::get('blog/create', [\App\Http\Controllers\BlogController::class, 'create'])->name('blog.create');
 Route::get('blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
 Route::get('blog/{id}', [\App\Http\Controllers\BlogController::class, 'show']);
@@ -34,3 +39,4 @@ Route::post('cerrar-sesion', [\App\Http\Controllers\Auth\LoginController::class,
 
 // Ruta para el home después de iniciar sesión
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
