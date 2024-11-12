@@ -16,7 +16,7 @@
             </div>
 
             <h1 class="text-center text-muted mb-5">Somos una comunidad de concientización alimentaria.
-                <br>Rescatamos alimentos y los entregamos a comedores comunitarios de forma gratuita.
+                <br>Rescatamos alimentos excedentes y los entregamos a comedores comunitarios de forma gratuita.
             </h1>
 
             <!-- Contadores de Kilos rescatados y Platos entregados -->

@@ -20,6 +20,11 @@
                             <p class="card-text">{{ $service->description }}</p>
                             <p class="card-text"><strong>Precio:</strong> ${{ number_format($service->price, 2) }}</p>
                             
+                            <!-- Agregar la leyenda aquí -->
+                            <p class="card-text text-muted small">
+                                Este pequeño costo al cliente permite hacer frente a los gastos de logística, nafta, materiales, etc.
+                            </p>
+
                             <!-- Botón "Ver más" -->
                             <a href="{{ route('servicios.show', ['id' => $service->service_id]) }}" class="btn btn-primary">Ver más</a>
                             
