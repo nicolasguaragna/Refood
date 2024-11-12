@@ -21,7 +21,7 @@
                             <p class="card-text"><strong>Precio:</strong> ${{ number_format($service->price, 2) }}</p>
                             
                             <!-- Botón "Ver más" -->
-                            <a href="{{ url('servicios/' . $service->service_id) }}" class="btn btn-primary">Ver más</a>
+                            <a href="{{ route('servicios.show', ['id' => $service->service_id]) }}" class="btn btn-primary">Ver más</a>
                             
                             <!-- Botón "Rescatar" solo visible para usuarios comunes autenticados -->
                             @auth
@@ -36,4 +36,3 @@
         </div>
     </div>
 </x-layout>
-

@@ -12,7 +12,7 @@
 
             <!-- Logo de la marca -->
             <div class="mb-4">
-                <img src="{{ asset('images/marca.jpg') }}" alt="Logo Refood" class="img-fluid rounded shadow-lg logo-image">
+                <img src="{{ asset('images/marca.jpg') }}" alt="Logo Refood" class="img-fluid rounded logo-image">
             </div>
 
             <h1 class="text-center text-muted mb-5">Somos una comunidad de concientización alimentaria.

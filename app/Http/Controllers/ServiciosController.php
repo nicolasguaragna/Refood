@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -19,6 +19,13 @@ class ServiciosController extends Controller
         ]);
     }
 
+    // Método para mostrar los detalles del servicio
+    public function show($service_id)
+    {
+        $service = Service::findOrFail($service_id); // Encuentra el servicio por ID
+        return view('servicios.show', compact('service')); // Pasa el servicio a la vista
+    }
+
     public function showRescueForm($service_id)
     {
         $service = Service::findOrFail($service_id); // Encuentra el servicio por ID
@@ -35,7 +42,7 @@ class ServiciosController extends Controller
                 'details' => 'required|string',
                 'service_id' => 'required|exists:services,service_id', // Cambiado para usar la clave primaria correcta
             ]);
-    
+
             RescueRequest::create([
                 'user_id' => Auth::id(),
                 'name' => $request->name,
@@ -44,17 +51,16 @@ class ServiciosController extends Controller
                 'details' => $request->details,
                 'service_id' => $request->service_id,
             ]);
-    
+
             return redirect()->route('servicios')->with([
                 'message' => 'Gracias por tu aporte, ¡Cada Plato Cuenta!',
                 'alert-type' => 'success',
             ]);
         }
-    
+
         return redirect()->back()->with([
             'message' => 'Debes iniciar sesión para solicitar un rescate.',
             'alert-type' => 'danger'
         ]);
     }
-    
 }

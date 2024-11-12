@@ -1,4 +1,4 @@
-<?php 
+<?php  
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckAdmin;
@@ -6,17 +6,17 @@ use App\Http\Middleware\CheckAdmin;
 // Página principal y rutas informativas
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('quienes-somos', [\App\Http\Controllers\AboutController::class, 'about']);
-Route::get('servicios', [\App\Http\Controllers\ServiciosController::class, 'index']);
-Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show']);
+Route::get('servicios', [\App\Http\Controllers\ServiciosController::class, 'index'])->name('servicios');
 
-// Ruta para solicitar rescate (solo para usuarios autenticados)
+// Ruta para mostrar detalles de un servicio
+Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show'])->name('servicios.show');
+
+// Ruta para mostrar el formulario de rescate (solo para usuarios autenticados)
 Route::middleware('auth')->get('/servicios/{service_id}/rescatar', [\App\Http\Controllers\ServiciosController::class, 'showRescueForm'])->name('rescue.form');
-
 
 // Rutas de autenticación personalizadas (registro y login)
 Route::get('register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [\App\Http\Controllers\Auth\RegisterController::class, 'register']);
-
 Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
 Route::post('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
@@ -26,7 +26,7 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::get('blog/admin', [\App\Http\Controllers\BlogController::class, 'admin'])->name('blog.admin');
 });
 
-// Rutas del blog (asegúrate de que las rutas específicas estén antes que las dinámicas)
+// Rutas del blog
 Route::get('blog/create', [\App\Http\Controllers\BlogController::class, 'create'])->name('blog.create');
 Route::get('blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
 Route::get('blog/{id}', [\App\Http\Controllers\BlogController::class, 'show']);
@@ -40,8 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/donations/create', [\App\Http\Controllers\DonationsController::class, 'create']);
     Route::post('/donations', [\App\Http\Controllers\DonationsController::class, 'store']);
 
-    Route::middleware('auth')->post('/servicios/rescatar', [\App\Http\Controllers\ServiciosController::class, 'submitRescueRequest'])->name('rescue.request');
-
+    // Ruta para enviar la solicitud de rescate
+    Route::post('/servicios/rescatar', [\App\Http\Controllers\ServiciosController::class, 'submitRescueRequest'])->name('rescue.request');
 });
 
 // Rutas de contacto

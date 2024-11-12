@@ -18,7 +18,8 @@
 </head>
 
 <body>
-    <div id="app">
+    <div class="wrapper">
+        <!-- Contenido de navegación -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -29,57 +30,31 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-success" href="{{ url('/') }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-success" href="{{ url('servicios') }}">Servicios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-success" href="{{ url('blog') }}">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-success" href="{{ url('quienes-somos') }}">Quienes Somos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-success" href="{{ url('contact') }}">Contacto</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link text-success" href="{{ url('/') }}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-success" href="{{ url('servicios') }}">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link text-success" href="{{ url('blog') }}">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link text-success" href="{{ url('quienes-somos') }}">Quienes Somos</a></li>
+                        <li class="nav-item"><a class="nav-link text-success" href="{{ url('contact') }}">Contacto</a></li>
 
                         <!-- Authentication Links -->
                         @guest
                         @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link text-success" href="{{ route('login') }}">Iniciar Sesión</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link text-success" href="{{ route('login') }}">Iniciar Sesión</a></li>
                         @endif
                         @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link text-success" href="{{ route('register') }}">Registrarse</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link text-success" href="{{ route('register') }}">Registrarse</a></li>
                         @endif
                         @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name }}
-                            </a>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }}</a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
                                 @if(Auth::user()->hasRole('admin'))
-                                <!-- Solo los administradores pueden ver este enlace -->
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('blog.admin') }}">Administrar Entradas del Blog</a>
-                                </li>
+                                <li><a class="dropdown-item" href="{{ route('blog.admin') }}">Administrar Entradas del Blog</a></li>
                                 @endif
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                        {{ __('Cerrar Sesión') }}
-                                    </a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
                                 </li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                             </ul>
                         </li>
                         @endguest
@@ -88,10 +63,13 @@
             </div>
         </nav>
 
-        <main class="container p-4">
+        <!-- Contenido principal -->
+        <main class="content container p-4">
             {{ $slot }}
         </main>
-        <footer class="footer bg-success text-white py-4">
+
+        <!-- Footer -->
+        <footer class="footer">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
