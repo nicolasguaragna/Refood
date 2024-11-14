@@ -53,3 +53,9 @@ Auth::routes(['reset' => true]);
 
 // Ruta para el home después de iniciar sesión
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Rutas de administración para gestionar usuarios, protegidas para administradores
+Route::middleware(['auth', CheckAdmin::class])->group(function () {
+    Route::get('/admin/users', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.users');
+    Route::get('/admin/users/{id}', [\App\Http\Controllers\AdminController::class, 'show'])->name('admin.users.show');
+});

@@ -50,6 +50,7 @@
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 @if(Auth::user()->hasRole('admin'))
                                 <li><a class="dropdown-item" href="{{ route('blog.admin') }}">Administrar Entradas del Blog</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.users') }}">Administrar Usuarios</a></li>
                                 @endif
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
