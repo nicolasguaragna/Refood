@@ -11,7 +11,7 @@ class AdminController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.users', compact('users'));
+        return view('admin.users.users', compact('users'));
     }
 
     // Método para mostrar los detalles de un usuario específico, incluyendo rescates y servicios

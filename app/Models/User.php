@@ -60,4 +60,10 @@ class User extends Authenticatable
     {
         return $this->roles()->where('name', $roleName)->exists();
     }
+
+    // Relación con las solicitudes de rescate
+    public function rescueRequests()
+    {
+        return $this->hasMany(RescueRequest::class, 'user_id');
+    }
 }
