@@ -25,15 +25,18 @@
                                 Este pequeño costo al cliente permite hacer frente a los gastos de logística, nafta, materiales, etc.
                             </p>
 
-                            <!-- Botón "Ver más" -->
-                            <a href="{{ route('servicios.show', ['id' => $service->service_id]) }}" class="btn btn-primary">Ver más</a>
-                            
-                            <!-- Botón "Rescatar" solo visible para usuarios comunes autenticados -->
-                            @auth
-                                @if(auth()->user()->hasRole('user'))
-                                    <a href="{{ route('rescue.form', ['service_id' => $service->service_id]) }}" class="btn btn-warning mt-2">Rescatar</a>
-                                @endif
-                            @endauth
+                            <!-- Contenedor de botones -->
+                            <div class="button-container">
+                                <!-- Botón "Ver más" -->
+                                <a href="{{ route('servicios.show', ['id' => $service->service_id]) }}" class="btn btn-primary">Ver más</a>
+                                
+                                <!-- Botón "Rescatar" solo visible para usuarios comunes autenticados -->
+                                @auth
+                                    @if(auth()->user()->hasRole('user'))
+                                        <a href="{{ route('rescue.form', ['service_id' => $service->service_id]) }}" class="btn btn-warning">Rescatar</a>
+                                    @endif
+                                @endauth
+                            </div>
                         </div>
                     </div>
                 </div>
