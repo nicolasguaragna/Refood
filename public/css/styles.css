@@ -192,3 +192,14 @@ html, body {
 .service-button:hover {
     background-color: #218838;
 }
+
+.btn-warning {
+    background-color: #2e7d32; 
+    color: #fff; 
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #ffffff; 
+}
+
