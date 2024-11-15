@@ -20,6 +20,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Imagen</th> <!-- Nueva columna para mostrar la imagen -->
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Acciones</th>
@@ -28,6 +29,14 @@
             <tbody>
                 @foreach ($posts as $post)
                     <tr>
+                        <td>
+                            <!-- Mostrar la miniatura de la imagen si existe -->
+                            @if ($post->image_path)
+                                <img src="{{ asset('storage/' . $post->image_path) }}" alt="Imagen de {{ $post->title }}" style="width: 100px; height: auto;">
+                            @else
+                                Sin imagen
+                            @endif
+                        </td>
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->author->name }}</td>
                         <td>

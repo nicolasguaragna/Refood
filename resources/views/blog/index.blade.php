@@ -24,6 +24,10 @@
             @foreach($posts as $post)
                 <div class="col-md-6">
                     <div class="card mb-4 shadow-sm">
+                        @if($post->image_path)
+                            <!-- Mostrar imagen si existe -->
+                            <img src="{{ asset('storage/' . $post->image_path) }}" class="card-img-top" alt="Imagen del blog">
+                        @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <p class="card-text">{{ $post->content }}</p>

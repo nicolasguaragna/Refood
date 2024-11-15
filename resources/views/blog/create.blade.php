@@ -16,7 +16,8 @@
         @endif
 
         <!-- Formulario para crear un nuevo post -->
-        <form action="{{ route('blog.store') }}" method="POST" class="shadow p-4 rounded bg-light">
+        <!-- Agregar enctype="multipart/form-data" para permitir la carga de archivos -->
+        <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data" class="shadow p-4 rounded bg-light">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Título</label>
@@ -28,10 +29,15 @@
                 <textarea class="form-control" id="content" name="content" rows="5" required>{{ old('content') }}</textarea>
             </div>
 
+            <!-- Campo para cargar la imagen -->
+            <div class="mb-3">
+                <label for="image" class="form-label">Imagen</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+            </div>
+
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Crear Entrada</button>
             </div>
         </form>
     </div>
 </x-layout>
-

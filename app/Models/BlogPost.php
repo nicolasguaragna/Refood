@@ -8,7 +8,7 @@ class BlogPost extends Model
 {
     protected $table = 'blog_posts';
 
-    protected $fillable = ['title', 'content', 'author_id'];
+    protected $fillable = ['title', 'content', 'author_id', 'image_path'];
 
     public function author() {
         return $this->belongsTo(User::class, 'author_id');

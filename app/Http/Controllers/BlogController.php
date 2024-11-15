@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class BlogController extends Controller
 {
@@ -69,12 +71,19 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validación de la imagen
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+        }
 
         BlogPost::create([
             'title' => $request->title,
             'content' => $request->content,
             'author_id' => auth()->id(),
+            'image_path' => $imagePath,
         ]);
 
         return redirect()->route('blog.index')->with([
@@ -107,10 +116,11 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $post = BlogPost::findOrFail($id);
-        
+
         if ($post->author_id !== auth()->id() && !auth()->user()->hasRole('admin')) {
             return redirect()->route('blog.admin')->with([
                 'message' => 'No tienes permiso para actualizar este post.',
@@ -118,9 +128,19 @@ class BlogController extends Controller
             ]);
         }
 
+        if ($request->hasFile('image')) {
+            // Eliminar la imagen antigua si existe
+            if ($post->image_path) {
+                Storage::disk('public')->delete($post->image_path);
+            }
+            // Almacenar la nueva imagen
+            $post->image_path = $request->file('image')->store('images', 'public');
+        }
+
         $post->update([
             'title' => $request->title,
             'content' => $request->content,
+            'image_path' => $post->image_path,
         ]);
 
         return redirect()->route('blog.admin')->with([
@@ -141,6 +161,11 @@ class BlogController extends Controller
             ]);
         }
 
+        // Eliminar la imagen si existe
+        if ($post->image_path) {
+            Storage::disk('public')->delete($post->image_path);
+        }
+
         $post->delete();
         return redirect()->route('blog.admin')->with([
             'message' => 'Post eliminado con éxito.',
@@ -148,4 +173,3 @@ class BlogController extends Controller
         ]);
     }
 }
-

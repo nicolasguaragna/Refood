@@ -16,7 +16,8 @@
         @endif
 
         <!-- Formulario para editar el post -->
-        <form action="{{ route('blog.update', $post->id) }}" method="POST">
+        <!-- Agregar enctype="multipart/form-data" para permitir la carga de archivos -->
+        <form action="{{ route('blog.update', $post->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT') <!-- Método PUT para actualizar -->
 
@@ -29,6 +30,20 @@
                 <label for="content" class="form-label">Contenido</label>
                 <textarea class="form-control" id="content" name="content" rows="5" required>{{ old('content', $post->content) }}</textarea>
             </div>
+
+            <!-- Campo para cargar una nueva imagen -->
+            <div class="mb-3">
+                <label for="image" class="form-label">Imagen</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+            </div>
+
+            <!-- Mostrar la imagen actual, si existe -->
+            @if ($post->image_path)
+                <div class="mb-3">
+                    <p>Imagen actual:</p>
+                    <img src="{{ asset('storage/' . $post->image_path) }}" alt="Imagen actual" style="max-width: 100%; height: auto;">
+                </div>
+            @endif
 
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
