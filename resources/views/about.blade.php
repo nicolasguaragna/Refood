@@ -2,7 +2,7 @@
     <x-slot:title>Quienes Somos</x-slot>
 
         <div class="container mt-1">
-            <h1 class="text-center mb-4">Quienes Somos</h1>
+            <h1 class="text-center mb-4">Quiénes Somos</h1>
             <div class="row">
                 <div class="col-md-6">
                     <img src="{{ asset('images/equipo4.jpeg') }}" alt="Nuestro equipo" class="img-fluid rounded">
