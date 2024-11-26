@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use App\Models\RescueRequest; // Asegúrate de tener este modelo
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,5 +65,15 @@ class ServiciosController extends Controller
             'message' => 'Debes iniciar sesión para solicitar un rescate.',
             'alert-type' => 'danger'
         ]);
+    }
+
+    public function showUserDetails($userId)
+    {
+        $user = User::findOrFail($userId); // Encuentra al usuario por su ID
+
+        // Ordenar los rescates asociados al usuario por created_at DESC
+        $rescues = $user->rescueRequests()->orderBy('created_at', 'desc')->get();
+
+        return view('admin.users.show', compact('user', 'rescues'));
     }
 }

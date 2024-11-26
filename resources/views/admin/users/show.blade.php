@@ -6,10 +6,10 @@
         <p>Email: {{ $user->email }}</p>
 
         <h2>Servicios Contratados</h2>
-        @if($user->rescueRequests->isEmpty())
+        @if($rescues->isEmpty())
         <p>El usuario no tiene servicios contratados.</p>
         @else
-        <table class="table">
+        <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Servicio</th>
@@ -21,14 +21,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($user->rescueRequests as $request)
+                @foreach($rescues as $request)
                 <tr>
-                    <td>{{ $request->service->name }}</td>
+                    <td>{{ $request->service->name ?? 'Servicio no disponible' }}</td>
                     <td>{{ $request->contact }}</td>
                     <td>{{ $request->location }}</td>
                     <td>{{ $request->details }}</td>
-                    <td>{{ $request->created_at }}</td>
-                    <td>{{ $request->rescue_date }}</td>
+                    <td>{{ $request->created_at->format('d/m/Y H:i') }}</td>
+                    <td>{{ $request->rescue_date ? \Carbon\Carbon::parse($request->rescue_date)->format('d/m/Y') : 'No especificado' }}</td>
                 </tr>
                 @endforeach
             </tbody>

@@ -1,4 +1,4 @@
-<?php  
+<?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckAdmin;
@@ -58,4 +58,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/admin/users', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.users');
     Route::get('/admin/users/{id}', [\App\Http\Controllers\AdminController::class, 'show'])->name('admin.users.show');
+    Route::get('/admin/users/{id}', [\App\Http\Controllers\ServiciosController::class, 'showUserDetails'])->name('admin.users.show');
 });
