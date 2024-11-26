@@ -41,6 +41,7 @@ class ServiciosController extends Controller
                 'location' => 'required|string|max:255',
                 'details' => 'required|string',
                 'service_id' => 'required|exists:services,service_id', // Cambiado para usar la clave primaria correcta
+                'rescue_date' => 'required|date',
             ]);
 
             RescueRequest::create([
@@ -50,6 +51,7 @@ class ServiciosController extends Controller
                 'location' => $request->location,
                 'details' => $request->details,
                 'service_id' => $request->service_id,
+                'rescue_date' => $request->rescue_date,
             ]);
 
             return redirect()->route('servicios')->with([

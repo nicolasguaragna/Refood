@@ -12,7 +12,13 @@ class RescueRequest extends Model
     protected $table = 'rescue_requests';
 
     protected $fillable = [
-        'user_id', 'name', 'contact', 'location', 'details', 'service_id'
+        'user_id',
+        'name',
+        'contact',
+        'location',
+        'details',
+        'service_id',
+        'rescue_date'
     ];
 
     // Relación con el usuario

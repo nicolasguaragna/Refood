@@ -6,13 +6,13 @@
 
         <!-- Mostrar errores de validación -->
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
 
         <!-- Formulario de solicitud de rescate -->
@@ -38,6 +38,11 @@
             <div class="mb-3">
                 <label for="location" class="form-label">Ubicación</label>
                 <input type="text" class="form-control" id="location" name="location" placeholder="Direccion del rescate" required value="{{ old('location') }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="rescue_date" class="form-label">Fecha del Rescate</label>
+                <input type="date" class="form-control" id="rescue_date" name="rescue_date" value="{{ old('rescue_date') }}" required>
             </div>
 
             <!-- Campo para los detalles del rescate -->
