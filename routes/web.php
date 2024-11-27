@@ -13,8 +13,23 @@ Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class,
 
 Route::get('/donate', [\App\Http\Controllers\MercadoPagoController::class, 'show'])->name('donate.show');
 
-// Rutas para las donaciones
-Route::get('/donations', [\App\Http\Controllers\DonationController::class, 'index'])->name('donate.index');
+Route::get('/donate/index', function () {
+    return redirect('/donate'); // Redirige a la página de donación principal
+})->name('donate.index');
+
+// Rutas para manejar las redirecciones después del pago
+Route::get('/donate/success', function () {
+    return view('donate-success'); // Vista para pagos exitosos
+})->name('donate.success');
+
+Route::get('/donate/failure', function () {
+    return view('donate-failure'); // Vista para pagos fallidos
+})->name('donate.failure');
+
+Route::get('/donate/pending', function () {
+    return view('donate-pending'); // Vista para pagos pendientes
+})->name('donate.pending');
+
 
 // Ruta para mostrar el formulario de rescate (solo para usuarios autenticados)
 Route::middleware('auth')->get('/servicios/{service_id}/rescatar', [\App\Http\Controllers\ServiciosController::class, 'showRescueForm'])->name('rescue.form');

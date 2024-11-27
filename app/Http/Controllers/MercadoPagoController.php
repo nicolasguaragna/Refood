@@ -23,6 +23,12 @@ class MercadoPagoController extends Controller
                     "unit_price" => 500, // Monto fijo de ejemplo
                 ]
             ],
+            "back_urls" => [
+                "success" => route('donate.success'), // URL para pagos exitosos
+                "failure" => route('donate.failure'), // URL para pagos fallidos
+                "pending" => route('donate.pending'), // URL para pagos pendientes
+            ],
+            "auto_return" => "approved", // Retorno automático solo para pagos aprobados
         ]);
 
         // Verificar que la preferencia se creó correctamente
