@@ -215,3 +215,24 @@ body {
     background-color: #4cae4c; /* Color al pasar el cursor */
     border-color: #398439; /* Color del borde al pasar el cursor */
 }
+
+/* Imagen del lado izquierdo */
+.donation-photo {
+    background-image: url("/images/voluntarios-sirviendo.jpg"); /* Ruta a la imagen */
+    background-size: cover; /* Que cubra todo el contenedor */
+    background-position: center; /* Centra la imagen */
+    border-radius: 15px; /* Opcional: bordes redondeados */
+    height: 400px; /* Altura definida */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .donation-photo {
+        height: 250px; /* Reduce la altura en pantallas más pequeñas */
+    }
+    .col-md-6 {
+        margin-bottom: 20px; /* Espacio entre columnas */
+    }
+}

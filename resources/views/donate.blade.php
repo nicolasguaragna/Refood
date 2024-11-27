@@ -1,12 +1,14 @@
 <x-layout>
     <x-slot:title>Donar un Plato</x-slot>
 
-        <div class="container mt-1">
+        <div class="container mt-4">
             <h1 class="text-center mb-4">Donar un Plato</h1>
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="{{ asset('images/donation.jpg') }}" alt="Donar un plato" class="img-fluid rounded">
+            <div class="row align-items-center">
+                <!-- Imagen del lado izquierdo -->
+                <div class="col-md-6 donation-photo">
+                    <!-- Imagen de fondo manejada por CSS -->
                 </div>
+                <!-- Contenido del lado derecho -->
                 <div class="col-md-6">
                     <h2>¿Por qué Donar?</h2>
                     <p>
