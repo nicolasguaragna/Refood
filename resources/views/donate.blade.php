@@ -21,7 +21,7 @@
                     </p>
 
                     <h2>Haz tu Donación</h2>
-                    <!-- Botón generado dinámicamente por Mercado Pago -->
+                    <!-- Botón generado diDnámicamente por Mercado Pago -->
                     <div id="wallet_container"></div>
 
                     <script src="https://sdk.mercadopago.com/js/v2"></script>

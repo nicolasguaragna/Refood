@@ -14,7 +14,7 @@ Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class,
 Route::get('/donate', [\App\Http\Controllers\MercadoPagoController::class, 'show'])->name('donate.show');
 
 // Rutas para las donaciones
-Route::get('donate', [\App\Http\Controllers\DonationController::class, 'index'])->name('donate.index');
+Route::get('/donations', [\App\Http\Controllers\DonationController::class, 'index'])->name('donate.index');
 
 // Ruta para mostrar el formulario de rescate (solo para usuarios autenticados)
 Route::middleware('auth')->get('/servicios/{service_id}/rescatar', [\App\Http\Controllers\ServiciosController::class, 'showRescueForm'])->name('rescue.form');
