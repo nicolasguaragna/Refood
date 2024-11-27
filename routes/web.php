@@ -11,6 +11,11 @@ Route::get('servicios', [\App\Http\Controllers\ServiciosController::class, 'inde
 // Ruta para mostrar detalles de un servicio
 Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show'])->name('servicios.show');
 
+Route::get('/donate', [\App\Http\Controllers\MercadoPagoController::class, 'show'])->name('donate.show');
+
+// Rutas para las donaciones
+Route::get('donate', [\App\Http\Controllers\DonationController::class, 'index'])->name('donate.index');
+
 // Ruta para mostrar el formulario de rescate (solo para usuarios autenticados)
 Route::middleware('auth')->get('/servicios/{service_id}/rescatar', [\App\Http\Controllers\ServiciosController::class, 'showRescueForm'])->name('rescue.form');
 
@@ -37,8 +42,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/blog/{id}/edit', [\App\Http\Controllers\BlogController::class, 'edit'])->name('blog.edit');
     Route::put('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'update'])->name('blog.update');
     Route::delete('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'destroy'])->name('blog.destroy');
-    Route::get('/donations/create', [\App\Http\Controllers\DonationsController::class, 'create']);
-    Route::post('/donations', [\App\Http\Controllers\DonationsController::class, 'store']);
 
     // Ruta para enviar la solicitud de rescate
     Route::post('/servicios/rescatar', [\App\Http\Controllers\ServiciosController::class, 'submitRescueRequest'])->name('rescue.request');

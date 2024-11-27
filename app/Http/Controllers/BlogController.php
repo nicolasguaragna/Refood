@@ -18,7 +18,8 @@ class BlogController extends Controller
     // Mostrar todos los posts (público)
     public function index()
     {
-        $posts = BlogPost::all();
+        // Ordenar las entradas por fecha de creación (descendente)
+        $posts = BlogPost::orderBy('created_at', 'desc')->get();
         return view('blog.index', compact('posts'))->with([
             'message' => 'Bienvenido al blog público.',
             'alert-type' => 'info'
@@ -31,12 +32,14 @@ class BlogController extends Controller
         $user = Auth::user();
 
         if ($user->hasRole('admin')) {
-            // Los administradores ven todas las entradas
-            $posts = BlogPost::all();
+            // Los administradores ven todas las entradas, ordenadas por fecha descendente
+            $posts = BlogPost::orderBy('created_at', 'desc')->get();
             $message = 'Panel de administración: Todos los blogs';
         } else {
-            // Los usuarios comunes ven solo sus propias entradas
-            $posts = BlogPost::where('author_id', $user->id)->get();
+            // Los usuarios comunes ven solo sus propias entradas, ordenadas por fecha descendente
+            $posts = BlogPost::where('author_id', $user->id)
+                ->orderBy('created_at', 'desc')
+                ->get();
             $message = 'Tus entradas de blog';
         }
 

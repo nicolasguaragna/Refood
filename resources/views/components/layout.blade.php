@@ -34,6 +34,7 @@
                         <li class="nav-item"><a class="nav-link text-success" href="{{ url('servicios') }}">Servicios</a></li>
                         <li class="nav-item"><a class="nav-link text-success" href="{{ url('blog') }}">Blog</a></li>
                         <li class="nav-item"><a class="nav-link text-success" href="{{ url('quienes-somos') }}">Quiénes Somos</a></li>
+                        <li class="nav-item"><a class="nav-link text-success" href="{{ route('donate.index') }}">Donar un plato</a></li>
                         <li class="nav-item"><a class="nav-link text-success" href="{{ url('contact') }}">Contacto</a></li>
 
                         <!-- Authentication Links -->
