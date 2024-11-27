@@ -4,11 +4,14 @@
         <div class="container mt-4">
             <h1 class="text-center mb-4">Donar un Plato</h1>
             <div class="row align-items-center">
-                <!-- Imagen del lado izquierdo -->
-                <div class="col-md-6 donation-photo">
-                    <!-- Imagen de fondo manejada por CSS -->
+                <!-- Columna de la imagen -->
+                <div class="col-md-6 text-center">
+                    <img
+                        src="{{ asset('images/voluntarios-sirviendo.jpg') }}"
+                        alt="Voluntarios sirviendo comida"
+                        class="img-fluid rounded shadow">
                 </div>
-                <!-- Contenido del lado derecho -->
+                <!-- Columna del contenido -->
                 <div class="col-md-6">
                     <h2>¿Por qué Donar?</h2>
                     <p>
