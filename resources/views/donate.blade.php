@@ -21,12 +21,12 @@
 
                     <h2>¿Cómo Funciona?</h2>
                     <p>
-                        Con tu donación, recolectamos alimentos no utilizados de comercios, empresas y hogares para redistribuirlos
+                        Con tu donación, recolectamos alimentos no utilizados de comercios, empresas, productores, para redistribuirlos
                         a comunidades en situación vulnerable. ¡Juntos podemos lograr un cambio real!
                     </p>
 
                     <h2>Haz tu Donación</h2>
-                    <!-- Botón generado diDnámicamente por Mercado Pago -->
+                    <!-- Botón generado dinámicamente por Mercado Pago -->
                     <div id="wallet_container"></div>
 
                     <script src="https://sdk.mercadopago.com/js/v2"></script>
