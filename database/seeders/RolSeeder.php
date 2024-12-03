@@ -13,7 +13,8 @@ class RolSeeder extends Seeder
      */
     public function run(): void
     {
-        Rol::create(['name' => 'admin']);
-        Rol::create(['name' => 'user']);
+        // Verifica si ya existe un rol antes de insertarlo
+        Rol::firstOrCreate(['name' => 'admin']);
+        Rol::firstOrCreate(['name' => 'user']);
     }
 }

@@ -26,7 +26,7 @@ class AssignRolesToUsersSeeder extends Seeder
 
             if ($user) {
                 $roleIds = Rol::whereIn('name', $roles)->pluck('id');
-                $user->roles()->syncWithoutDetaching($roleIds);
+                $user->roles()->syncWithoutDetaching($roleIds); // asegura que no se creen relaciones repetidas
             }
         }
     }

@@ -13,6 +13,7 @@
             <thead>
                 <tr>
                     <th>Servicio</th>
+                    <th>Precio</th>
                     <th>Contacto</th>
                     <th>Ubicación</th>
                     <th>Detalles</th>
@@ -24,6 +25,7 @@
                 @foreach($rescues as $request)
                 <tr>
                     <td>{{ $request->service->name ?? 'Servicio no disponible' }}</td>
+                    <td>${{ number_format($request->service->price, 2) }}</td>
                     <td>{{ $request->contact }}</td>
                     <td>{{ $request->location }}</td>
                     <td>{{ $request->details }}</td>

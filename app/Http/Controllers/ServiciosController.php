@@ -72,7 +72,10 @@ class ServiciosController extends Controller
         $user = User::findOrFail($userId); // Encuentra al usuario por su ID
 
         // Ordenar los rescates asociados al usuario por created_at DESC
-        $rescues = $user->rescueRequests()->orderBy('created_at', 'desc')->get();
+        $rescues = $user->rescueRequests()
+            ->with('service') // Incluir la relación con el modelo Service
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('admin.users.show', compact('user', 'rescues'));
     }
