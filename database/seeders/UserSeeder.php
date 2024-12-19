@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash; // Para usar bcrypt en la contraseña
+use App\Models\User; // Asegúrate de importar el modelo User
 
 class UserSeeder extends Seeder
 {
@@ -13,35 +13,44 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
+        User::firstOrCreate(
+            ['email' => 'micag@example.com'], // Condición para evitar duplicados
             [
                 'name' => 'Micaela Guaragna',
-                'email' => 'micag@example.com',
-                'password' => Hash::make('1234'),
+                'password' => Hash::make('1234'), // Encripta la contraseña
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
+            ]
+        );
+
+        User::firstOrCreate(
+            ['email' => 'tatianab@example.com'],
             [
                 'name' => 'Tatiana Barrios',
-                'email' => 'tatianab@example.com',
                 'password' => Hash::make('1234'),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
+            ]
+        );
+
+        User::firstOrCreate(
+            ['email' => 'briang@example.com'],
             [
                 'name' => 'Brian Guaragna',
-                'email' => 'briang@example.com',
                 'password' => Hash::make('1234'),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
+            ]
+        );
+
+        User::firstOrCreate(
+            ['email' => 'nico_guaragna@hotmail.com'],
             [
                 'name' => 'Nico Guaragna',
-                'email' => 'nico_guaragna@hotmail.com',
-                'password' => Hash::make('1234'), 
+                'password' => Hash::make('1234'),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-        ]);
+            ]
+        );
     }
 }

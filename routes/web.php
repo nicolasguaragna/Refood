@@ -52,6 +52,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [\App\Http\Controllers\UserController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [\App\Http\Controllers\UserController::class, 'update'])->name('profile.update');
     Route::post('/servicios/rescatar', [\App\Http\Controllers\ServiciosController::class, 'submitRescueRequest'])->name('rescue.request');
+
+    // Rutas para administración de servicios del usuario
+    Route::get('/profile/services', [\App\Http\Controllers\UserController::class, 'services'])->name('user.services');
+    Route::get('/profile/services/{id}/edit', [\App\Http\Controllers\UserController::class, 'editService'])->name('services.edit');
+    Route::put('/profile/services/{id}', [\App\Http\Controllers\UserController::class, 'updateService'])->name('services.update');
+    Route::delete('/profile/services/{id}', [\App\Http\Controllers\UserController::class, 'cancelService'])->name('services.cancel');
 });
 
 // Rutas de contacto

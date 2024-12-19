@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             BlogSeeder::class,
             ServiceSeeder::class,
             AssignServiceSeeder::class,
+            RescueRequestSeeder::class,
         ]);
     }
 }

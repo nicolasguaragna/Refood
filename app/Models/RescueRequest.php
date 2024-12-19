@@ -21,13 +21,30 @@ class RescueRequest extends Model
         'rescue_date'
     ];
 
-    // Relación con el usuario
+    /**
+     * Cast attributes to specific types.
+     *
+     * This ensures that rescue_date is always treated as a datetime object.
+     */
+    protected $casts = [
+        'rescue_date' => 'datetime',
+    ];
+
+    /**
+     * Define the relationship with the User model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Relación con el servicio
+    /**
+     * Define the relationship with the Service model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function service()
     {
         return $this->belongsTo(Service::class, 'service_id');
