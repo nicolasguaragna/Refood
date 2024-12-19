@@ -4,3 +4,11 @@ Portales y Comercio Electrónico
 Guaragna Fernando 
 Santiago Gallino
 Final
+
+Usuario Admin:
+nico_guaragna@hotmail.com
+12345678
+
+Usuario común:
+briang@example.com
+1234

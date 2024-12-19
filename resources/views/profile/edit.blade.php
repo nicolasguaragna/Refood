@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label for="confirm-password">Confirmar Contraseña</label>
                             <div class="input-group">
-                                <input type="password" id="confirm-password" name="confirm_password" class="form-control" placeholder="Confirmar Contraseña">
+                                <input type="password" id="confirm-password" name="new_password_confirmation" class="form-control" placeholder="Confirmar Contraseña">
                                 <button type="button" class="btn btn-outline-secondary toggle-password" data-target="#confirm-password">
                                     <i class="fa fa-eye"></i>
                                 </button>

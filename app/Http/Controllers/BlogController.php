@@ -89,9 +89,18 @@ class BlogController extends Controller
             'image_path' => $imagePath,
         ]);
 
+        // Verificar si el usuario es administrador
+        if (auth()->user()->hasRole('admin')) {
+            return redirect()->route('blog.admin')->with([
+                'message' => 'Entrada de blog creada con éxito.',
+                'alert-type' => 'success',
+            ]);
+        }
+
+        // Redirigir al listado común si no es administrador
         return redirect()->route('blog.index')->with([
             'message' => 'Entrada de blog creada con éxito.',
-            'alert-type' => 'success'
+            'alert-type' => 'success',
         ]);
     }
 
