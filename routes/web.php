@@ -60,6 +60,11 @@ Route::middleware('auth')->group(function () {
 
     // Ruta para enviar la solicitud de rescate
     Route::post('/servicios/rescatar', [\App\Http\Controllers\ServiciosController::class, 'submitRescueRequest'])->name('rescue.request');
+
+    // Rutas para perfil de usuario autenticado
+    Route::get('/profile', [\App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [\App\Http\Controllers\UserController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [\App\Http\Controllers\UserController::class, 'update'])->name('profile.update');
 });
 
 // Rutas de contacto
