@@ -17,9 +17,9 @@ class AdminController extends Controller
     // Método para mostrar los detalles de un usuario específico, incluyendo rescates y servicios
     public function show($id)
     {
-        // Carga el usuario junto con sus rescates y los servicios asociados
+        // Cargo el usuario junto con sus rescates y los servicios asociados
         $user = User::with('rescueRequests.service')->findOrFail($id);
-        return view('admin.users.show', compact('user'));
+        $rescues = $user->rescueRequests; // obtengo las solicitudes de rescate
+        return view('admin.users.show', compact('user', 'rescues'));
     }
 }
-
