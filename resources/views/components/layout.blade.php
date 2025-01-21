@@ -26,7 +26,7 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/marca.jpg') }}" alt="Refood Logo" height="40">
+                    <img src="{{ asset('images/marca-final.png') }}" alt="Refood Logo" height="40">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -80,7 +80,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="{{ asset('images/marca.jpg') }}" alt="Refood Logo" class="footer-logo">
+                        <img src="{{ asset('images/marca-final.png') }}" alt="Refood Logo" class="footer-logo">
                         <p>Cada plato cuenta</p>
                     </div>
                     <div class="col-md-6 text-end">

@@ -36,7 +36,7 @@ a {
 
 /* Estilo para el footer */
 .footer {
-    background-color: #2e7d32; /* Color de fondo del footer */
+    background-color: #a1a1a1; /* Color de fondo del footer */
     color: #fff;
     padding: 20px;
 }
@@ -55,7 +55,9 @@ a {
 }
 
 .footer-logo {
-    max-width: 150px;
+    max-width: 220px; /* Aumenta el ancho máximo */
+    height: auto; /* Mantén la proporción */
+    display: inline-block;
 }
 
 /* Estilo para la columna de información de contacto */
