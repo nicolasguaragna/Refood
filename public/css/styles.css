@@ -256,3 +256,102 @@ a {
         margin-bottom: 20px; /* Espacio entre columnas */
     }
 }
+/* Estilo del fondo circular detrás de la imagen */
+.banner-image {
+    position: relative; /* Permite posicionar elementos dentro del contenedor */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-image .circle-background {
+    position: absolute;
+    width: 500px; /* Tamaño del círculo */
+    height: 500px; /* Tamaño del círculo */
+    background-color: #6bc097; /* Color verde */
+    border-radius: 50%; /* Hace que sea un círculo */
+    z-index: 1; /* Asegura que esté detrás de la imagen */
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta la posición al centro exacto */
+}
+
+.banner-image img {
+    position: relative;
+    z-index: 2; /* Coloca la imagen delante del círculo */
+}
+
+/* Resto del CSS permanece igual */
+
+/* Banner principal */
+.landing-banner {
+    background-color: #f8f9fa;
+    padding: 50px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.landing-banner .banner-image img {
+    max-width: 100%;
+    border-radius: 20px;
+}
+
+/* Cliente reviews */
+.client-reviews {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Qué hacemos */
+.what-we-do {
+    padding: 40px 20px;
+}
+
+/* La solución */
+.solution {
+    padding: 40px 20px;
+}
+
+.solution-card {
+    background-color: #eef9f3;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.solution-card h3 {
+    font-size: 1.5rem;
+    color: #035f13;
+}
+
+.solution-card p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Opinión de nuestra comunidad */
+.community-opinion {
+    background-color: #f8f9fa;
+    padding: 40px 20px;
+}
+
+.testimonial-card {
+    background-color: #eef9f3;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.testimonial-card p {
+    color: #555;
+}
+
+.testimonial-card img {
+    border: 2px solid #6bc097;
+}
+
