@@ -266,8 +266,8 @@ a {
 
 .banner-image .circle-background {
     position: absolute;
-    width: 500px; /* Tamaño del círculo */
-    height: 500px; /* Tamaño del círculo */
+    width: 397px; /* Tamaño del círculo */
+    height: 397px; /* Tamaño del círculo */
     background-color: #6bc097; /* Color verde */
     border-radius: 50%; /* Hace que sea un círculo */
     z-index: 1; /* Asegura que esté detrás de la imagen */
@@ -285,7 +285,6 @@ a {
 
 /* Banner principal */
 .landing-banner {
-    background-color: #f8f9fa;
     padding: 50px 0;
     display: flex;
     justify-content: space-between;

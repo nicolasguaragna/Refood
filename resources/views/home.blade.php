@@ -5,7 +5,7 @@
         <section class="landing-banner d-flex align-items-center justify-content-center text-center">
             <div class="container">
                 <h1 class="display-4 fw-bold">
-                    Cada plato cuenta <span class="text-success">para un mundo sin desperdicio</span>
+                    Cada plato cuenta <br><span class="text-success">para un mundo <br>sin desperdicio</span>
                 </h1>
                 <p class="lead">Un sitio para reducir el excedente de alimentos y redistribuirlos a quienes más lo necesitan.</p>
                 <a href="{{ route('donate.index') }}" class="btn btn-success btn-lg mt-3">Dona Ahora</a>
@@ -17,7 +17,7 @@
             </div>
             <div class="banner-image">
                 <div class="circle-background"></div> <!-- Fondo circular -->
-                <img src="{{ asset('images/banner.jpg') }}" alt="Banner Principal" class="img-fluid">
+                <img src="{{ asset('images/banner.png') }}" alt="Banner Principal" class="img-fluid">
             </div>
         </section>
 
