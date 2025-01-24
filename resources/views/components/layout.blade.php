@@ -26,27 +26,34 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/marca-final.png') }}" alt="Refood Logo" height="40">
+                    <img src="{{ asset('images/marca-final.png') }}" alt="Refood Logo" height="50">
                 </a>
+                <!-- Botón de hamburguesa para móviles -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <!-- Contenido del menú -->
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <!-- Secciones principales centradas -->
+                    <div class="nav-rectangle mx-auto">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('servicios') }}">Servicios</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('blog') }}">Blog</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('quienes-somos') }}">Quiénes Somos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('donate.index') }}">Donar un plato</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('contact') }}">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <!-- Enlaces de sesión alineados a la derecha -->
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link text-success" href="{{ url('/') }}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link text-success" href="{{ url('servicios') }}">Servicios</a></li>
-                        <li class="nav-item"><a class="nav-link text-success" href="{{ url('blog') }}">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link text-success" href="{{ url('quienes-somos') }}">Quiénes Somos</a></li>
-                        <li class="nav-item"><a class="nav-link text-success" href="{{ route('donate.index') }}">Donar un plato</a></li>
-                        <li class="nav-item"><a class="nav-link text-success" href="{{ url('contact') }}">Contacto</a></li>
-
                         <!-- Authentication Links -->
                         @guest
                         @if (Route::has('login'))
-                        <li class="nav-item"><a class="nav-link text-success" href="{{ route('login') }}">Iniciar Sesión</a></li>
+                        <li class="nav-item"><a class="nav-link btn btn-outline-success" href="{{ route('login') }}">Iniciar Sesión</a></li>
                         @endif
                         @if (Route::has('register'))
-                        <li class="nav-item"><a class="nav-link text-success" href="{{ route('register') }}">Registrarse</a></li>
+                        <li class="nav-item ms-2"><a class="nav-link btn btn-success text-white" href="{{ route('register') }}">Registrarse</a></li>
                         @endif
                         @else
                         <li class="nav-item dropdown">

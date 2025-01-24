@@ -25,7 +25,7 @@
         <section class="what-we-do text-center mt-5">
             <h2 class="fw-bold">¿QUÉ HACEMOS?</h2>
             <p class="text-muted">
-                Conectamos empresas donantes con comedores comunitarios y organizaciones sociales, asegurándonos de que los alimentos en buen estado lleguen a quienes más lo necesitan.
+                Conectamos empresas donantes <br> con comedores comunitarios y organizaciones sociales <br> asegurándonos de que los alimentos en buen estado <br> lleguen a quienes más lo necesitan.
             </p>
         </section>
 
@@ -35,20 +35,17 @@
             <div class="row mt-4">
                 <div class="col-md-4">
                     <div class="solution-card shadow-sm p-4">
-                        <h3 class="fw-bold">Registro de alimentos</h3>
-                        <p>Por parte de las empresas.</p>
+                        <h3 class="fw-bold">Registro de alimentos <br>por parte de las empresas</h3>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="solution-card shadow-sm p-4">
                         <h3 class="fw-bold">Recolección y verificación</h3>
-                        <p>Garantizamos que estén en buen estado.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="solution-card shadow-sm p-4">
-                        <h3 class="fw-bold">Distribución a comedores</h3>
-                        <p>Llegamos a quienes más lo necesitan.</p>
+                        <h3 class="fw-bold">Distribución a comedores comunitarios</h3>
                     </div>
                 </div>
             </div>

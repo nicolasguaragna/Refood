@@ -354,3 +354,47 @@ a {
     border: 2px solid #6bc097;
 }
 
+.nav-link {
+    color: #035f13;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #28a745;
+}
+
+.navbar .btn-outline-success {
+    border-radius: 20px;
+}
+
+.navbar .btn-success {
+    border-radius: 20px;
+}
+.nav-rectangle {
+    background-color: #6bc097; /* Color de fondo verde */
+    border-radius: 25px; /* Bordes redondeados */
+    padding: 10px 30px; /* Espaciado interno */
+    display: inline-block; /* Ajusta el tamaño al contenido */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.nav-rectangle ul {
+    display: flex; /* Diseño en fila */
+    gap: 20px; /* Espaciado entre enlaces */
+    margin: 0;
+    padding: 0;
+    list-style: none; /* Eliminar puntos de lista */
+}
+
+.nav-rectangle .nav-link {
+    text-decoration: none; /* Sin subrayado */
+    font-weight: bold;
+    color: white; /* Color del texto */
+    transition: color 0.3s ease;
+}
+
+.nav-rectangle .nav-link:hover {
+    color: #035f13; /* Cambiar color al pasar el ratón */
+}
+
