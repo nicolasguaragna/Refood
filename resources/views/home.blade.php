@@ -9,10 +9,16 @@
                 </h1>
                 <p class="lead">Un sitio para reducir el excedente de alimentos y redistribuirlos a quienes más lo necesitan.</p>
                 <a href="{{ route('donate.index') }}" class="btn btn-success btn-lg mt-3">Dona Ahora</a>
-                <div class="client-reviews mt-3">
-                    <img src="{{ asset('images/Elipse1.jpg') }}" alt="Clientes Felices" class="rounded-circle me-2" style="width: 50px; height: 50px;">
+                <div class="client-images me-2">
+                    <img src="{{ asset('images/Elipse1.jpg') }}" alt="Cliente 1" class="rounded-circle" style="width: 40px; height: 40px;">
+                    <img src="{{ asset('images/Elipse2.jpg') }}" alt="Cliente 2" class="rounded-circle" style="width: 40px; height: 40px; margin-left: -10px;">
+                    <img src="{{ asset('images/Elipse3.jpg') }}" alt="Cliente 3" class="rounded-circle" style="width: 40px; height: 40px; margin-left: -10px;">
+                </div>
+                <div>
                     <span class="fw-bold">Clientes Felices</span>
-                    <span class="text-muted">4.8 (450+ reviews)</span>
+                    <span class="text-muted d-block">
+                        <i class="fa fa-star text-warning"></i> 4.8 (450+ reviews)
+                    </span>
                 </div>
             </div>
             <div class="banner-image">
