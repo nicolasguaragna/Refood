@@ -371,6 +371,7 @@ a {
 .navbar .btn-success {
     border-radius: 20px;
 }
+
 .nav-rectangle {
     background-color: #6bc097; /* Color de fondo verde */
     border-radius: 15px; /* Bordes redondeados */
@@ -398,3 +399,15 @@ a {
     color: #035f13; /* Cambiar color al pasar el ratón */
 }
 
+.nav-rectangle ul li {
+    display: flex; /* Permite alinear el contenido dentro del <li> */
+    align-items: center; /* Alinea el contenido verticalmente */
+    gap: 10px; /* Añade un pequeño espacio para evitar que el texto toque el separador */
+}
+
+.nav-rectangle ul li:not(:last-child)::after {
+    content: "|"; /* Contenido del separador */
+    display: inline-block;
+    color: white; /* Color del separador */
+    font-weight: bold;
+}
