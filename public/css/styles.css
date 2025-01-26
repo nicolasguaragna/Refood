@@ -432,8 +432,8 @@ a {
 .cta-section {
     background-color: #eef9f3; /* Color de fondo claro */
     padding: 20px 0;
-    border-top: 2px solid #6bc097; /* Línea superior verde */
-    border-bottom: 2px solid #6bc097; /* Línea inferior verde */
+    border-top: 1px solid #6bc097; /* Línea superior verde */
+    border-bottom: 1px solid #6bc097; /* Línea inferior verde */
     margin-top: 40px;
 }
 
@@ -448,7 +448,7 @@ a {
 }
 
 .cta-logo {
-    width:100px; /* Ancho de la imagen del logo */
+    width:200px; /* Ancho de la imagen del logo */
     height: auto; /* Mantén la proporción */
 }
 
@@ -477,4 +477,20 @@ a {
     color: #ffffff; /* Texto blanco */
 }
 
+/* Fondo decorativo global con puntos */
+.section-background {
+    position: relative;
+    z-index: 1;
+    background-image: url('/images/puntos.png'); /* Ruta a tu imagen de puntos */
+    background-repeat: no-repeat;
+    background-position: top right; /* Ajusta la posición según tus necesidades */
+    background-size: 150px; /* Tamaño del patrón */
+    overflow: hidden; /* Asegura que no se desborde */
+}
+
+/* Para asegurar que los elementos dentro no queden afectados */
+.section-content {
+    position: relative;
+    z-index: 2;
+}
 
