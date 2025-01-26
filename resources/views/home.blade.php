@@ -63,30 +63,37 @@
             <p class="text-muted">Opinión de nuestra comunidad</p>
             <div class="row mt-4">
                 <div class="col-md-4">
-                    <div class="testimonial-card shadow-sm p-4">
-                        <p class="fw-bold">"Desde que comenzamos con Refood, hemos logrado reducir el desperdicio de alimentos en nuestras tiendas."</p>
-                        <img src="{{ asset('images/testimonial-carlos.jpg') }}" alt="Carlos García" class="rounded-circle mt-3" style="width: 60px; height: 60px;">
-                        <p class="mt-2"><strong>- Carlos García</strong><br>Gerente de Responsabilidad Social, Supermercados</p>
-                        <p class="text-warning">★★★★★</p>
+                    <div class="testimonial-card shadow-sm p-4 d-flex flex-column align-items-center">
+                        <p class="fw-bold text-center">"Desde que comenzamos con Refood, hemos logrado reducir el desperdicio de alimentos en nuestras tiendas."</p>
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="{{ asset('images/testimonial-carlos.jpg') }}" alt="Carlos García" class="rounded-circle" style="width: 60px; height: 60px;">
+                            <p class="text-warning mb-0">★★★★★</p>
+                        </div>
+                        <p class="mt-2"><strong>Carlos García</strong><br>Gerente de Responsabilidad Social, Supermercados</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="testimonial-card shadow-sm p-4">
-                        <p class="fw-bold">"Gracias a Refood, cada semana recibimos alimentos frescos y variados que no podríamos obtener de otra manera."</p>
-                        <img src="{{ asset('images/testimonial-ana.jpg') }}" alt="Ana Gonzalez" class="rounded-circle mt-3" style="width: 60px; height: 60px;">
-                        <p class="mt-2"><strong>- Ana Gonzalez</strong><br>Coordinadora del Comedor Comunidad Activa</p>
-                        <p class="text-warning">★★★★★</p>
+                    <div class="testimonial-card shadow-sm p-4 d-flex flex-column align-items-center">
+                        <p class="fw-bold text-center">"Gracias a Refood, cada semana recibimos alimentos frescos y variados que no podríamos obtener de otra manera."</p>
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="{{ asset('images/testimonial-ana.jpg') }}" alt="Ana Gonzalez" class="rounded-circle" style="width: 60px; height: 60px;">
+                            <p class="text-warning mb-0">★★★★★</p>
+                        </div>
+                        <p class="mt-2"><strong>Ana Gonzalez</strong><br>Coordinadora del Comedor Comunidad Activa</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="testimonial-card shadow-sm p-4">
-                        <p class="fw-bold">"Ser voluntaria me cambió la vida. Saber que esos alimentos llegarán a quienes los necesitan es una experiencia gratificante."</p>
-                        <img src="{{ asset('images/testimonial-mariana.jpg') }}" alt="Mariana Fert" class="rounded-circle mt-3" style="width: 60px; height: 60px;">
-                        <p class="mt-2"><strong>- Mariana Fert</strong><br>Voluntaria Refood</p>
-                        <p class="text-warning">★★★★★</p>
+                    <div class="testimonial-card shadow-sm p-4 d-flex flex-column align-items-center">
+                        <p class="fw-bold text-center">"Ser voluntaria me cambió la vida. Saber que esos alimentos llegarán a quienes los necesitan es una experiencia gratificante."</p>
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="{{ asset('images/testimonial-mariana.jpg') }}" alt="Mariana Fert" class="rounded-circle" style="width: 60px; height: 60px;">
+                            <p class="text-warning mb-0">★★★★★</p>
+                        </div>
+                        <p class="mt-2"><strong>Mariana Fert</strong><br>Voluntaria Refood</p>
                     </div>
                 </div>
             </div>
         </section>
+
 
 </x-layout>

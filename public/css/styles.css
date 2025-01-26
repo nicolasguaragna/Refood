@@ -334,7 +334,6 @@ a {
 
 /* Opinión de nuestra comunidad */
 .community-opinion {
-    background-color: #f8f9fa;
     padding: 40px 20px;
 }
 
@@ -411,3 +410,5 @@ a {
     color: white; /* Color del separador */
     font-weight: bold;
 }
+
+
