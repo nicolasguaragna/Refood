@@ -64,7 +64,7 @@
             <div class="row mt-4">
                 <div class="col-md-4">
                     <div class="testimonial-card shadow-sm p-4 d-flex flex-column align-items-center">
-                        <p class="fw-bold text-center">"Desde que comenzamos con Refood, hemos logrado reducir el desperdicio de alimentos en nuestras tiendas."</p>
+                        <p class="fw-bold text-center">Desde que comenzamos con Refood, hemos logrado reducir el desperdicio de alimentos en nuestras tiendas."</p>
                         <div class="d-flex align-items-center gap-2">
                             <img src="{{ asset('images/testimonial-carlos.jpg') }}" alt="Carlos García" class="rounded-circle" style="width: 60px; height: 60px;">
                             <p class="text-warning mb-0">★★★★★</p>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="testimonial-card shadow-sm p-4 d-flex flex-column align-items-center">
-                        <p class="fw-bold text-center">"Gracias a Refood, cada semana recibimos alimentos frescos y variados que no podríamos obtener de otra manera."</p>
+                        <p class="fw-bold text-center">Gracias a Refood, cada semana recibimos alimentos frescos y variados que no podríamos obtener de otra manera."</p>
                         <div class="d-flex align-items-center gap-2">
                             <img src="{{ asset('images/testimonial-ana.jpg') }}" alt="Ana Gonzalez" class="rounded-circle" style="width: 60px; height: 60px;">
                             <p class="text-warning mb-0">★★★★★</p>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="testimonial-card shadow-sm p-4 d-flex flex-column align-items-center">
-                        <p class="fw-bold text-center">"Ser voluntaria me cambió la vida. Saber que esos alimentos llegarán a quienes los necesitan es una experiencia gratificante."</p>
+                        <p class="fw-bold text-center">Ser voluntaria me cambió la vida. Saber que esos alimentos llegarán a quienes los necesitan es una experiencia gratificante."</p>
                         <div class="d-flex align-items-center gap-2">
                             <img src="{{ asset('images/testimonial-mariana.jpg') }}" alt="Mariana Fert" class="rounded-circle" style="width: 60px; height: 60px;">
                             <p class="text-warning mb-0">★★★★★</p>
@@ -94,6 +94,15 @@
                 </div>
             </div>
         </section>
+
+        <section class="cta-section text-center mt-5">
+            <div class="cta-container d-flex justify-content-between align-items-center">
+                <img src="{{ asset('images/marca-final.png') }}" alt="Refood Logo" class="cta-logo">
+                <h2 class="cta-text">CADA PLATO CUENTA</h2>
+                <a href="{{ route('register') }}" class="btn btn-success cta-button">Únete a la Causa</a>
+            </div>
+        </section>
+
 
 
 </x-layout>
