@@ -262,6 +262,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: visible; /* Esto asegura que los elementos no se recorten */
 }
 
 .banner-image .circle-background {
@@ -274,6 +275,7 @@ a {
     top: 50%; /* Centra verticalmente */
     left: 50%; /* Centra horizontalmente */
     transform: translate(-50%, -50%); /* Ajusta la posición al centro exacto */
+    overflow: visible; /* Asegura que no se recorte */
 }
 
 .banner-image img {
@@ -478,14 +480,16 @@ a {
 }
 
 /* Fondo decorativo global con puntos */
-.section-background {
-    position: relative;
-    z-index: 1;
+.background-dots {
+    position: absolute;
+    width: 200px; /* Tamaño ajustable */
+    height: 200px;
     background-image: url('/images/puntos.png'); /* Ruta a tu imagen de puntos */
-    background-repeat: no-repeat;
-    background-position: top right; /* Ajusta la posición según tus necesidades */
-    background-size: 150px; /* Tamaño del patrón */
-    overflow: hidden; /* Asegura que no se desborde */
+    background-size: cover;
+    z-index: 0; /* Asegúrate de que esté detrás */
+    top: 70%; /* Ajusta la posición */
+    right: 60%;
+    transform: translate(-50%, -50%);
 }
 
 /* Para asegurar que los elementos dentro no queden afectados */
