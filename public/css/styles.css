@@ -326,7 +326,7 @@ a {
 
 .solution-card h3 {
     font-size: 1.5rem;
-    color: #035f13;
+    color: #000000;
 }
 
 .solution-card p {
@@ -482,14 +482,14 @@ a {
 /* Fondo decorativo global con puntos */
 .background-dots {
     position: absolute;
-    width: 200px; /* Tamaño ajustable */
-    height: 200px;
+    width: 150px; /* Tamaño ajustable */
+    height: 150px;
     background-image: url('/images/puntos.png'); /* Ruta a tu imagen de puntos */
     background-size: cover;
-    z-index: 0; /* Asegúrate de que esté detrás */
-    top: 70%; /* Ajusta la posición */
-    right: 60%;
-    transform: translate(-50%, -50%);
+    z-index:auto;
+    top: 40%; /* Ajusta la posición */
+    right: -45%; /* Posiciona cerca del borde derecho */
+    transform: translate(-50%, -50%);/* Centra con respecto al punto de referencia */
 }
 
 /* Para asegurar que los elementos dentro no queden afectados */

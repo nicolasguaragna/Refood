@@ -1,26 +1,33 @@
 <x-layout>
     <x-slot:title>Página Principal</x-slot>
         <!-- Sección principal -->
-        <section class="landing-banner d-flex align-items-center justify-content-center text-center">
-            <div class="container">
+        <section class="landing-banner d-flex align-items-center justify-content-between">
+            <div class="container text-start">
                 <h1 class="display-4 fw-bold">
                     Cada plato cuenta <br><span class="text-success">para un mundo <br>sin desperdicio</span>
                 </h1>
-                <p class="lead">Un sitio para reducir el excedente de alimentos y redistribuirlos a quienes más lo necesitan.</p>
+                <p class="lead">Un sitio para reducir el excedente de alimentos <br>y redistribuirlos a quienes más lo necesitan.</p>
                 <a href="{{ route('donate.index') }}" class="btn btn-success btn-lg mt-3">Dona Ahora</a>
-                <div class="client-images me-2">
-                    <img src="{{ asset('images/Elipse1.jpg') }}" alt="Cliente 1" class="rounded-circle" style="width: 40px; height: 40px;">
-                    <img src="{{ asset('images/Elipse2.jpg') }}" alt="Cliente 2" class="rounded-circle" style="width: 40px; height: 40px; margin-left: -10px;">
-                    <img src="{{ asset('images/Elipse3.jpg') }}" alt="Cliente 3" class="rounded-circle" style="width: 40px; height: 40px; margin-left: -10px;">
-                </div>
-                <div>
-                    <span class="fw-bold">Clientes Felices</span>
-                    <span class="text-muted d-block">
-                        <i class="fa fa-star text-warning"></i> 4.8 (450+ reviews)
-                    </span>
+
+                <!-- Clientes felices -->
+                <div class="d-flex align-items-center mt-4">
+                    <div class="client-images me-3">
+                        <img src="{{ asset('images/Elipse1.jpg') }}" alt="Cliente 1" class="rounded-circle" style="width: 40px; height: 40px;">
+                        <img src="{{ asset('images/Elipse2.jpg') }}" alt="Cliente 2" class="rounded-circle" style="width: 40px; height: 40px; margin-left: -10px;">
+                        <img src="{{ asset('images/Elipse3.jpg') }}" alt="Cliente 3" class="rounded-circle" style="width: 40px; height: 40px; margin-left: -10px;">
+                    </div>
+                    <div>
+                        <span class="fw-bold">Clientes Felices</span>
+                        <br>
+                        <span class="text-muted">
+                            <i class="fa fa-star text-warning"></i> 4.8 (450+ reviews)
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="banner-image">
+
+            <!-- Imagen del banner con fondo decorativo -->
+            <div class="banner-image position-relative">
                 <div class="circle-background"></div> <!-- Fondo circular -->
                 <div class="background-dots"></div> <!-- Puntos gráficos -->
                 <img src="{{ asset('images/banner.png') }}" alt="Banner Principal" class="img-fluid">
@@ -29,9 +36,9 @@
 
         <!-- Sección Qué hacemos -->
         <section class="what-we-do text-center mt-5">
-            <h2 class="fw-bold">¿QUÉ HACEMOS?</h2>
+            <h2 class="fw-bold text-success">¿QUÉ HACEMOS?</h2>
             <p class="text-muted">
-                Conectamos empresas donantes <br> con comedores comunitarios y organizaciones sociales <br> asegurándonos de que los alimentos en buen estado <br> lleguen a quienes más lo necesitan.
+                Conectamos empresas donantes <br> con comedores comunitarios y organizaciones sociales, <br> asegurándonos de que los alimentos en buen estado <br> lleguen a quienes más lo necesitan.
             </p>
         </section>
 
@@ -60,7 +67,7 @@
         <!-- Sección Opinión de nuestra comunidad -->
         <section class="community-opinion text-center mt-5">
             <h2 class="fw-bold text-success">LO QUE DICEN</h2>
-            <p class="text-muted">Opinión de nuestra comunidad</p>
+            <p class="fw-bold">Opinión de nuestra comunidad</p>
             <div class="row mt-4">
                 <div class="col-md-4">
                     <div class="testimonial-card shadow-sm p-4 d-flex flex-column align-items-center">
@@ -79,7 +86,7 @@
                             <img src="{{ asset('images/testimonial-ana.jpg') }}" alt="Ana Gonzalez" class="rounded-circle" style="width: 60px; height: 60px;">
                             <p class="text-warning mb-0">★★★★★</p>
                         </div>
-                        <p class="mt-2"><strong>Ana Gonzalez</strong><br>Coordinadora del Comedor Comunidad Activa</p>
+                        <p class="mt-2"><strong>Ana Gonzalez</strong><br>Coordinadora del Comedor <br>Comunidad Activa</p>
                     </div>
                 </div>
                 <div class="col-md-4">
