@@ -1,8 +1,11 @@
 <x-layout>
     <x-slot:title>Blog</x-slot>
 
-        <div class="container mt-5">
+        <div class="container mt-1 position-relative">
             <h1 class="text-center mb-4">Blog</h1>
+
+            <!-- Puntos decorativos -->
+            <div class="background-dots"></div>
 
             @foreach ($posts as $post)
             <div class="post-preview">
