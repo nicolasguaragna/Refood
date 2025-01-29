@@ -1,7 +1,7 @@
 <x-layout>
     <x-slot:title>Página Principal</x-slot>
         <!-- Sección principal -->
-        <section class="landing-banner d-flex align-items-center justify-content-between">
+        <section class="landing-banner d-flex align-items-center justify-content-between" style="overflow: visible;">
             <div class="container text-start">
                 <h1 class="display-4 fw-bold">
                     Cada plato cuenta <br><span class="text-success">para un mundo <br>sin desperdicio</span>
@@ -27,7 +27,7 @@
             </div>
 
             <!-- Imagen del banner con fondo decorativo -->
-            <div class="banner-image position-relative">
+            <div class="banner-image position-relative" style="overflow: visible;">
                 <div class="circle-background"></div> <!-- Fondo circular -->
                 <div class="background-dots"></div> <!-- Puntos gráficos -->
                 <img src="{{ asset('images/banner.png') }}" alt="Banner Principal" class="img-fluid">
