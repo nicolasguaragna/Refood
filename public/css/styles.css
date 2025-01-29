@@ -290,7 +290,7 @@ a {
 
 /* Banner principal */
 .landing-banner {
-    padding: 50px ;
+    padding: 50px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -485,10 +485,10 @@ a {
 /* Fondo decorativo global con puntos */
 .background-dots {
     position: absolute;
-    width: 150px; /* Tamaño ajustable */
-    height: 150px;
+    width: 175px; /* Tamaño ajustable */
+    height: 175 px;
     background-image: url('/images/puntos.png'); /* Ruta a tu imagen de puntos */
-    background-size: contain;
+    background-size:cover;
     background-repeat: no-repeat;
     z-index:auto;
     top: 40%; /* Ajusta la posición */
