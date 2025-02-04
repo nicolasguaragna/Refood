@@ -102,6 +102,32 @@
             </div>
         </section>
 
+        <!-- Sección Carrusel de Partners -->
+        <section class="partners-section text-center mt-5">
+            <h2 class="fw-bold text-success">Nuestros Partners</h2>
+            <div id="partnersCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{ asset('images/partner1.jpg') }}" class="d-block mx-auto img-fluid" alt="Partner 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ asset('images/partner2.png') }}" class="d-block mx-auto img-fluid" alt="Partner 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ asset('images/partner3.jpeg') }}" class="d-block mx-auto img-fluid" alt="Partner 3">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#partnersCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#partnersCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </section>
+
         <section class="cta-section text-center mt-5">
             <div class="cta-container d-flex justify-content-between align-items-center">
                 <img src="{{ asset('images/marca-final.png') }}" alt="Refood Logo" class="cta-logo">
