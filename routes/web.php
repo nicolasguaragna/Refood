@@ -46,6 +46,18 @@ Route::get('blog', [\App\Http\Controllers\BlogController::class, 'index'])->name
 Route::get('blog/{id}', [\App\Http\Controllers\BlogController::class, 'show']);
 Route::middleware('auth')->post('/blog', [\App\Http\Controllers\BlogController::class, 'store'])->name('blog.store');
 
+// Rutas de noticias protegidas para administradores
+Route::middleware(['auth', CheckAdmin::class])->group(function () {
+    Route::get('noticias/admin', [\App\Http\Controllers\NoticiaController::class, 'admin'])->name('noticias.admin');
+    Route::resource('noticias', \App\Http\Controllers\NoticiaController::class)->except(['show']);
+});
+
+// Ruta pública para la lista de noticias
+Route::get('noticias', [\App\Http\Controllers\NoticiaController::class, 'index'])->name('noticias.index');
+
+// Ruta pública para mostrar el detalle de una noticia
+Route::get('noticias/{id}', [\App\Http\Controllers\NoticiaController::class, 'show'])->name('noticias.show');
+
 // Rutas de perfil para usuarios autenticados
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [\App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
@@ -59,15 +71,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile/services/{id}', [\App\Http\Controllers\UserController::class, 'updateService'])->name('services.update');
     Route::delete('/profile/services/{id}', [\App\Http\Controllers\UserController::class, 'cancelService'])->name('services.cancel');
 });
-
-// Rutas de noticias protegidas para administradores
-Route::middleware(['auth', CheckAdmin::class])->group(function () {
-    Route::get('noticias/admin', [\App\Http\Controllers\NoticiaController::class, 'admin'])->name('noticias.admin');
-    Route::resource('noticias', \App\Http\Controllers\NoticiaController::class)->except(['show']);
-});
-
-// Ruta pública para la lista de noticias
-Route::get('noticias', [\App\Http\Controllers\NoticiaController::class, 'index'])->name('noticias.index');
 
 // Rutas de contacto
 Route::get('contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');

@@ -10,7 +10,7 @@ class NoticiaController extends Controller
 {
     public function index()
     {
-        $noticias = Noticia::all();
+        $noticias = Noticia::paginate(10);
         return view('noticias.index', compact('noticias'));
     }
 
@@ -43,6 +43,12 @@ class NoticiaController extends Controller
         Noticia::create($data);
 
         return redirect()->route('noticias.admin')->with('success', 'Noticia creada exitosamente.');
+    }
+
+    public function show($id)
+    {
+        $noticia = Noticia::findOrFail($id);
+        return view('noticias.show', compact('noticia'));
     }
 
     public function edit(Noticia $noticia)

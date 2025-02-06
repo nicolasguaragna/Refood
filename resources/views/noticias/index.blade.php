@@ -2,44 +2,31 @@
     <x-slot:title>Noticias</x-slot:title>
 
     <div class="container mt-5">
-        <h1 class="text-center">Noticias</h1>
-        <a href="{{ route('noticias.create') }}" class="btn btn-success mb-3">Nueva Noticia</a>
-        @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
+        <h1 class="text-center mb-4">Últimas Noticias</h1>
+        <p class="text-center text-muted mb-5">Mantente al día con las últimas novedades de Refood.</p>
 
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Contenido</th>
-                    <th>Imagen</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($noticias as $noticia)
-                <tr>
-                    <td>{{ $noticia->titulo }}</td>
-                    <td>{{ Str::limit($noticia->contenido, 50) }}</td>
-                    <td>
-                        @if($noticia->imagen)
-                        <img src="{{ asset('storage/' . $noticia->imagen) }}" alt="Imagen" width="100">
-                        @else
-                        No hay imagen
-                        @endif
-                    </td>
-                    <td>
-                        <a href="{{ route('noticias.edit', $noticia) }}" class="btn btn-warning">Editar</a>
-                        <form action="{{ route('noticias.destroy', $noticia) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="row">
+            @foreach ($noticias as $noticia)
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    @if ($noticia->imagen)
+                    <img src="{{ asset('storage/' . $noticia->imagen) }}" class="card-img-top" alt="{{ $noticia->titulo }}">
+                    @else
+                    <img src="{{ asset('images/placeholder-news.jpg') }}" class="card-img-top" alt="Imagen por defecto">
+                    @endif
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">{{ $noticia->titulo }}</h5>
+                        <p class="card-text text-muted">{{ Str::limit($noticia->contenido, 100, '...') }}</p>
+                        <p class="text-muted">Autor: Nicolás Guaragna</p>
+                        <a href="{{ route('noticias.show', $noticia->id) }}" class="btn btn-primary">Leer más</a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        <div class="pagination-container">
+            {{ $noticias->links() }}
+        </div>
     </div>
 </x-layout>
