@@ -60,6 +60,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/services/{id}', [\App\Http\Controllers\UserController::class, 'cancelService'])->name('services.cancel');
 });
 
+// Rutas de noticias protegidas para administradores
+Route::middleware(['auth', CheckAdmin::class])->group(function () {
+    Route::get('noticias/admin', [\App\Http\Controllers\NoticiaController::class, 'admin'])->name('noticias.admin');
+    Route::resource('noticias', \App\Http\Controllers\NoticiaController::class)->except(['show']);
+});
+
+// Ruta pública para la lista de noticias
+Route::get('noticias', [\App\Http\Controllers\NoticiaController::class, 'index'])->name('noticias.index');
+
 // Rutas de contacto
 Route::get('contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
