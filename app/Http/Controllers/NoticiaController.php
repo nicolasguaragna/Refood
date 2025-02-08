@@ -34,10 +34,10 @@ class NoticiaController extends Controller
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = $request->all();
+        $data = $request->except('imagen');
 
         if ($request->hasFile('imagen')) {
-            $data['imagen'] = $request->file('imagen')->store('noticias', 'public');
+            $data['imagen'] = $request->file('imagen')->store('images', 'public');
         }
 
         Noticia::create($data);
@@ -64,14 +64,14 @@ class NoticiaController extends Controller
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = $request->all();
+        $data = $request->except('imagen');
 
         if ($request->hasFile('imagen')) {
             // Eliminar imagen anterior si existe
             if ($noticia->imagen) {
                 Storage::disk('public')->delete($noticia->imagen);
             }
-            $data['imagen'] = $request->file('imagen')->store('noticias', 'public');
+            $data['imagen'] = $request->file('imagen')->store('images', 'public');
         }
 
         $noticia->update($data);

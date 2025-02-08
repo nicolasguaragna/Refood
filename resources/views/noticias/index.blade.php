@@ -9,11 +9,7 @@
             @foreach ($noticias as $noticia)
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
-                    @if ($noticia->imagen)
-                    <img src="{{ asset('storage/' . $noticia->imagen) }}" class="card-img-top" alt="{{ $noticia->titulo }}">
-                    @else
-                    <img src="{{ asset('images/placeholder-news.jpg') }}" class="card-img-top" alt="Imagen por defecto">
-                    @endif
+                    <img src="{{ $noticia->imagen }}" class="card-img-top" alt="{{ $noticia->titulo }}">
                     <div class="card-body">
                         <h5 class="card-title fw-bold">{{ $noticia->titulo }}</h5>
                         <p class="card-text text-muted">{{ Str::limit($noticia->contenido, 100, '...') }}</p>
