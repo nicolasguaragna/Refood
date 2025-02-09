@@ -4,6 +4,14 @@
     <div class="container mt-4">
         <h1 class="text-center mb-4">Administrar Noticias</h1>
 
+        <!-- Mostrar mensaje de éxito si existe -->
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
         <!-- Botón para crear nueva noticia -->
         <div class="d-flex justify-content-end mb-3">
             <a href="{{ route('noticias.create') }}" class="btn btn-success">Nueva Noticia</a>

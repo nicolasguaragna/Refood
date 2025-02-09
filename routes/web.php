@@ -50,6 +50,11 @@ Route::middleware('auth')->post('/blog', [\App\Http\Controllers\BlogController::
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('noticias/admin', [\App\Http\Controllers\NoticiaController::class, 'admin'])->name('noticias.admin');
     Route::resource('noticias', \App\Http\Controllers\NoticiaController::class)->except(['show']);
+    Route::get('noticias/create', [\App\Http\Controllers\NoticiaController::class, 'create'])->name('noticias.create');
+    Route::post('noticias', [\App\Http\Controllers\NoticiaController::class, 'store'])->name('noticias.store');
+    Route::get('noticias/{id}/edit', [\App\Http\Controllers\NoticiaController::class, 'edit'])->name('noticias.edit');
+    Route::put('noticias/{id}', [\App\Http\Controllers\NoticiaController::class, 'update'])->name('noticias.update');
+    Route::delete('noticias/{id}', [\App\Http\Controllers\NoticiaController::class, 'destroy'])->name('noticias.destroy');
 });
 
 // Ruta pública para la lista de noticias

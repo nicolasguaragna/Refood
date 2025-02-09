@@ -45,10 +45,8 @@ class NoticiaController extends Controller
             'imagen' => $imagePath,
         ]);
 
-        return redirect()->route('noticias.admin')->with([
-            'message' => 'Noticia creada con éxito.',
-            'alert-type' => 'success',
-        ]);
+        // Enviar mensaje flash de éxito
+        return redirect()->route('noticias.admin')->with('success', 'Noticia creada con éxito.');
     }
 
     public function show($id)
@@ -62,27 +60,29 @@ class NoticiaController extends Controller
         return view('noticias.edit', compact('noticia'));
     }
 
-    public function update(Request $request, Noticia $noticia)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'titulo' => 'required|max:255',
             'contenido' => 'required',
-            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,avif|max:2048',
         ]);
 
-        $data = $request->except('imagen');
+        $noticia = Noticia::findOrFail($id);
+        $data = $request->only(['titulo', 'contenido']);
 
         if ($request->hasFile('imagen')) {
-            // Eliminar imagen anterior si existe
+            // Eliminar la imagen anterior si existe
             if ($noticia->imagen) {
-                Storage::disk('public')->delete($noticia->imagen);
+                \Storage::disk('public')->delete($noticia->imagen);
             }
+            // Guardar la nueva imagen
             $data['imagen'] = $request->file('imagen')->store('images', 'public');
         }
 
         $noticia->update($data);
 
-        return redirect()->route('noticias.admin')->with('success', 'Noticia actualizada exitosamente.');
+        return redirect()->route('noticias.admin')->with('success', 'Noticia actualizada con éxito.');
     }
 
     public function destroy(Noticia $noticia)

@@ -4,59 +4,43 @@
     <div class="container mt-5">
         <h1 class="text-center mb-4">Editar Noticia</h1>
 
-        @if(session('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
         @endif
 
-        <div class="card shadow p-4">
-            <form action="{{ route('noticias.update', $noticia->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+        <form action="{{ route('noticias.update', $noticia->id) }}" method="POST" enctype="multipart/form-data" class="shadow p-4 rounded bg-light">
+            @csrf
+            @method('PUT')
 
-                <!-- Título de la noticia -->
-                <div class="mb-3">
-                    <label for="title" class="form-label">Título</label>
-                    <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $noticia->title) }}" required>
-                    @error('title')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" value="{{ old('titulo', $noticia->titulo) }}" required>
+            </div>
 
-                <!-- Contenido -->
-                <div class="mb-3">
-                    <label for="content" class="form-label">Contenido</label>
-                    <textarea name="content" id="content" class="form-control @error('content') is-invalid @enderror" rows="5" required>{{ old('content', $noticia->content) }}</textarea>
-                    @error('content')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+            <div class="mb-3">
+                <label for="contenido" class="form-label">Contenido</label>
+                <textarea class="form-control" id="contenido" name="contenido" rows="5" required>{{ old('contenido', $noticia->contenido) }}</textarea>
+            </div>
 
-                <!-- Imagen actual -->
-                @if($noticia->image)
-                <div class="mb-3">
-                    <label class="form-label">Imagen actual</label>
-                    <div>
-                        <img src="{{ asset('storage/' . $noticia->image) }}" alt="Imagen de la noticia" class="img-fluid rounded" style="max-width: 300px;">
-                    </div>
+            <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen (opcional)</label>
+                @if ($noticia->imagen)
+                <div class="mb-2">
+                    <img src="{{ $noticia->imagen_url }}" alt="Imagen actual" class="img-thumbnail" width="200">
                 </div>
                 @endif
+                <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+            </div>
 
-                <!-- Nueva Imagen -->
-                <div class="mb-3">
-                    <label for="image" class="form-label">Actualizar Imagen (opcional)</label>
-                    <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
-                    @error('image')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- Botón de envío -->
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Actualizar Noticia</button>
-                </div>
-            </form>
-        </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Actualizar Noticia</button>
+            </div>
+        </form>
     </div>
 </x-layout>
