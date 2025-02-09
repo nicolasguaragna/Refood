@@ -8,13 +8,17 @@
         <div class="row">
             @foreach ($noticias as $noticia)
             <div class="col-md-6 mb-4">
-                <div class="card shadow-sm">
+                <div class="card h-100 shadow-sm">
+                    @if ($noticia->imagen)
                     <img src="{{ $noticia->imagen_url }}" class="card-img-top" alt="{{ $noticia->titulo }}">
-                    <div class="card-body">
+                    @else
+                    <img src="{{ asset('images/placeholder-news.png') }}" class="card-img-top" alt="Imagen por defecto">
+                    @endif
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold">{{ $noticia->titulo }}</h5>
                         <p class="card-text text-muted">{{ Str::limit($noticia->contenido, 100, '...') }}</p>
                         <p class="text-muted">Autor: Nicolás Guaragna</p>
-                        <a href="{{ route('noticias.show', $noticia->id) }}" class="btn btn-primary">Leer más</a>
+                        <a href="{{ route('noticias.show', $noticia->id) }}" class="btn btn-primary mt-auto">Leer más</a>
                     </div>
                 </div>
             </div>

@@ -512,3 +512,16 @@ a {
     border-radius: 80%;
     padding: 20px;
 }
+
+.card-img-top {
+    object-fit: cover; /* Ajusta la imagen al tamaño del contenedor */
+    height: 200px; /* Altura fija para las imágenes */
+    width: 100%;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Asegura que todas las tarjetas tengan la misma altura */
+}
