@@ -37,7 +37,7 @@ class NoticiaController extends Controller
         $data = $request->except('imagen');
 
         if ($request->hasFile('imagen')) {
-            $data['imagen'] = $request->file('imagen')->store('images', 'public');
+            $data['imagen'] = $request->file('imagen')->store('noticias', 'public');
         }
 
         Noticia::create($data);
