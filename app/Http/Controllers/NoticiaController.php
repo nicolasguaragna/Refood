@@ -90,9 +90,13 @@ class NoticiaController extends Controller
         if ($noticia->imagen) {
             Storage::disk('public')->delete($noticia->imagen);
         }
-
+        // Elimino la noticia de la base de datos
         $noticia->delete();
 
-        return redirect()->route('noticias.admin')->with('success', 'Noticia eliminada exitosamente.');
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('noticias.admin')->with([
+            'message' => 'Noticia eliminada con éxito.',
+            'alert-type' => 'success',
+        ]);
     }
 }
