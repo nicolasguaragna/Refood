@@ -31,18 +31,24 @@ class NoticiaController extends Controller
         $request->validate([
             'titulo' => 'required|max:255',
             'contenido' => 'required',
-            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,avif|max:2048',
         ]);
 
-        $data = $request->except('imagen');
-
+        $imagePath = null;
         if ($request->hasFile('imagen')) {
-            $data['imagen'] = $request->file('imagen')->store('noticias', 'public');
+            $imagePath = $request->file('imagen')->store('images', 'public');
         }
 
-        Noticia::create($data);
+        Noticia::create([
+            'titulo' => $request->titulo,
+            'contenido' => $request->contenido,
+            'imagen' => $imagePath,
+        ]);
 
-        return redirect()->route('noticias.admin')->with('success', 'Noticia creada exitosamente.');
+        return redirect()->route('noticias.admin')->with([
+            'message' => 'Noticia creada con éxito.',
+            'alert-type' => 'success',
+        ]);
     }
 
     public function show($id)
