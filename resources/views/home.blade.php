@@ -104,7 +104,7 @@
 
         <!-- Sección Carrusel de Partners -->
         <section class="partners-section text-center mt-5">
-            <h2 class="fw-bold text-success">Nuestros Partners</h2>
+            <h2 class="fw-bold text-success">NUESTROS PARTNERS</h2>
             <div id="partnersCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">

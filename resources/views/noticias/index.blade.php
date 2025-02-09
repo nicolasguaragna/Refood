@@ -18,7 +18,7 @@
                         <h5 class="card-title fw-bold">{{ $noticia->titulo }}</h5>
                         <p class="card-text text-muted">{{ Str::limit($noticia->contenido, 100, '...') }}</p>
                         <p class="text-muted">Autor: Nicolás Guaragna</p>
-                        <a href="{{ route('noticias.show', $noticia->id) }}" class="btn btn-primary mt-auto">Leer más</a>
+                        <a href="{{ route('noticias.show', $noticia->id) }}" class="btn btn-primary leer-mas-btn mt-auto">Leer más</a>
                     </div>
                 </div>
             </div>
