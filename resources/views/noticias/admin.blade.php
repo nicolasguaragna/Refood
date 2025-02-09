@@ -6,7 +6,7 @@
 
         <!-- Mostrar mensaje de éxito si existe -->
         @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div id="flash-message" class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -58,4 +58,19 @@
             </table>
         </div>
     </div>
+
+    <!-- Script para hacer que el mensaje flash desaparezca -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const flashMessage = document.getElementById("flash-message");
+            if (flashMessage) {
+                setTimeout(() => {
+                    flashMessage.classList.remove("show"); // Quita la clase `show` para iniciar la transición
+                    flashMessage.addEventListener("transitionend", () => {
+                        flashMessage.remove(); // Elimina el mensaje del DOM
+                    });
+                }, 4000); // Desaparece después de 4 segundos
+            }
+        });
+    </script>
 </x-layout>
