@@ -3,7 +3,13 @@
 
     <div class="container mt-5">
         <h1 class="text-center mb-4">Últimas Noticias</h1>
+        <!-- Botón para crear nueva noticia, visible solo para el admin -->
+        @if(Auth::check() && Auth::user()->hasRole('admin'))
+        <a href="{{ route('noticias.create') }}" class="btn btn-success">Crear Nueva Noticia</a>
+        @endif
+
         <p class="text-center text-muted mb-5">Mantente al día con las últimas novedades de Refood.</p>
+
 
         <div class="row">
             @foreach ($noticias as $noticia)
