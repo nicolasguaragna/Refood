@@ -18,7 +18,9 @@ class RescueRequest extends Model
         'location',
         'details',
         'service_id',
-        'rescue_date'
+        'rescue_date',
+        'latitude',
+        'longitude'
     ];
 
     /**

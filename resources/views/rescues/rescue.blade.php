@@ -34,11 +34,16 @@
                 <input type="text" class="form-control" id="contact" name="contact" placeholder="Teléfono o correo de contacto" required value="{{ old('contact') }}">
             </div>
 
-            <!-- Campo para la ubicación -->
+            <!-- Campo para la ubicación con Google Places API -->
             <div class="mb-3">
                 <label for="location" class="form-label">Ubicación</label>
                 <input type="text" class="form-control" id="location" name="location" placeholder="Direccion del rescate" required value="{{ old('location') }}">
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
             </div>
+
+            <!-- Mapa de Google -->
+            <div id="map" style="height: 400px; width: 100%;" class="mb-3"></div>
 
             <div class="mb-3">
                 <label for="rescue_date" class="form-label">Fecha del Rescate</label>
@@ -56,4 +61,57 @@
             </div>
         </form>
     </div>
+
+    <!-- Incluir API de Google Maps -->
+    <script>
+        function initMap() {
+            const defaultLocation = {
+                lat: -34.603722,
+                lng: -58.381592
+            }; // Coordenadas por defecto (Buenos Aires)
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: defaultLocation,
+                zoom: 13
+            });
+
+            const marker = new google.maps.Marker({
+                position: defaultLocation,
+                map: map,
+                draggable: true
+            });
+
+            const input = document.getElementById("location");
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo("bounds", map);
+
+            autocomplete.addListener("place_changed", function() {
+                const place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    return;
+                }
+
+                // Centrar el mapa y mover el marcador a la ubicación seleccionada
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(15);
+                }
+
+                marker.setPosition(place.geometry.location);
+                document.getElementById("latitude").value = place.geometry.location.lat();
+                document.getElementById("longitude").value = place.geometry.location.lng();
+            });
+
+            // Permitir mover el marcador manualmente
+            marker.addListener("dragend", function() {
+                const position = marker.getPosition();
+                document.getElementById("latitude").value = position.lat();
+                document.getElementById("longitude").value = position.lng();
+            });
+        }
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqaRvHKOkE10b_ImbhRlUVe9X-P1rAgro
+    &libraries=places&callback=initMap"></script>
 </x-layout>
