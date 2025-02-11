@@ -13,7 +13,7 @@ class RescueRequestController extends Controller
     public function index()
     {
         $rescueRequests = RescueRequest::orderBy('created_at', 'desc')->get();
-        return view('rescue.index', compact('rescueRequests'));
+        return view('rescues.index', compact('rescueRequests'));
     }
 
     /**
@@ -21,7 +21,7 @@ class RescueRequestController extends Controller
      */
     public function create()
     {
-        return view('rescue.create');
+        return view('rescues.create');
     }
 
     /**
@@ -51,6 +51,6 @@ class RescueRequestController extends Controller
             'rescue_date' => $request->rescue_date,
         ]);
 
-        return redirect()->route('rescue.index')->with('success', 'Solicitud de rescate creada con éxito.');
+        return redirect()->route('rescues.index')->with('success', 'Solicitud de rescate creada con éxito.');
     }
 }
