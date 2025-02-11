@@ -21,7 +21,7 @@ class RescueRequestController extends Controller
      */
     public function create()
     {
-        return view('rescues.create');
+        return view('rescues.rescue', ['googleMapsApiKey' => env('GOOGLE_MAPS_API_KEY')]);
     }
 
     /**

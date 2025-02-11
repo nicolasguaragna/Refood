@@ -112,6 +112,6 @@
         }
     </script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqaRvHKOkE10b_ImbhRlUVe9X-P1rAgro
-    &libraries=places&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ $googleMapsApiKey }}&callback=initMap" async defer></script>
+
 </x-layout>
