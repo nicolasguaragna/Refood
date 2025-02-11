@@ -4,15 +4,13 @@
     <div class="container mt-4">
         <h1 class="text-center">Mis Servicios</h1>
 
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-        @endif
-
-        @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
+        <!-- Mostrar mensajes de éxito o error si existen -->
+        @if (session('success') || session('error'))
+        <div id="flash-message" class="alert 
+            {{ session('success') ? 'alert-success' : 'alert-danger' }} 
+            alert-dismissible fade show" role="alert">
+            {{ session('success') ?? session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
 
@@ -20,8 +18,8 @@
         <p class="text-center">No tienes servicios contratados.</p>
         @else
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover">
-                <thead>
+            <table class="table table-bordered table-striped">
+                <thead class="table-success">
                     <tr>
                         <th>Servicio</th>
                         <th>Precio</th>
@@ -56,4 +54,18 @@
         </div>
         @endif
     </div>
+
+    <!-- JavaScript para ocultar el mensaje automáticamente -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const flashMessage = document.getElementById("flash-message");
+            if (flashMessage) {
+                setTimeout(() => {
+                    flashMessage.classList.remove("show");
+                    flashMessage.classList.add("fade");
+                    setTimeout(() => flashMessage.style.display = "none", 500);
+                }, 4000); // Desaparece después de 4 segundos
+            }
+        });
+    </script>
 </x-layout>
