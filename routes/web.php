@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Controllers\RescueRequestController;
+use App\Http\Controllers\MercadoPagoController;
 
 // Página principal y rutas informativas
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
@@ -13,11 +14,13 @@ Route::get('servicios', [\App\Http\Controllers\ServiciosController::class, 'inde
 Route::get('/servicios/{id}', [\App\Http\Controllers\ServiciosController::class, 'show'])->name('servicios.show');
 
 // Rutas de donación
-Route::get('/donate', [\App\Http\Controllers\MercadoPagoController::class, 'show'])->name('donate.show');
-Route::get('/donate/index', fn() => redirect('/donate'))->name('donate.index');
+Route::get('/donate', [MercadoPagoController::class, 'showDonationForm'])->name('donate.form');
+Route::post('/donate/process', [MercadoPagoController::class, 'processDonation'])->name('donate.process');
 Route::get('/donate/success', fn() => view('donate-success'))->name('donate.success');
 Route::get('/donate/failure', fn() => view('donate-failure'))->name('donate.failure');
 Route::get('/donate/pending', fn() => view('donate-pending'))->name('donate.pending');
+Route::get('/donate/index', fn() => redirect('/donate'))->name('donate.index');
+
 
 // Ruta para mostrar el formulario de rescate (solo para usuarios autenticados)
 Route::middleware('auth')->get('/servicios/{service_id}/rescatar', [\App\Http\Controllers\ServiciosController::class, 'showRescueForm'])->name('rescue.form');
@@ -76,6 +79,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/services/{id}/edit', [\App\Http\Controllers\UserController::class, 'editService'])->name('services.edit');
     Route::put('/profile/services/{id}', [\App\Http\Controllers\UserController::class, 'updateService'])->name('services.update');
     Route::delete('/profile/services/{id}', [\App\Http\Controllers\UserController::class, 'cancelService'])->name('services.cancel');
+
+    // Rutas de pago de servicios de rescate con Mercado Pago
+    Route::get('/services/{id}/pay', [MercadoPagoController::class, 'payService'])->name('services.pay');
+    Route::get('/services/{id}/payment/success', [MercadoPagoController::class, 'paymentSuccess'])->name('services.payment.success');
+    Route::get('/services/{id}/payment/failure', [MercadoPagoController::class, 'paymentFailure'])->name('services.payment.failure');
+    Route::get('/services/{id}/payment/pending', [MercadoPagoController::class, 'paymentPending'])->name('services.payment.pending');
 });
 
 // Rutas de contacto

@@ -46,6 +46,12 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
                             </form>
+
+                            @if(!$service->is_paid) <!-- Solo mostrar si el servicio no ha sido pagado -->
+                            <a href="{{ route('services.pay', $service->id) }}" class="btn btn-success btn-sm">Pagar</a>
+                            @else
+                            <span class="badge bg-success">Pagado</span>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
