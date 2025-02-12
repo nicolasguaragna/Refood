@@ -62,24 +62,23 @@ class MercadoPagoController extends Controller
      */
     public function payService($serviceId)
     {
-        MercadoPagoConfig::setAccessToken(env('MERCADO_PAGO_ACCESS_TOKEN'));
-
-        $service = RescueRequest::findOrFail($serviceId);
-
-        // ✅ Evitar pagos de servicios ya pagados
-        if ($service->is_paid) {
-            return redirect()->route('user.services')->with('error', 'Este servicio ya ha sido pagado.');
-        }
-
         try {
+            MercadoPagoConfig::setAccessToken(env('MERCADO_PAGO_ACCESS_TOKEN'));
+
+            $service = RescueRequest::findOrFail($serviceId);
+
             $client = new PreferenceClient();
             $preference = $client->create([
                 "items" => [
                     [
                         "title" => "Pago por servicio de rescate",
                         "quantity" => 1,
-                        "unit_price" => isset($service->service) ? $service->service->price : 0.00, // Evitar errores si no hay un servicio asignado
+                        "unit_price" => (float) $service->service->price, // Convertir a float por seguridad
+                        "currency_id" => "ARS", // Asegurar que la moneda sea pesos argentinos
                     ]
+                ],
+                "payer" => [
+                    "email" => auth()->user()->email ?? "comprador@email.com" // Email del comprador
                 ],
                 "back_urls" => [
                     "success" => route('services.payment.success', $service->id),
@@ -90,20 +89,21 @@ class MercadoPagoController extends Controller
             ]);
 
             if (!isset($preference->id)) {
-                \Log::error("Mercado Pago: No se pudo generar la preferencia.", ['response' => $preference]);
+                \Log::error('Mercado Pago: No se pudo generar la preferencia de pago. Respuesta API: ', (array) $preference);
                 return redirect()->route('user.services')->with('error', "No se pudo generar el pago.");
             }
 
-            return view('services.pay', [
+            return view('servicios.pay', [
                 'preferenceId' => $preference->id,
                 'publicKey' => env('MERCADO_PAGO_PUBLIC_KEY'),
                 'service' => $service
             ]);
         } catch (\Exception $e) {
-            \Log::error("Error en Mercado Pago: " . $e->getMessage());
+            \Log::error('Error en Mercado Pago: ' . $e->getMessage());
             return redirect()->route('user.services')->with('error', "Error al procesar el pago. Contacta al soporte.");
         }
     }
+
 
     /**
      * Confirmar el pago exitoso y actualizar el estado del servicio.
