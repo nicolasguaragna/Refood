@@ -108,10 +108,27 @@ class MercadoPagoController extends Controller
     /**
      * Confirmar el pago exitoso y actualizar el estado del servicio.
      */
-    public function paymentSuccess($serviceId)
+    public function paymentSuccess(Request $request, $serviceId)
     {
-        $service = RescueRequest::findOrFail($serviceId);
-        $service->update(['is_paid' => true]);
+        \Log::info("Pago recibido para el servicio ID: " . $serviceId);
+
+        $service = RescueRequest::find($serviceId);
+
+        if (!$service) {
+            \Log::error("No se encontró el servicio con ID: " . $serviceId);
+            return redirect()->route('user.services')->with('error', 'Servicio no encontrado.');
+        }
+
+        // Loggear la solicitud de MercadoPago
+        \Log::info("Datos de la respuesta de MercadoPago: ", $request->all());
+
+        if (!$service->is_paid) {
+            $service->is_paid = true;
+            $service->save();  // Guardar el cambio en la BD
+            \Log::info("Estado de pago actualizado a 'true' para el servicio ID: " . $serviceId);
+        } else {
+            \Log::info("El servicio ID: " . $serviceId . " ya estaba pagado.");
+        }
 
         return redirect()->route('user.services')->with('success', 'El pago se realizó con éxito.');
     }
