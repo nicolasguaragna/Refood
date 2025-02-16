@@ -40,6 +40,7 @@
                         <td>{{ $service->details }}</td>
                         <td>{{ $service->rescue_date ? $service->rescue_date->format('d/m/Y') : 'No especificado' }}</td>
                         <td>
+                            @if(!$service->is_paid) <!-- Solo mostrar botones si el servicio NO ha sido pagado -->
                             <a href="{{ route('services.edit', $service->id) }}" class="btn btn-primary btn-sm">Editar</a>
                             <form action="{{ route('services.cancel', $service->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de que deseas cancelar este servicio?');">
                                 @csrf
@@ -47,7 +48,7 @@
                                 <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
                             </form>
 
-                            @if(!$service->is_paid) <!-- Solo mostrar si el servicio no ha sido pagado -->
+                            <!-- Solo mostrar si el servicio no ha sido pagado -->
                             <a href="{{ route('services.pay', $service->id) }}" class="btn btn-success btn-sm">Pagar</a>
                             @else
                             <span class="badge bg-success">Pagado</span>
