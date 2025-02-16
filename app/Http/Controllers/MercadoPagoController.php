@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\MercadoPagoConfig;
 use App\Models\RescueRequest;
+use Illuminate\Support\Facades\Auth;
 
 class MercadoPagoController extends Controller
 {
@@ -111,23 +112,27 @@ class MercadoPagoController extends Controller
     public function paymentSuccess(Request $request, $serviceId)
     {
         \Log::info("Pago recibido para el servicio ID: " . $serviceId);
+        \Log::info("Datos recibidos de MercadoPago:", $request->all());
 
         $service = RescueRequest::find($serviceId);
-
         if (!$service) {
-            \Log::error("No se encontró el servicio con ID: " . $serviceId);
+            \Log::error("❌ Servicio no encontrado - ID: " . $serviceId);
             return redirect()->route('user.services')->with('error', 'Servicio no encontrado.');
         }
 
-        // Loggear la solicitud de MercadoPago
-        \Log::info("Datos de la respuesta de MercadoPago: ", $request->all());
-
         if (!$service->is_paid) {
             $service->is_paid = true;
-            $service->save();  // Guardar el cambio en la BD
-            \Log::info("Estado de pago actualizado a 'true' para el servicio ID: " . $serviceId);
+            $service->save();
+            \Log::info("✅ Estado de pago actualizado para servicio ID: " . $serviceId);
         } else {
-            \Log::info("El servicio ID: " . $serviceId . " ya estaba pagado.");
+            \Log::info("ℹ️ El servicio ID: " . $serviceId . " ya estaba pagado.");
+        }
+
+        // Re-autenticar al usuario antes de la redirección
+        if (!Auth::check()) {
+            $user = RescueRequest::find($serviceId)->user; // Obtener usuario del servicio pagado
+            Auth::login($user);
+            \Log::info("Usuario re-autenticado tras el pago: " . $user->id);
         }
 
         return redirect()->route('user.services')->with('success', 'El pago se realizó con éxito.');
