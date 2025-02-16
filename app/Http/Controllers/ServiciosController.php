@@ -29,9 +29,12 @@ class ServiciosController extends Controller
 
     public function showRescueForm($service_id)
     {
-        $service = Service::findOrFail($service_id); // Encuentra el servicio por ID
-        return view('rescues.rescue', compact('service')); // Pasa el servicio a la vista
+        $service = Service::findOrFail($service_id);
+        $googleMapsApiKey = config('services.google_maps.api_key'); // Carga la clave desde config/services.php
+
+        return view('rescues.rescue', compact('service', 'googleMapsApiKey'));
     }
+
 
     public function submitRescueRequest(Request $request)
     {

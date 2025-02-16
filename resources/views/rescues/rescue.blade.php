@@ -2,7 +2,7 @@
     <x-slot:title>Solicitud de Rescate</x-slot:title>
 
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Solicitar Rescate de Servicio</h1>
+        <h1 class="text-center mb-4">Solicitar de Rescate</h1>
 
         <!-- Mostrar errores de validación -->
         @if ($errors->any())
