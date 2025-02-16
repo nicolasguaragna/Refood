@@ -40,6 +40,9 @@
                 <input type="text" class="form-control" id="location" name="location" placeholder="Direccion del rescate" required value="{{ old('location') }}">
                 <input type="hidden" id="latitude" name="latitude">
                 <input type="hidden" id="longitude" name="longitude">
+                <div id="location-alert" class="alert alert-danger mt-2 d-none">
+                    🚨 Solo se permiten direcciones dentro del AMBA en Buenos Aires.
+                </div>
             </div>
 
             <!-- Mapa de Google -->
@@ -68,10 +71,10 @@
             const defaultLocation = {
                 lat: -34.603722,
                 lng: -58.381592
-            }; // Coordenadas por defecto (Buenos Aires)
+            }; // Buenos Aires
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: defaultLocation,
-                zoom: 13
+                zoom: 12
             });
 
             const marker = new google.maps.Marker({
@@ -81,36 +84,67 @@
             });
 
             const input = document.getElementById("location");
-            const autocomplete = new google.maps.places.Autocomplete(input);
-            autocomplete.bindTo("bounds", map);
+            const autocomplete = new google.maps.places.Autocomplete(input, {
+                componentRestrictions: {
+                    country: "AR"
+                }, // Restringir búsqueda a Argentina
+                fields: ["geometry", "formatted_address", "address_components"]
+            });
 
             autocomplete.addListener("place_changed", function() {
                 const place = autocomplete.getPlace();
+
                 if (!place.geometry) {
                     return;
                 }
 
-                // Centrar el mapa y mover el marcador a la ubicación seleccionada
-                if (place.geometry.viewport) {
-                    map.fitBounds(place.geometry.viewport);
-                } else {
-                    map.setCenter(place.geometry.location);
-                    map.setZoom(15);
-                }
-
+                // Centrar mapa y mover marcador
+                map.setCenter(place.geometry.location);
                 marker.setPosition(place.geometry.location);
                 document.getElementById("latitude").value = place.geometry.location.lat();
                 document.getElementById("longitude").value = place.geometry.location.lng();
+
+                // Verificar si la ubicación está dentro de AMBA
+                validarUbicacionAMBA(place);
             });
 
-            // Permitir mover el marcador manualmente
             marker.addListener("dragend", function() {
                 const position = marker.getPosition();
                 document.getElementById("latitude").value = position.lat();
                 document.getElementById("longitude").value = position.lng();
             });
         }
+
+        function validarUbicacionAMBA(place) {
+            const AMBA_LOCALIDADES = [
+                "Ciudad Autónoma de Buenos Aires", "Almirante Brown", "Avellaneda", "Berazategui",
+                "Berisso", "Brandsen", "Campana", "Cañuelas", "Ensenada", "Escobar",
+                "Esteban Echeverría", "Exaltación de la Cruz", "Ezeiza", "Florencio Varela",
+                "General Las Heras", "General Rodríguez", "General San Martín", "Hurlingham",
+                "Ituzaingó", "José C. Paz", "La Matanza", "La Plata", "Lanús", "Lomas de Zamora",
+                "Luján", "Malvinas Argentinas", "Marcos Paz", "Merlo", "Moreno", "Morón",
+                "Pilar", "Presidente Perón", "Quilmes", "San Fernando", "San Isidro",
+                "San Miguel", "San Vicente", "Tigre", "Tres de Febrero", "Vicente López", "Zárate"
+            ];
+
+            let enAMBA = false;
+            place.address_components.forEach(component => {
+                if (component.types.includes("administrative_area_level_2") || component.types.includes("locality")) {
+                    if (AMBA_LOCALIDADES.includes(component.long_name)) {
+                        enAMBA = true;
+                    }
+                }
+            });
+
+            if (!enAMBA) {
+                document.getElementById("location-alert").classList.remove("d-none");
+                document.getElementById("location").value = "";
+            } else {
+                document.getElementById("location-alert").classList.add("d-none");
+            }
+        }
     </script>
+
 
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
 
