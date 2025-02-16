@@ -79,13 +79,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/services/{id}/edit', [\App\Http\Controllers\UserController::class, 'editService'])->name('services.edit');
     Route::put('/profile/services/{id}', [\App\Http\Controllers\UserController::class, 'updateService'])->name('services.update');
     Route::delete('/profile/services/{id}', [\App\Http\Controllers\UserController::class, 'cancelService'])->name('services.cancel');
-
-    // Rutas de pago de servicios de rescate con Mercado Pago
-    Route::get('/services/{id}/pay', [MercadoPagoController::class, 'payService'])->name('services.pay');
-    Route::get('/services/{id}/payment/success', [MercadoPagoController::class, 'paymentSuccess'])->name('services.payment.success');
-    Route::get('/services/{id}/payment/failure', [MercadoPagoController::class, 'paymentFailure'])->name('services.payment.failure');
-    Route::get('/services/{id}/payment/pending', [MercadoPagoController::class, 'paymentPending'])->name('services.payment.pending');
 });
+
+// Rutas de pago de servicios de rescate con Mercado Pago
+Route::get('/services/{id}/pay', [MercadoPagoController::class, 'payService'])->name('services.pay');
+Route::get('/services/{id}/payment/success', [MercadoPagoController::class, 'paymentSuccess'])->name('services.payment.success');
+Route::get('/services/{id}/payment/failure', [MercadoPagoController::class, 'paymentFailure'])->name('services.payment.failure');
+Route::get('/services/{id}/payment/pending', [MercadoPagoController::class, 'paymentPending'])->name('services.payment.pending');
 
 // Rutas de contacto
 Route::get('contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');
