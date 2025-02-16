@@ -98,6 +98,10 @@
                     return;
                 }
 
+                // Depuración: Ver qué devuelve Google Places
+                console.log("Dirección seleccionada:", place.formatted_address);
+                console.log("Componentes:", place.address_components);
+
                 // Centrar mapa y mover marcador
                 map.setCenter(place.geometry.location);
                 marker.setPosition(place.geometry.location);
@@ -117,7 +121,7 @@
 
         function validarUbicacionAMBA(place) {
             const AMBA_LOCALIDADES = [
-                "Ciudad Autónoma de Buenos Aires", "Almirante Brown", "Avellaneda", "Berazategui",
+                "Ciudad Autónoma de Buenos Aires", "CABA", "Buenos Aires", "Almirante Brown", "Avellaneda", "Berazategui",
                 "Berisso", "Brandsen", "Campana", "Cañuelas", "Ensenada", "Escobar",
                 "Esteban Echeverría", "Exaltación de la Cruz", "Ezeiza", "Florencio Varela",
                 "General Las Heras", "General Rodríguez", "General San Martín", "Hurlingham",
@@ -128,14 +132,21 @@
             ];
 
             let enAMBA = false;
+
+            // Recorrer los componentes de la dirección y comparar con AMBA
             place.address_components.forEach(component => {
-                if (component.types.includes("administrative_area_level_2") || component.types.includes("locality")) {
+                console.log("Componente evaluado:", component.long_name);
+                if (component.types.includes("administrative_area_level_2") ||
+                    component.types.includes("administrative_area_level_1") ||
+                    component.types.includes("locality")) {
+
                     if (AMBA_LOCALIDADES.includes(component.long_name)) {
                         enAMBA = true;
                     }
                 }
             });
 
+            // Mostrar mensaje si está fuera de AMBA
             if (!enAMBA) {
                 document.getElementById("location-alert").classList.remove("d-none");
                 document.getElementById("location").value = "";
