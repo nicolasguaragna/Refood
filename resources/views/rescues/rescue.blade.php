@@ -28,10 +28,11 @@
                 <input type="text" class="form-control" id="name" name="name" placeholder="Tu nombre" required value="{{ old('name') }}">
             </div>
 
-            <!-- Campo para el contacto -->
+            <!-- Campo de contacto -->
             <div class="mb-3">
                 <label for="contact" class="form-label">Contacto</label>
-                <input type="text" class="form-control" id="contact" name="contact" placeholder="Teléfono o correo de contacto" required value="{{ old('contact') }}">
+                <input type="text" class="form-control" id="contact" name="contact" placeholder="Teléfono de contacto" required pattern="[0-9]+" maxlength="15">
+                <small class="text-danger d-none" id="contact-error">Solo se permiten números.</small>
             </div>
 
             <!-- Campo para la ubicación con Google Places API -->
@@ -50,7 +51,7 @@
 
             <div class="mb-3">
                 <label for="rescue_date" class="form-label">Fecha del Rescate</label>
-                <input type="date" class="form-control" id="rescue_date" name="rescue_date" value="{{ old('rescue_date') }}" required>
+                <input type="date" class="form-control" id="rescue_date" name="rescue_date" required>
             </div>
 
             <!-- Campo para los detalles del rescate -->
@@ -156,6 +157,26 @@
         }
     </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let today = new Date().toISOString().split("T")[0];
+            document.getElementById("rescue_date").setAttribute("min", today);
+        });
+    </script>
+
+    <script>
+        document.getElementById("contact").addEventListener("input", function(event) {
+            let input = event.target;
+            input.value = input.value.replace(/\D/g, ""); // Remueve caracteres no numéricos
+
+            let errorMessage = document.getElementById("contact-error");
+            if (!/^[0-9]+$/.test(input.value)) {
+                errorMessage.classList.remove("d-none");
+            } else {
+                errorMessage.classList.add("d-none");
+            }
+        });
+    </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
 
