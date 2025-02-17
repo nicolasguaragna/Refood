@@ -18,40 +18,46 @@
         <p class="text-center">No tienes servicios contratados.</p>
         @else
         <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="table-success">
+            <table class="table table-sm table-bordered table-striped text-nowrap">
+                <thead class="table-success text-center">
                     <tr>
-                        <th>Servicio</th>
-                        <th>Precio</th>
-                        <th>Contacto</th>
-                        <th>Ubicación</th>
-                        <th>Detalles</th>
-                        <th>Fecha de Rescate</th>
-                        <th>Acciones</th>
+                        <th style="width: 10%;">Servicio</th>
+                        <th style="width: 10%;">Precio</th>
+                        <th style="width: 12%;">Contacto</th>
+                        <th style="width: 18%;">Ubicación</th>
+                        <th style="width: 20%;">Detalles</th>
+                        <th style="width: 10%;">Fecha de Rescate</th>
+                        <th style="width: 10%;">Estado</th>
+                        <th style="width: 10%;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($services as $service)
                     <tr>
-                        <td>{{ $service->service->name ?? 'Servicio no disponible' }}</td>
-                        <td>${{ $service->service ? number_format($service->service->price, 2) : '0.00' }}</td>
-                        <td>{{ $service->contact }}</td>
-                        <td>{{ $service->location }}</td>
-                        <td>{{ $service->details }}</td>
-                        <td>{{ $service->rescue_date ? $service->rescue_date->format('d/m/Y') : 'No especificado' }}</td>
-                        <td>
-                            @if(!$service->is_paid) <!-- Solo mostrar botones si el servicio NO ha sido pagado -->
+                        <td class="text-center">{{ $service->service->name ?? 'No disponible' }}</td>
+                        <td class="text-center">${{ $service->service ? number_format($service->service->price, 2) : '0.00' }}</td>
+                        <td class="text-center">{{ $service->contact }}</td>
+                        <td class="text-truncate" style="max-width: 200px;">{{ $service->location }}</td>
+                        <td class="text-truncate" style="max-width: 250px;">{{ $service->details }}</td>
+                        <td class="text-center">{{ $service->rescue_date ? $service->rescue_date->format('d/m/Y') : 'No especificado' }}</td>
+                        <td class="text-center">
+                            @if($service->is_paid)
+                            <span class="badge bg-success">Pagado</span>
+                            @else
+                            <span class="badge bg-warning text-dark">Pendiente</span>
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            @if(!$service->is_paid)
                             <a href="{{ route('services.edit', $service->id) }}" class="btn btn-primary btn-sm">Editar</a>
-                            <form action="{{ route('services.cancel', $service->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de que deseas cancelar este servicio?');">
+                            <form action="{{ route('services.cancel', $service->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Seguro que deseas cancelar este servicio?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
                             </form>
-
-                            <!-- Solo mostrar si el servicio no ha sido pagado -->
                             <a href="{{ route('services.pay', $service->id) }}" class="btn btn-success btn-sm">Pagar</a>
                             @else
-                            <span class="badge bg-success">Pagado</span>
+                            <span class="badge bg-secondary">Sin acciones</span>
                             @endif
                         </td>
                     </tr>
