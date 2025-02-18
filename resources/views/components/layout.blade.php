@@ -85,27 +85,22 @@
         </main>
 
         <!-- Footer -->
-        <footer class="footer">
+        <footer class="footer text-center p-3 bg-grey text-white">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <img src="{{ asset('images/marca-final.png') }}" alt="Refood Logo" class="footer-logo">
-                        <p>Cada plato cuenta</p>
-                    </div>
-                    <div class="col-md-6 text-end">
-                        <h2>Contacto</h2>
-                        <p><strong>11 3312 4697</strong></p>
-                        <p><strong>refood@refood.com.ar</strong></p>
-                    </div>
-                </div>
+                <img src="{{ asset('images/marca-final.png') }}" alt="Refood Logo" class="footer-logo mb-2">
+                <p class="mb-0">© 2025 Refood - Cada Plato Cuenta</p>
             </div>
         </footer>
-    </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Stacks para scripts específicos de vistas -->
-    @stack('scripts')
+        <!-- Botón de WhatsApp -->
+        <a href="https://wa.me/5491133124697?text=Hola!%20Quisiera%20hacer%20una%20consulta%20sobre%20Refood."
+            class="whatsapp-float" target="_blank" title="Chatea con nosotros en WhatsApp">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+        </a>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Stacks para scripts específicos de vistas -->
+        @stack('scripts')
 </body>
 
 </html>
