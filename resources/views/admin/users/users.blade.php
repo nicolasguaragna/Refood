@@ -41,6 +41,8 @@
                                             <th>Detalles</th>
                                             <th>Fecha</th>
                                             <th>Pago</th>
+                                            <th>Estado</th>
+                                            <th>Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,6 +57,21 @@
                                                 @else
                                                 <span class="badge bg-warning">Pendiente</span>
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('admin.rescue.updateStatus', $rescue->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+                                                        <option value="Pendiente" {{ $rescue->status == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
+                                                        <option value="Visto" {{ $rescue->status == 'Visto' ? 'selected' : '' }}>Visto</option>
+                                                        <option value="Para ser retirado" {{ $rescue->status == 'Para ser retirado' ? 'selected' : '' }}>Para ser retirado</option>
+                                                        <option value="Retirado" {{ $rescue->status == 'Retirado' ? 'selected' : '' }}>Retirado</option>
+                                                    </select>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm" onclick="notificarUsuario({{ $rescue->id }})">Notificar</button>
                                             </td>
                                         </tr>
                                         @endforeach

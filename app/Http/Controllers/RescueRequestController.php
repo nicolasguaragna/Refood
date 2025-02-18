@@ -53,4 +53,19 @@ class RescueRequestController extends Controller
 
         return redirect()->route('user.services')->with('success', 'Solicitud de rescate creada con éxito. Aquí puedes ver los servicios solicitados y el estado de cada uno.');
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $rescue = RescueRequest::findOrFail($id);
+        $rescue->status = $request->status;
+        $rescue->save();
+
+        // 🔹 Enviar una notificación al usuario
+        $user = $rescue->user;
+        if ($user) {
+            $user->notify(new RescueStatusUpdated($rescue)); // Enviar notificación
+        }
+
+        return redirect()->back()->with('success', 'Estado actualizado correctamente.');
+    }
 }

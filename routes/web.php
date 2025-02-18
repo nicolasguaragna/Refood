@@ -44,6 +44,11 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/admin/users/{id}', [\App\Http\Controllers\AdminController::class, 'show'])->name('admin.users.show');
 });
 
+Route::patch('/admin/rescue/{id}/update-status', [AdminRescueController::class, 'updateStatus'])
+    ->name('admin.rescue.updateStatus')
+    ->middleware('auth', 'role:admin');
+
+
 // Rutas del blog accesibles para todos los usuarios
 Route::get('blog/create', [\App\Http\Controllers\BlogController::class, 'create'])->name('blog.create');
 Route::get('blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
