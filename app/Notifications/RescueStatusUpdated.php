@@ -20,7 +20,7 @@ class RescueStatusUpdated extends Notification
 
     public function via($notifiable)
     {
-        return ['mail']; // Puedes agregar 'database' o 'whatsapp' si integras Twilio o similar
+        return ['mail', 'database']; // Puedes agregar 'database' o 'whatsapp' si integras Twilio o similar
     }
 
     public function toMail($notifiable)
@@ -38,6 +38,7 @@ class RescueStatusUpdated extends Notification
         return [
             'rescue_id' => $this->rescue->id,
             'status' => $this->rescue->status,
+            'message' => 'El estado de tu rescate ha cambiado a: ' . $this->rescue->status,
         ];
     }
 }
