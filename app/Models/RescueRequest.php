@@ -21,7 +21,8 @@ class RescueRequest extends Model
         'rescue_date',
         'latitude',
         'longitude',
-        'is_paid'
+        'is_paid',
+        'status'
     ];
 
     /**

@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class RescueStatusUpdated extends Notification
@@ -25,9 +26,18 @@ class RescueStatusUpdated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Estado de tu rescate actualizado')
-            ->line("El estado de tu rescate ha cambiado a: {$this->rescue->status}.")
-            ->action('Ver en la plataforma', url('/profile/services'))
+            ->subject('Estado de Rescate Actualizado')
+            ->greeting('Hola ' . $notifiable->name . ',')
+            ->line('El estado de tu solicitud de rescate ha sido actualizado a: ' . $this->rescue->status)
+            ->action('Ver detalles', url('/profile/services'))
             ->line('Gracias por usar Refood.');
+    }
+
+    public function toArray($notifiable)
+    {
+        return [
+            'rescue_id' => $this->rescue->id,
+            'status' => $this->rescue->status,
+        ];
     }
 }

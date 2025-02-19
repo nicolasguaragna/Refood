@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RescueRequest;
+use App\Notifications\RescueStatusUpdated;
+
 
 class RescueRequestController extends Controller
 {
@@ -56,7 +58,15 @@ class RescueRequestController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
+        // Validar que el estado recibido es uno de los permitidos
+        $request->validate([
+            'status' => 'required|string|in:Pendiente,Visto,Para ser retirado,Retirado'
+        ]);
+
+        // Buscar el rescate por ID
         $rescue = RescueRequest::findOrFail($id);
+
+        // Actualizar el estado del rescate
         $rescue->status = $request->status;
         $rescue->save();
 
