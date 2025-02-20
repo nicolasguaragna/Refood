@@ -39,7 +39,6 @@
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ url('servicios') }}">Servicios</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url('blog') }}">Blog</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ url('noticias') }}">Noticias</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ url('quienes-somos') }}">Quiénes Somos</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('donate.index') }}">Donar un plato</a></li>
@@ -64,7 +63,6 @@
                                 <li><a class="dropdown-item" href="{{ route('user.services') }}">Mis Servicios</a></li>
                                 @if(Auth::user()->hasRole('admin'))
                                 <li><a class="dropdown-item" href="{{ route('noticias.admin') }}">Administrar Noticias</a></li>
-                                <li><a class="dropdown-item" href="{{ route('blog.admin') }}">Administrar Entradas del Blog</a></li>
                                 <li><a class="dropdown-item" href="{{ route('admin.users') }}">Administrar Usuarios</a></li>
                                 @endif
                                 <li>

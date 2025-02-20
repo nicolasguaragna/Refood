@@ -58,24 +58,20 @@ class RescueRequestController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        // Validar que el estado recibido es uno de los permitidos
-        $request->validate([
-            'status' => 'required|string|in:Pendiente,Visto,Para ser retirado,Retirado'
-        ]);
+        try {
+            $rescue = RescueRequest::findOrFail($id);
+            $rescue->status = $request->status;
+            $rescue->save();
 
-        // Buscar el rescate por ID
-        $rescue = RescueRequest::findOrFail($id);
+            // Enviar una notificación al usuario
+            $user = $rescue->user;
+            if ($user) {
+                $user->notify(new RescueStatusUpdated($rescue));
+            }
 
-        // Actualizar el estado del rescate
-        $rescue->status = $request->status;
-        $rescue->save();
-
-        // 🔹 Enviar una notificación al usuario
-        $user = $rescue->user;
-        if ($user) {
-            $user->notify(new RescueStatusUpdated($rescue)); // Enviar notificación
+            return response()->json(['success' => true, 'message' => 'Estado actualizado correctamente.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Hubo un problema al actualizar el estado.', 'details' => $e->getMessage()], 500);
         }
-
-        return redirect()->back()->with('success', 'Estado actualizado correctamente.');
     }
 }

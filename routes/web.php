@@ -32,23 +32,11 @@ Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'showLog
 Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
 Route::post('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
-// Rutas del blog protegidas para administradores
+// Rutas de administración de usuarios protegidas para administradores
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
-    Route::get('blog/admin', [\App\Http\Controllers\BlogController::class, 'admin'])->name('blog.admin');
-    Route::get('/blog/{id}/edit', [\App\Http\Controllers\BlogController::class, 'edit'])->name('blog.edit');
-    Route::put('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'update'])->name('blog.update');
-    Route::delete('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'destroy'])->name('blog.destroy');
-
-    // Rutas de administración de usuarios
     Route::get('/admin/users', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.users');
     Route::patch('/admin/rescue/{id}/update-status', [RescueRequestController::class, 'updateStatus'])->name('admin.rescue.updateStatus');
 });
-
-// Rutas del blog accesibles para todos los usuarios
-Route::get('blog/create', [\App\Http\Controllers\BlogController::class, 'create'])->name('blog.create');
-Route::get('blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
-Route::get('blog/{id}', [\App\Http\Controllers\BlogController::class, 'show']);
-Route::middleware('auth')->post('/blog', [\App\Http\Controllers\BlogController::class, 'store'])->name('blog.store');
 
 // Rutas de noticias protegidas para administradores
 Route::middleware(['auth', CheckAdmin::class])->group(function () {

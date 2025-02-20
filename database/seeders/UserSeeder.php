@@ -33,15 +33,6 @@ class UserSeeder extends Seeder
             ]
         );
 
-        User::firstOrCreate(
-            ['email' => 'briang@example.com'],
-            [
-                'name' => 'Brian Guaragna',
-                'password' => Hash::make('1234'),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
-        );
 
         User::firstOrCreate(
             ['email' => 'nico_guaragna@hotmail.com'],

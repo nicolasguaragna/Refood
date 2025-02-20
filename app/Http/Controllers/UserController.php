@@ -54,6 +54,8 @@ class UserController extends Controller
         $user = Auth::user(); // Obtener el usuario autenticado
         $services = $user->rescueRequests()->with('service')->get(); // Cargar servicios asociados
 
+        $user->unreadNotifications->markAsRead(); // Marcar como leídas las notificaciones
+
         return view('profile.user-services', compact('services'));
     }
 

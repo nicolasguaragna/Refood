@@ -14,6 +14,16 @@
         </div>
         @endif
 
+        <!-- 🔹 Notificaciones del cambio de estado -->
+        @if (Auth::user()->unreadNotifications->count() > 0)
+        <div class="alert alert-info">
+            <h5>📢 Notificaciones:</h5>
+            @foreach (Auth::user()->unreadNotifications as $notification)
+            <p>{{ $notification->data['message'] }}</p>
+            @endforeach
+        </div>
+        @endif
+
         @if($services->isEmpty())
         <p class="text-center">No tienes servicios contratados.</p>
         @else
@@ -47,6 +57,22 @@
                             <span class="badge bg-warning text-dark">Pendiente</span>
                             @endif
                         </td>
+
+                        <td class="text-center">
+                            <!-- 🔹 Estado actualizado del rescate -->
+                            @if($service->status === 'Pendiente')
+                            <span class="badge bg-warning text-dark">Pendiente</span>
+                            @elseif($service->status === 'Visto')
+                            <span class="badge bg-info text-white">Visto</span>
+                            @elseif($service->status === 'Para ser retirado')
+                            <span class="badge bg-primary text-white">Para ser retirado</span>
+                            @elseif($service->status === 'Retirado')
+                            <span class="badge bg-success">Retirado</span>
+                            @else
+                            <span class="badge bg-secondary">{{ $service->status }}</span>
+                            @endif
+                        </td>
+
                         <td class="text-center">
                             @if(!$service->is_paid)
                             <a href="{{ route('services.edit', $service->id) }}" class="btn btn-primary btn-sm">Editar</a>
