@@ -58,20 +58,16 @@ class RescueRequestController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        try {
-            $rescue = RescueRequest::findOrFail($id);
-            $rescue->status = $request->status;
-            $rescue->save();
+        $rescue = RescueRequest::findOrFail($id);
+        $rescue->status = $request->status;
+        $rescue->save();
 
-            // Enviar una notificación al usuario
-            $user = $rescue->user;
-            if ($user) {
-                $user->notify(new RescueStatusUpdated($rescue));
-            }
-
-            return response()->json(['success' => true, 'message' => 'Estado actualizado correctamente.'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Hubo un problema al actualizar el estado.', 'details' => $e->getMessage()], 500);
+        // Enviar una notificación al usuario
+        $user = $rescue->user;
+        if ($user) {
+            $user->notify(new RescueStatusUpdated($rescue));
         }
+
+        return redirect()->back()->with('success', 'Estado actualizado correctamente.');
     }
 }
