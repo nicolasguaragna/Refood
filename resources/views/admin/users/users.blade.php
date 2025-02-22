@@ -21,7 +21,7 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->phone ?? 'No registrado' }}</td>
+                        <td>{{ $user->contact ?? 'No registrado' }}</td>
                         <td>
                             <button class="btn btn-info btn-sm" data-bs-toggle="collapse" data-bs-target="#rescates-{{ $user->id }}">
                                 Ver Rescates
@@ -39,10 +39,9 @@
                                         <tr>
                                             <th>Ubicación</th>
                                             <th>Detalles</th>
-                                            <th>Fecha</th>
+                                            <th>Fecha de Rescate</th>
                                             <th>Pago</th>
                                             <th>Estado</th>
-                                            <th>Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,9 +68,6 @@
                                                         <option value="Retirado" {{ $rescue->status == 'Retirado' ? 'selected' : '' }}>Retirado</option>
                                                     </select>
                                                 </form>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-primary btn-sm" onclick="notificarUsuario({{ $rescue->id }})">Notificar</button>
                                             </td>
                                         </tr>
                                         @endforeach

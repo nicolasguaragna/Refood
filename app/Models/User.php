@@ -66,4 +66,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(RescueRequest::class, 'user_id');
     }
+
+    /**
+     * Obtener el número de contacto del usuario.
+     * Si el usuario no tiene un número en `users`, se toma el más reciente de `rescue_requests`.
+     *
+     * @return string|null
+     */
+    public function getContactAttribute()
+    {
+        return optional($this->rescueRequests()->latest()->first())->contact;
+    }
 }
