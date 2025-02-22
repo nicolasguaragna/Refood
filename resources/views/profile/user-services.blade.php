@@ -37,7 +37,8 @@
                         <th style="width: 18%;">Ubicación</th>
                         <th style="width: 20%;">Detalles</th>
                         <th style="width: 10%;">Fecha de Rescate</th>
-                        <th style="width: 10%;">Estado</th>
+                        <th style="width: 10%;">Pago</th>
+                        <th style="width: 10%;">Feedback Refood</th>
                         <th style="width: 10%;">Acciones</th>
                     </tr>
                 </thead>
@@ -50,6 +51,9 @@
                         <td class="text-truncate" style="max-width: 200px;">{{ $service->location }}</td>
                         <td class="text-truncate" style="max-width: 250px;">{{ $service->details }}</td>
                         <td class="text-center">{{ $service->rescue_date ? $service->rescue_date->format('d/m/Y') : 'No especificado' }}</td>
+
+                        <!-- Columna 'Pago' -->
+
                         <td class="text-center">
                             @if($service->is_paid)
                             <span class="badge bg-success">Pagado</span>
@@ -58,6 +62,7 @@
                             @endif
                         </td>
 
+                        <!-- Columna Feedback Refood -->
                         <td class="text-center">
                             <!-- 🔹 Estado actualizado del rescate -->
                             @if($service->status === 'Pendiente')
@@ -73,6 +78,7 @@
                             @endif
                         </td>
 
+                        <!-- Ultima columna Acciones -->
                         <td class="text-center">
                             @if(!$service->is_paid)
                             <a href="{{ route('services.edit', $service->id) }}" class="btn btn-primary btn-sm">Editar</a>

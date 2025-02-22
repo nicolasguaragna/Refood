@@ -19,6 +19,9 @@
                             <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $user->email) }}" required>
                         </div>
 
+                        <label class="form-label mt-3">Contacto</label>
+                        <input type="text" name="phone" class="form-control" value="{{ auth()->user()->phone ?? '' }}">
+
                         <div class="form-group">
                             <label for="new-password">Nueva Contraseña (opcional)</label>
                             <div class="input-group">

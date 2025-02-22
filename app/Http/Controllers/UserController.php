@@ -29,12 +29,14 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20',
             'new_password' => 'nullable|min:8|confirmed',
         ]);
 
         // Actualizar nombre y correo
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->phone = $request->phone;
 
         // Si se proporciona una nueva contraseña, actualizarla
         if ($request->filled('new_password')) {

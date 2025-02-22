@@ -15,6 +15,7 @@
                 <div class="card-body">
                     <p><strong>Nombre:</strong> {{ $user->name }}</p>
                     <p><strong>Email:</strong> {{ $user->email }}</p>
+                    <p><strong>Contacto:</strong> {{ auth()->user()->phone ?? 'No registrado' }}</p>
                     <a href="{{ route('profile.edit') }}" class="btn btn-primary">Editar Perfil</a>
                 </div>
             </div>
