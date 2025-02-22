@@ -1,65 +1,95 @@
 <x-layout>
-    <x-slot:title>Editar Perfil</x-slot>
+    <x-slot:title>Editar Perfil</x-slot:title>
 
-        <div class="container mt-4">
-            <h1 class="text-center">Editar Perfil</h1>
-            <div class="card mx-auto" style="max-width: 500px;">
-                <div class="card-body">
-                    <form method="POST" action="{{ route('profile.update') }}">
-                        @csrf
-                        @method('PUT')
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">✏️ Editar Perfil</h1>
 
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nombre</label>
-                            <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $user->name) }}" required>
-                        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-center mb-3">📌 Actualiza tu información personal</h5>
 
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $user->email) }}" required>
-                        </div>
+                        <form method="POST" action="{{ route('profile.update') }}">
+                            @csrf
+                            @method('PUT')
 
-                        <label class="form-label mt-3">Contacto</label>
-                        <input type="text" name="phone" class="form-control" value="{{ auth()->user()->phone ?? '' }}">
-
-                        <div class="form-group">
-                            <label for="new-password">Nueva Contraseña (opcional)</label>
-                            <div class="input-group">
-                                <input type="password" id="new-password" name="new_password" class="form-control" placeholder="Nueva Contraseña">
-                                <button type="button" class="btn btn-outline-secondary toggle-password" data-target="#new-password">
-                                    <i class="fa fa-eye"></i>
-                                </button>
+                            <!-- Nombre -->
+                            <div class="mb-3">
+                                <label for="name" class="form-label fw-bold">👤 Nombre</label>
+                                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
+                                    value="{{ old('name', $user->name) }}" required>
+                                @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="confirm-password">Confirmar Contraseña</label>
-                            <div class="input-group">
-                                <input type="password" id="confirm-password" name="new_password_confirmation" class="form-control" placeholder="Confirmar Contraseña">
-                                <button type="button" class="btn btn-outline-secondary toggle-password" data-target="#confirm-password">
-                                    <i class="fa fa-eye"></i>
-                                </button>
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label fw-bold">📧 Email</label>
+                                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror"
+                                    value="{{ old('email', $user->email) }}" required>
+                                @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                        </div>
 
-                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
-                        <a href="{{ route('profile.show') }}" class="btn btn-secondary">Cancelar</a>
-                    </form>
+                            <!-- Contacto -->
+                            <div class="mb-3">
+                                <label for="phone" class="form-label fw-bold">📞 Contacto</label>
+                                <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror"
+                                    value="{{ old('phone', auth()->user()->phone ?? '') }}">
+                                @error('phone')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Nueva Contraseña -->
+                            <div class="mb-3">
+                                <label for="new-password" class="form-label fw-bold">🔑 Nueva Contraseña (opcional)</label>
+                                <div class="input-group">
+                                    <input type="password" id="new-password" name="new_password" class="form-control" placeholder="Nueva Contraseña">
+                                    <button type="button" class="btn btn-outline-secondary toggle-password" data-target="#new-password">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Confirmar Contraseña -->
+                            <div class="mb-3">
+                                <label for="confirm-password" class="form-label fw-bold">🔒 Confirmar Contraseña</label>
+                                <div class="input-group">
+                                    <input type="password" id="confirm-password" name="new_password_confirmation" class="form-control" placeholder="Confirmar Contraseña">
+                                    <button type="button" class="btn btn-outline-secondary toggle-password" data-target="#confirm-password">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Botones -->
+                            <div class="d-flex justify-content-between mt-4">
+                                <a href="{{ route('profile.show') }}" class="btn btn-secondary">🔙 Cancelar</a>
+                                <button type="submit" class="btn btn-success">💾 Guardar Cambios</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        @push('scripts')
-        <script>
-            document.querySelectorAll('.toggle-password').forEach(button => {
-                button.addEventListener('click', () => {
-                    const target = document.querySelector(button.getAttribute('data-target'));
-                    const isPassword = target.getAttribute('type') === 'password';
-                    target.setAttribute('type', isPassword ? 'text' : 'password');
-                    button.querySelector('i').classList.toggle('fa-eye');
-                    button.querySelector('i').classList.toggle('fa-eye-slash');
-                });
+    <!-- Script para alternar visibilidad de contraseñas -->
+    @push('scripts')
+    <script>
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', () => {
+                const target = document.querySelector(button.getAttribute('data-target'));
+                const isPassword = target.getAttribute('type') === 'password';
+                target.setAttribute('type', isPassword ? 'text' : 'password');
+                button.querySelector('i').classList.toggle('fa-eye');
+                button.querySelector('i').classList.toggle('fa-eye-slash');
             });
-        </script>
-        @endpush
+        });
+    </script>
+    @endpush
 </x-layout>

@@ -1,23 +1,49 @@
 <x-layout>
-    <x-slot:title>Perfil de Usuario</x-slot>
+    <x-slot:title>Perfil de Usuario</x-slot:title>
 
-        <div class="container mt-4">
-            <!-- Mostrar mensaje de feedback -->
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
+    <div class="container mt-4">
+        <!-- Mensaje de éxito si se actualiza el perfil -->
+        @if (session('success'))
+        <div id="flash-message" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            <i class="fa fa-check-circle"></i> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
 
-            <h1 class="text-center">Mi Perfil</h1>
-            <div class="card mx-auto" style="max-width: 500px;">
-                <div class="card-body">
-                    <p><strong>Nombre:</strong> {{ $user->name }}</p>
-                    <p><strong>Email:</strong> {{ $user->email }}</p>
-                    <p><strong>Contacto:</strong> {{ auth()->user()->phone ?? 'No registrado' }}</p>
-                    <a href="{{ route('profile.edit') }}" class="btn btn-primary">Editar Perfil</a>
+        <h1 class="text-center mb-4">👤 Mi Perfil</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-3">📌 Información Personal</h5>
+
+                        <p><strong>👤 Nombre:</strong> {{ $user->name }}</p>
+                        <p><strong>📧 Email:</strong> {{ $user->email }}</p>
+                        <p><strong>📞 Contacto:</strong> {{ auth()->user()->phone ?? 'No registrado' }}</p>
+
+                        <hr>
+
+                        <a href="{{ route('profile.edit') }}" class="btn btn-primary w-100">
+                            ✏️ Editar Perfil
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Script para ocultar el mensaje automáticamente -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const flashMessage = document.getElementById("flash-message");
+            if (flashMessage) {
+                setTimeout(() => {
+                    flashMessage.classList.remove("show");
+                    flashMessage.classList.add("fade");
+                    setTimeout(() => flashMessage.style.display = "none", 500);
+                }, 4000); // Desaparece después de 4 segundos
+            }
+        });
+    </script>
 </x-layout>
