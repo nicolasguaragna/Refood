@@ -98,10 +98,25 @@ class MercadoPagoController extends Controller
     public function payService($serviceId)
     {
         try {
-            MercadoPagoConfig::setAccessToken(env('MERCADO_PAGO_ACCESS_TOKEN'));
+            // Obtener el Access Token desde el .env
+            $accessToken = env('MERCADO_PAGO_ACCESS_TOKEN');
 
+            // Registrar en el log si se obtuvo correctamente
+            \Log::info("Access Token Mercado Pago: " . ($accessToken ?? 'No definido'));
+
+            // Validar que el Access Token no sea null
+            if (!$accessToken) {
+                \Log::error('Mercado Pago: Access Token no definido en el .env.');
+                return redirect()->route('user.services')->with('error', "Error de configuración en MercadoPago. Contacta al soporte.");
+            }
+
+            // Configurar Mercado Pago con el Access Token
+            MercadoPagoConfig::setAccessToken($accessToken);
+
+            // Buscar el servicio por ID
             $service = RescueRequest::findOrFail($serviceId);
 
+            // Crear la preferencia de pago
             $client = new PreferenceClient();
             $preference = $client->create([
                 "items" => [
@@ -123,6 +138,7 @@ class MercadoPagoController extends Controller
                 "auto_return" => "approved",
             ]);
 
+            // Verificar si la preferencia fue creada correctamente
             if (!isset($preference->id)) {
                 \Log::error('Mercado Pago: No se pudo generar la preferencia de pago. Respuesta API: ', (array) $preference);
                 return redirect()->route('user.services')->with('error', "No se pudo generar el pago.");
@@ -170,6 +186,9 @@ class MercadoPagoController extends Controller
         if (!Auth::check()) {
             $user = RescueRequest::find($serviceId)->user; // Obtener usuario del servicio pagado
             Auth::login($user);
+            /**
+             * auth()->loginUsingId($user->id);
+             */
             \Log::info("Usuario re-autenticado tras el pago: " . $user->id);
         }
 
