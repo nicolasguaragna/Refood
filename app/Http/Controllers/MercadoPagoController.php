@@ -136,6 +136,7 @@ class MercadoPagoController extends Controller
                     "pending" => route('services.payment.pending', $service->id),
                 ],
                 "auto_return" => "approved",
+                "site_id" => "MLA", // agrego el site_id para Argentina
             ]);
 
             // Verificar si la preferencia fue creada correctamente
@@ -146,7 +147,7 @@ class MercadoPagoController extends Controller
 
             return view('servicios.pay', [
                 'preferenceId' => $preference->id,
-                'publicKey' => env('MERCADO_PAGO_PUBLIC_KEY'),
+                'publicKey' => config('services.mercadopago.public_key'),
                 'service' => $service
             ]);
         } catch (\Exception $e) {
