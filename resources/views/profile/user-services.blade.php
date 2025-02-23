@@ -109,7 +109,7 @@
                     flashMessage.classList.remove("show");
                     flashMessage.classList.add("fade");
                     setTimeout(() => flashMessage.style.display = "none", 500);
-                }, 4000); // Desaparece después de 4 segundos
+                }, 7000); // Desaparece después de 7 segundos
             }
         });
     </script>

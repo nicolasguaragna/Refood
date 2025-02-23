@@ -22,8 +22,10 @@ class RescueRequest extends Model
         'latitude',
         'longitude',
         'is_paid',
-        'status'
+        'status',
+        'food_type'
     ];
+
 
     /**
      * Cast attributes to specific types.
@@ -52,5 +54,29 @@ class RescueRequest extends Model
     public function service()
     {
         return $this->belongsTo(Service::class, 'service_id');
+    }
+
+    public function getPriorityAttribute()
+    {
+        $highPriorityKeywords = ['carne', 'lácteo', 'tomate', 'lechuga', 'banana', 'frutilla', 'palta', 'espinaca', 'uva', 'embutidos', 'verdura fresca', 'pollo', 'pescado', 'queso', 'huevo', 'alimentos cocidos', 'manteca'];
+        $mediumPriorityKeywords = ['pan', 'harina', 'verdura no perecedera', 'fruta', 'leche en polvo', 'pasta', 'fideos', 'granos', 'tubérculo', 'galletas'];
+
+        // Convertir a minúsculas para evitar problemas de mayúsculas/minúsculas
+        $detailsLower = strtolower($this->details);
+
+        // Verificar si alguna palabra clave está en los detalles
+        foreach ($highPriorityKeywords as $word) {
+            if (str_contains($detailsLower, $word)) {
+                return 'Alta';
+            }
+        }
+
+        foreach ($mediumPriorityKeywords as $word) {
+            if (str_contains($detailsLower, $word)) {
+                return 'Media';
+            }
+        }
+
+        return 'Baja';
     }
 }

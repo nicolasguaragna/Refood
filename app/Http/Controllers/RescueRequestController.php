@@ -53,7 +53,8 @@ class RescueRequestController extends Controller
             'rescue_date' => $request->rescue_date,
         ]);
 
-        return redirect()->route('user.services')->with('success', 'Solicitud de rescate creada con éxito. Aquí puedes ver los servicios solicitados y el estado de cada uno.');
+        return redirect()->route('user.services')->with('success', 'Solicitud de rescate creada con éxito, a la brevedad nos estaremos comunicando 
+        para confirmar el retiro. En esta sección puedes ver los servicios solicitados y el estado de cada uno.');
     }
 
     public function updateStatus(Request $request, $id)

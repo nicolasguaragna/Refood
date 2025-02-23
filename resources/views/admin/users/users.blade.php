@@ -41,6 +41,7 @@
                                             <th>Detalles</th>
                                             <th>Fecha de Rescate</th>
                                             <th>Pago</th>
+                                            <th>Prioridad</th>
                                             <th>Estado</th>
                                         </tr>
                                     </thead>
@@ -57,7 +58,20 @@
                                                 <span class="badge bg-warning">Pendiente</span>
                                                 @endif
                                             </td>
-                                            <td>
+
+                                            <!-- Columna de Prioridad -->
+                                            <td class="text-center">
+                                                @if($rescue->priority == 'Alta')
+                                                <span class="badge bg-danger">🔴 Alta</span>
+                                                @elseif($rescue->priority == 'Media')
+                                                <span class="badge bg-warning">🟡 Media</span>
+                                                @else
+                                                <span class="badge bg-success">🟢 Baja</span>
+                                                @endif
+                                            </td>
+
+                                            <!-- Columna de Estado -->
+                                            <td class="text-center">
                                                 <form action="{{ route('admin.rescue.updateStatus', $rescue->id) }}" method="POST">
                                                     @csrf
                                                     @method('PATCH')
