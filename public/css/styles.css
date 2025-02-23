@@ -563,4 +563,7 @@ a {
 .whatsapp-float:hover {
     transform: scale(1.1);
 }
-    
+
+.text-secondary {
+    color: #6bc097 !important; 
+}
