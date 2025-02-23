@@ -98,15 +98,15 @@ class MercadoPagoController extends Controller
     public function payService($serviceId)
     {
         try {
-            // Obtener el Access Token desde el .env
-            $accessToken = env('MERCADO_PAGO_ACCESS_TOKEN');
+            // Obtener el Access Token desde la configuración de servicios
+            $accessToken = config('services.mercadopago.access_token');
 
             // Registrar en el log si se obtuvo correctamente
             \Log::info("Access Token Mercado Pago: " . ($accessToken ?? 'No definido'));
 
             // Validar que el Access Token no sea null
             if (!$accessToken) {
-                \Log::error('Mercado Pago: Access Token no definido en el .env.');
+                \Log::error('Mercado Pago: Access Token no definido en la configuración.');
                 return redirect()->route('user.services')->with('error', "Error de configuración en MercadoPago. Contacta al soporte.");
             }
 
