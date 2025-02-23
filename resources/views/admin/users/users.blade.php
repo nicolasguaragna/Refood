@@ -49,7 +49,7 @@
                                         <tr>
                                             <td>{{ $rescue->location }}</td>
                                             <td>{{ $rescue->details }}</td>
-                                            <td>{{ $rescue->rescue_date }}</td>
+                                            <td>{{ $rescue->rescue_date->format('d/m/Y') }}</td>
                                             <td>
                                                 @if($rescue->is_paid)
                                                 <span class="badge bg-success">Pagado</span>
