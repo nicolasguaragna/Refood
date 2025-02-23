@@ -15,8 +15,35 @@ class MercadoPagoController extends Controller
      */
     public function showDonationForm()
     {
-        return view('donate-form'); // Vista para elegir el monto de donación
+        MercadoPagoConfig::setAccessToken(env('MERCADO_PAGO_ACCESS_TOKEN'));
+
+        $client = new PreferenceClient();
+        $preference = $client->create([
+            "items" => [
+                [
+                    "title" => "Donación a Refood",
+                    "quantity" => 1,
+                    "unit_price" => 1000, // Monto base por defecto
+                ]
+            ],
+            "back_urls" => [
+                "success" => route('donate.success'),
+                "failure" => route('donate.failure'),
+                "pending" => route('donate.pending'),
+            ],
+            "auto_return" => "approved",
+        ]);
+
+        if (!isset($preference->id)) {
+            return redirect()->route('donate.form')->with('error', "No se pudo generar la preferencia de pago.");
+        }
+
+        return view('donate', [
+            'preferenceId' => $preference->id,
+            'publicKey' => env('MERCADO_PAGO_PUBLIC_KEY')
+        ]);
     }
+
 
     /**
      * Procesar la donación con Mercado Pago.
