@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class MercadoPagoController extends Controller
 {
     /**
-     * Mostrar el formulario de donación donde el usuario puede elegir el monto.
+     * Configuro MP con el Access Token. 
+     * Creo una preferencia de pago con un monto base de $1000.
+     * 
+     * Defino las URLs de retorno tras el pago.
+     * Devuelvo la vista donate.blade.php con la clave pública y la ID de la preferencia.
      */
     public function showDonationForm()
     {
@@ -86,7 +90,10 @@ class MercadoPagoController extends Controller
     }
 
     /**
-     * Generar un pago para un servicio de rescate.
+     * Creo una preferencia de pago con el precio del servicio.
+     * Busco el servicio de rescate en la base de datos.
+     * Configuro las URL de retorno tras el pago.
+     * Devuelvo a la vista servicios.pay.blade.php con la clave pública y el ID de pago.
      */
     public function payService($serviceId)
     {
@@ -134,7 +141,11 @@ class MercadoPagoController extends Controller
 
 
     /**
-     * Confirmar el pago exitoso y actualizar el estado del servicio.
+     * registro en logs que el pago fue recibido.
+     * Busco el servicio en la base de datos.
+     * Actualizo el estado a "Pagado" (is_paid = true).
+     * Reautentico al usuario si se deslogueó.
+     * Redirijo a user.services con un mensaje de éxito.
      */
     public function paymentSuccess(Request $request, $serviceId)
     {
@@ -166,7 +177,7 @@ class MercadoPagoController extends Controller
     }
 
     /**
-     * Manejar un pago fallido.
+     * Manejar un pago fallido.Si el pago falla, redirijo a Mis Servicios con un mensaje de error.
      */
     public function paymentFailure($serviceId)
     {
@@ -174,7 +185,7 @@ class MercadoPagoController extends Controller
     }
 
     /**
-     * Manejar pagos pendientes.
+     * Si el pago queda en estado "pendiente", notifico al usuario y lo redirijo a Mis Servicios.
      */
     public function paymentPending($serviceId)
     {
