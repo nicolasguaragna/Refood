@@ -82,13 +82,25 @@ a {
 
 /* Estilo para el botón de envío */
 .contact-button {
-    background-color: #6bc097;
-    border-color: #6bc097;
+    background-color: #6bc097; /* Color de fondo personalizado */
+    color: white !important; /* Cambia el color del texto */
+    font-weight: bold; /* Hace que la letra sea más bold */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .contact-button:hover {
-    background-color: #ffffff; /* Un color ligeramente más oscuro para el efecto hover */
+    background-color: #6bc097; /* Color más oscuro al pasar el mouse */
+    color: #ffffff !important; /* Asegurar que el texto siga siendo blanco */
+    transform: scale(1.05);
 }
+
+.contact-button:active {
+    transform: scale(0.95);
+}
+
 
 /* Para desactivar el redimensionamiento del textarea */
 .no-resize {
