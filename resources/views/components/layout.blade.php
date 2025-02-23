@@ -99,6 +99,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Stacks para scripts específicos de vistas -->
         @stack('scripts')
+        <!-- Agregar la imagen de puntos en todas las vistas -->
+        <x-background-dots />
 </body>
 
 </html>

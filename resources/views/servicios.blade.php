@@ -4,9 +4,6 @@
     <div class="container mt-1 position-relative" style="max-width: 1200px; margin: auto;">
         <h1 class="text-center mb-4">Nuestros Servicios</h1>
 
-        <!-- Componente de puntos decorativos -->
-        <x-background-dots />
-
         <!-- Mostrar mensajes de feedback -->
         @if(session('message'))
         <div class="alert alert-{{ session('alert-type') }} mt-3">

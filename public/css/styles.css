@@ -498,14 +498,14 @@ a {
 /* Fondo decorativo global con puntos */
 .background-dots {
     position: absolute;
-    width: 150px; /* Tamaño ajustable */
-    height: 150px;
-    background-image: url('/images/puntos.png'); /* Ruta de tu imagen */
-    background-size: cover;
     top: 40%;
-    right: -10%; /* Ajusta la posición */
-    transform: translate(0, -50%);
-    z-index: 0; /* Debe estar detrás del contenido */
+    right: 0%; /* Ajusta la posición */
+    width: 200px; /* Tamaño ajustable */
+    height: 200px;
+    background-image: url('/images/puntos.png'); /* Ruta de tu imagen */
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: -1; /* Debe estar detrás del contenido */
 }
 
 /* Para asegurar que los elementos dentro no queden afectados */
