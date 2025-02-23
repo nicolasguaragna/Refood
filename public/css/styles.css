@@ -62,14 +62,14 @@ a {
 
 /* Estilo para la columna de información de contacto */
 .contact-info {
-    background-color: #198754;
+    background-color: #6bc097;
     color: #ffff;
     padding: 20px;
 }
 
 /* Estilo para el formulario de contacto */
 .contact-form {
-    border: 2px solid #198754;
+    border: 2px solid #6bc097;
     border-radius: 10px;
     padding: 20px;
     background-color: #f9f9f9;
@@ -77,13 +77,13 @@ a {
 
 /* Estilo para los campos de entrada en el formulario */
 .contact-input {
-    border: 1px solid #198754;
+    border: 1px solid #6bc097;
 }
 
 /* Estilo para el botón de envío */
 .contact-button {
-    background-color: #198754;
-    border-color: #198754;
+    background-color: #6bc097;
+    border-color: #6bc097;
 }
 
 .contact-button:hover {
@@ -124,7 +124,7 @@ a {
 }
 
 .navbar-toggler {
-    background-color: #003310;
+    background-color: #6bc097;
     border: unset;
 }
 
@@ -173,7 +173,7 @@ a {
 .service-title {
     font-size: 2rem;
     font-weight: bold;
-    color: #035f13;
+    color: #6bc097;
     margin-bottom: 10px;
     text-align: center;
 }
@@ -203,7 +203,7 @@ a {
     width: fit-content;
     margin: 20px auto 0;
     padding: 10px 20px;
-    background-color: #28a745;
+    background-color: #157347;
     color: #fff;
     text-align: center;
     border-radius: 5px;
@@ -211,11 +211,11 @@ a {
 }
 
 .service-button:hover {
-    background-color: #218838;
+    background-color: #6bc097;
 }
 
 .btn-warning {
-    background-color: #2e7d32;
+    background-color: #6bc097;
     color: #fff;
     border: none;
 }
@@ -226,14 +226,14 @@ a {
 
 /* "Ver Detalles" */
 .btn.btn-info {
-    background-color: #5cb85c; /* Cambia este color a tu preferencia */
-    border-color: #4cae4c; /* Cambia el color del borde si es necesario */
+    background-color: #6bc097; /* Cambia este color a tu preferencia */
+    border-color: #6bc097; /* Cambia el color del borde si es necesario */
     color: #fff; /* Cambia el color del texto */
 }
 
 .btn.btn-info:hover {
-    background-color: #4cae4c; /* Color al pasar el cursor */
-    border-color: #398439; /* Color del borde al pasar el cursor */
+    background-color: #6bc097; /* Color al pasar el cursor */
+    border-color: #6bc097; /* Color del borde al pasar el cursor */
 }
 
 /* Imagen del lado izquierdo */
@@ -376,13 +376,13 @@ a {
 }
 
 .nav-link {
-    color: #035f13;
+    color: #6bc097;
     font-weight: bold;
     transition: all 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #28a745;
+    color: #6bc097;
 }
 
 .navbar .btn-outline-success {

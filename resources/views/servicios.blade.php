@@ -14,10 +14,10 @@
         </div>
         @endif
 
-        <div class="row">
+        <div class="row g-4">
             @foreach($services as $service)
             <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
+                <div class="card shadow-sm p-3">
                     <div class="card-body">
                         <h2 class="card-title">{{ $service->name }}</h2>
                         <p class="card-text">{{ $service->description }}</p>
