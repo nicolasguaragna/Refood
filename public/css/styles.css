@@ -409,13 +409,24 @@ a {
     padding: 40px 20px;
 }
 
+.testimonial-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .testimonial-card {
     background-color: #eef9f3;
     border-radius: 10px;
     text-align: center;
     padding: 20px;
     margin-bottom: 20px;
-    position: relative; /* Necesario para posicionar el ::before */
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .testimonial-card::before {
