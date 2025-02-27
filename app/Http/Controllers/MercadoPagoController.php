@@ -19,6 +19,10 @@ class MercadoPagoController extends Controller
      */
     public function showDonationForm()
     {
+
+        $accessToken = config('services.mercadopago.access_token');
+        $publicKey = config('services.mercadopago.public_key');
+
         MercadoPagoConfig::setAccessToken(config('services.mercadopago.access_token'));
 
         $client = new PreferenceClient();
@@ -45,7 +49,7 @@ class MercadoPagoController extends Controller
 
         return view('donate', [
             'preferenceId' => $preference->id,
-            'publicKey' => env('MERCADO_PAGO_PUBLIC_KEY')
+            'publicKey' => $publicKey
         ]);
     }
 
