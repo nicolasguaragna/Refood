@@ -453,6 +453,16 @@ a {
     border: 2px solid #6bc097;
 }
 
+@media (max-width: 768px) {
+    .testimonial-container {
+        flex-direction: column;
+    }
+    .testimonial-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
 .nav-link {
     color: #6bc097;
     font-weight: bold;
@@ -642,6 +652,17 @@ a {
     transform: scale(1.1);
 }
 
+@media (max-width: 480px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+    }
+    .whatsapp-float img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
 .text-secondary {
     color: #6bc097 !important; 
 }
@@ -664,3 +685,11 @@ a {
 .btn-success:active {
     transform: scale(0.95); /* Efecto de presión al hacer clic */
 }
+
+@media (max-width: 768px) {
+    .circle-background,
+    .banner-image img {
+        display: none;
+    }
+}
+
