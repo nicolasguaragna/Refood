@@ -19,7 +19,7 @@ class MercadoPagoController extends Controller
      */
     public function showDonationForm()
     {
-        MercadoPagoConfig::setAccessToken(env('MERCADO_PAGO_ACCESS_TOKEN'));
+        MercadoPagoConfig::setAccessToken(config('services.mercadopago.access_token'));
 
         $client = new PreferenceClient();
         $preference = $client->create([
@@ -27,7 +27,7 @@ class MercadoPagoController extends Controller
                 [
                     "title" => "Donación a Refood",
                     "quantity" => 1,
-                    "unit_price" => 1000, // Monto base por defecto
+                    "unit_price" => 1000, // $$$ Monto base por defecto
                 ]
             ],
             "back_urls" => [
@@ -36,6 +36,7 @@ class MercadoPagoController extends Controller
                 "pending" => route('donate.pending'),
             ],
             "auto_return" => "approved",
+            "site_id" => "MLA"
         ]);
 
         if (!isset($preference->id)) {

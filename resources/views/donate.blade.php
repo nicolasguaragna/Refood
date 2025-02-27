@@ -31,7 +31,9 @@
 
                     <script src="https://sdk.mercadopago.com/js/v2"></script>
                     <script>
-                        const mp = new MercadoPago('{{ $publicKey }}'); // Public Key pasada desde el controlador
+                        const mp = new MercadoPago("{{ $publicKey }}", {
+                            locale: 'es-AR'
+                        });
                         mp.bricks().create('wallet', 'wallet_container', {
                             initialization: {
                                 preferenceId: "{{ $preferenceId }}", // ID de la preferencia generado en el controlador
