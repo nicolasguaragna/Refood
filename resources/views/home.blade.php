@@ -7,7 +7,7 @@
                     Cada plato cuenta <br><span class="text-success">para un mundo <br>sin desperdicio</span>
                 </h1>
                 <p class="lead">Un sitio para reducir el excedente de alimentos <br>y redistribuirlos a quienes más lo necesitan.</p>
-                <a href="{{ route('donate.index') }}" class="btn btn-success btn-lg mt-3">Dona Ahora</a>
+                <a href="{{ route('donate.index') }}" class="btn btn-success btn-lg mt-3">Doná Ahora</a>
 
                 <!-- Clientes felices -->
                 <div class="d-flex align-items-center mt-4">

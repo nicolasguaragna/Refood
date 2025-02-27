@@ -338,6 +338,10 @@ a {
     background-color: #eef9f3;
     border-radius: 10px;
     text-align: center;
+    min-height: 120px; /* Ajusta según necesites */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .solution-card h3 {
