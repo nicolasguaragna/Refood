@@ -82,25 +82,43 @@
             {{ $slot }}
         </main>
 
-        <!-- Footer -->
-        <footer class="footer text-center p-3 bg-grey text-white">
+        <footer class="footer">
             <div class="container">
-                <img src="{{ asset('images/marca-final.png') }}" alt="Refood Logo" class="footer-logo mb-2">
-                <p class="mb-0">© 2025 Refood | Desarrollado por <strong>Nicolás Guaragna</strong></p>
-            </div>
-        </footer>
 
-        <!-- Botón de WhatsApp -->
-        <a href="https://wa.me/5491133124697?text=Hola!%20Quisiera%20hacer%20una%20consulta%20sobre%20Refood."
-            class="whatsapp-float" target="_blank" title="Chatea con nosotros en WhatsApp">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-        </a>
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Stacks para scripts específicos de vistas -->
-        @stack('scripts')
-        <!-- Agregar la imagen de puntos en todas las vistas -->
-        <x-background-dots />
+                <!-- Logo y lema -->
+                <div>
+                    <img src="{{ asset('images/marca-final.png') }}" alt="Refood" class="footer-logo">
+                    </p>Cada Plato Cuenta</p>
+                </div>
+
+                <!-- Enlaces útiles -->
+                <div>
+                    <h5>Enlaces Rápidos</h5>
+                    <ul class="footer-links">
+                        <li><a href="{{ url('quienes-somos') }}" class="text-white">Quiénes Somos</a></li>
+                        <li><a href="{{ route('donate.index') }}" class="text-white">Donar un Plato</a></li>
+                        <li><a href="{{ url('contact') }}" class="text-white">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Línea divisoria -->
+            <div class="footer-divider"></div>
+            <!-- Créditos -->
+            <p class="footer-credits">© 2025 Refood | Desarrollado por <strong>Nicolás Guaragna</strong></p>
+    </div>
+    </footer>
+
+    <!-- Botón de WhatsApp -->
+    <a href="https://wa.me/5491133124697?text=Hola!%20Quisiera%20hacer%20una%20consulta%20sobre%20Refood."
+        class="whatsapp-float" target="_blank" title="Chatea con nosotros en WhatsApp">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+    </a>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Stacks para scripts específicos de vistas -->
+    @stack('scripts')
+    <!-- Agregar la imagen de puntos en todas las vistas -->
+    <x-background-dots />
 </body>
 
 </html>
