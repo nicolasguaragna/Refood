@@ -86,7 +86,7 @@
         <footer class="footer text-center p-3 bg-grey text-white">
             <div class="container">
                 <img src="{{ asset('images/marca-final.png') }}" alt="Refood Logo" class="footer-logo mb-2">
-                <p class="mb-0">© 2025 Refood - Cada Plato Cuenta</p>
+                <p class="mb-0">© 2025 Refood | Desarrollado por <strong>Nicolás Guaragna</strong></p>
             </div>
         </footer>
 
