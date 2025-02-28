@@ -10,7 +10,7 @@ use App\Notifications\RescueStatusUpdated;
 class RescueRequestController extends Controller
 {
     /**
-     * Muestra todas las solicitudes de rescate.
+     * Muestro todas las solicitudes de rescate, en orden descendente por fecha de creacion.
      */
     public function index()
     {
@@ -19,7 +19,8 @@ class RescueRequestController extends Controller
     }
 
     /**
-     * Muestra el formulario para crear una nueva solicitud de rescate.
+     * Muestro el formulario para crear una nueva solicitud de rescate.
+     * Incluye la clave de la API de Google Maps para la geolocalización.
      */
     public function create()
     {
@@ -27,7 +28,9 @@ class RescueRequestController extends Controller
     }
 
     /**
-     * Guarda una nueva solicitud de rescate en la base de datos.
+     * Guardo una nueva solicitud de rescate en la base de datos.
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -57,13 +60,20 @@ class RescueRequestController extends Controller
         para confirmar el retiro. En esta sección puedes ver los servicios solicitados y el estado de cada uno.');
     }
 
+    /**
+     * Actualizo el estado de una solicitud de rescate y notifico al usuario correspondiente.
+     * 
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateStatus(Request $request, $id)
     {
         $rescue = RescueRequest::findOrFail($id);
         $rescue->status = $request->status;
         $rescue->save();
 
-        // Enviar una notificación al usuario
+        // Envio una notificación al usuario
         $user = $rescue->user;
         if ($user) {
             $user->notify(new RescueStatusUpdated($rescue));

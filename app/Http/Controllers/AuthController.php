@@ -15,7 +15,7 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    // Procesa el registro de usuario
+    // Se procesa el registro de usuario
     public function register(Request $request)
     {
         $request->validate([
@@ -41,7 +41,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    // Procesa el inicio de sesión de usuario
+    // Se procesa el inicio de sesión de usuario
     public function login(Request $request)
     {
         $request->validate([

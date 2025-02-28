@@ -19,12 +19,14 @@ class MercadoPagoController extends Controller
      */
     public function showDonationForm()
     {
-
+        // Obtengo las credenciales de Mercado Pago desde la configuración
         $accessToken = config('services.mercadopago.access_token');
         $publicKey = config('services.mercadopago.public_key');
 
+        // configuro Mercado Pago con el Access Token
         MercadoPagoConfig::setAccessToken(config('services.mercadopago.access_token'));
 
+        // creo la preferencia de pago
         $client = new PreferenceClient();
         $preference = $client->create([
             "items" => [
@@ -43,10 +45,12 @@ class MercadoPagoController extends Controller
             "site_id" => "MLA"
         ]);
 
+        // verifico si la preferencia fue generada correctamente
         if (!isset($preference->id)) {
             return redirect()->route('donate.form')->with('error', "No se pudo generar la preferencia de pago.");
         }
 
+        // retorno a la vista con los datos de la preferencia
         return view('donate', [
             'preferenceId' => $preference->id,
             'publicKey' => $publicKey
@@ -55,7 +59,7 @@ class MercadoPagoController extends Controller
 
 
     /**
-     * Procesar la donación con Mercado Pago.
+     * Procesar una donación con Mercado Pago.
      */
     public function processDonation(Request $request)
     {
@@ -103,37 +107,37 @@ class MercadoPagoController extends Controller
     public function payService($serviceId)
     {
         try {
-            // Obtener el Access Token desde la configuración de servicios
+            // Obtengo el Access Token desde la configuración de servicios
             $accessToken = config('services.mercadopago.access_token');
 
-            // Registrar en el log si se obtuvo correctamente
+            // Registro en el log si se obtuvo correctamente
             \Log::info("Access Token Mercado Pago: " . ($accessToken ?? 'No definido'));
 
-            // Validar que el Access Token no sea null
+            // Valido que el Access Token no sea null
             if (!$accessToken) {
                 \Log::error('Mercado Pago: Access Token no definido en la configuración.');
                 return redirect()->route('user.services')->with('error', "Error de configuración en MercadoPago. Contacta al soporte.");
             }
 
-            // Configurar Mercado Pago con el Access Token
+            // Configuro Mercado Pago con el Access Token
             MercadoPagoConfig::setAccessToken($accessToken);
 
-            // Buscar el servicio por ID
+            // Busco el servicio por ID
             $service = RescueRequest::findOrFail($serviceId);
 
-            // Crear la preferencia de pago
+            // Creo la preferencia de pago
             $client = new PreferenceClient();
             $preference = $client->create([
                 "items" => [
                     [
                         "title" => "Pago por servicio de rescate",
                         "quantity" => 1,
-                        "unit_price" => (float) $service->service->price, // Convertir a float por seguridad
-                        "currency_id" => "ARS", // Asegurar que la moneda sea pesos argentinos
+                        "unit_price" => (float) $service->service->price, // covierto a float por seguridad
+                        "currency_id" => "ARS", // aseguro que la moneda sea pesos argentinos
                     ]
                 ],
                 "payer" => [
-                    "email" => auth()->user()->email ?? "comprador@email.com" // Email del comprador
+                    "email" => auth()->user()->email ?? "comprador@email.com" // email del comprador
                 ],
                 "back_urls" => [
                     "success" => route('services.payment.success', $service->id),
@@ -144,7 +148,7 @@ class MercadoPagoController extends Controller
                 "site_id" => "MLA", // agrego el site_id para Argentina
             ]);
 
-            // Verificar si la preferencia fue creada correctamente
+            // verifico si la preferencia fue creada correctamente
             if (!isset($preference->id)) {
                 \Log::error('Mercado Pago: No se pudo generar la preferencia de pago. Respuesta API: ', (array) $preference);
                 return redirect()->route('user.services')->with('error', "No se pudo generar el pago.");
@@ -190,7 +194,7 @@ class MercadoPagoController extends Controller
 
         // Re-autenticar al usuario antes de la redirección
         if (!Auth::check()) {
-            $user = RescueRequest::find($serviceId)->user; // Obtener usuario del servicio pagado
+            $user = RescueRequest::find($serviceId)->user; // obtengo usuario del servicio pagado
             Auth::login($user);
             /**
              * auth()->loginUsingId($user->id);
@@ -202,7 +206,7 @@ class MercadoPagoController extends Controller
     }
 
     /**
-     * Manejar un pago fallido.Si el pago falla, redirijo a Mis Servicios con un mensaje de error.
+     * Manejo un pago fallido.Si el pago falla, redirijo a Mis Servicios con un mensaje de error.
      */
     public function paymentFailure($serviceId)
     {

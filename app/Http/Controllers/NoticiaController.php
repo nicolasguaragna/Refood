@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Storage;
 
 class NoticiaController extends Controller
 {
+    /**
+     * Muestro una lista paginada de noticias
+     */
     public function index()
     {
         $noticias = Noticia::paginate(10);
@@ -17,15 +20,21 @@ class NoticiaController extends Controller
     // Método para la vista de administración (Solo para Admin)
     public function admin()
     {
-        $noticias = Noticia::all(); // Obtener todas las noticias
+        $noticias = Noticia::all(); // Obtengo todas las noticias
         return view('noticias.admin', compact('noticias'));
     }
 
+    /**
+     * Muestro el formulario de creacion de una noticia.
+     */
     public function create()
     {
         return view('noticias.create');
     }
 
+    /**
+     * Almaceno una nueva noticia en la base de datos
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -45,21 +54,30 @@ class NoticiaController extends Controller
             'imagen' => $imagePath,
         ]);
 
-        // Enviar mensaje flash de éxito
+        // envio mensaje flash de éxito
         return redirect()->route('noticias.admin')->with('success', 'Noticia creada con éxito.');
     }
 
+    /**
+     * Muestro una noticia específica.
+     */
     public function show($id)
     {
         $noticia = Noticia::findOrFail($id);
         return view('noticias.show', compact('noticia'));
     }
 
+    /**
+     * Muestro el formulario de edición de una noticia.
+     */
     public function edit(Noticia $noticia)
     {
         return view('noticias.edit', compact('noticia'));
     }
 
+    /**
+     * Actualizo una noticia en la base de datos.
+     */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -85,6 +103,9 @@ class NoticiaController extends Controller
         return redirect()->route('noticias.admin')->with('success', 'Noticia actualizada con éxito.');
     }
 
+    /**
+     * Elimino una noticia de la base de datos.
+     */
     public function destroy(Noticia $noticia)
     {
         if ($noticia->imagen) {

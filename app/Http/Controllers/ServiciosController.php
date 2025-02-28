@@ -3,39 +3,57 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
-use App\Models\RescueRequest; // Asegúrate de tener este modelo
+use App\Models\RescueRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ServiciosController extends Controller
 {
+    /**
+     * Muestro la lista de todos los servicios disponibles
+     */
     public function index()
     {
-        /*traigo los registros de la tabla services con eloquent.*/
-        $services = Service::all(); // Obtener todos los servicios
+        $services = Service::all(); // obtengo todos los servicios
 
         return view('servicios', [
             'services' => $services,
         ]);
     }
 
-    // Método para mostrar los detalles del servicio
+    /**
+     * Muestro los detalles de un servicio específico.
+     * 
+     * @param int $service_id
+     * @return \Illuminate\View\View
+     */
     public function show($service_id)
     {
-        $service = Service::findOrFail($service_id); // Encuentra el servicio por ID
-        return view('servicios.show', compact('service')); // Pasa el servicio a la vista
+        $service = Service::findOrFail($service_id); // Encuentro el servicio por ID
+        return view('servicios.show', compact('service')); // Paso el servicio a la vista
     }
 
+    /**
+     * Muestro el formulario para solicitar un rescate asociado a un servicio.
+     * 
+     * @param int $service_id
+     * @return \Illuminate\View\View
+     */
     public function showRescueForm($service_id)
     {
         $service = Service::findOrFail($service_id);
-        $googleMapsApiKey = config('services.google_maps.api_key'); // Carga la clave desde config/services.php
+        $googleMapsApiKey = config('services.google_maps.api_key');
 
         return view('rescues.rescue', compact('service', 'googleMapsApiKey'));
     }
 
-
+    /**
+     * Proceso una solicitud de rescate de un servicio.
+     * 
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function submitRescueRequest(Request $request)
     {
         if (Auth::check()) {
@@ -44,7 +62,7 @@ class ServiciosController extends Controller
                 'contact' => 'required|string|max:255',
                 'location' => 'required|string|max:255',
                 'details' => 'required|string',
-                'service_id' => 'required|exists:services,service_id', // Cambiado para usar la clave primaria correcta
+                'service_id' => 'required|exists:services,service_id',
                 'rescue_date' => 'required|date',
             ]);
 
@@ -70,13 +88,19 @@ class ServiciosController extends Controller
         ]);
     }
 
+    /**
+     * Muestrp los detalles de un usuario, incluyendo sus solicitudes de rescate.
+     * 
+     * @param int $userId
+     * @return \Illuminate\View\View
+     */
     public function showUserDetails($userId)
     {
         $user = User::findOrFail($userId); // Encuentra al usuario por su ID
 
-        // Ordenar los rescates asociados al usuario por created_at DESC
+        // obtengo los rescates asociados al usuario y los ordeno por fecha de creación descendente
         $rescues = $user->rescueRequests()
-            ->with('service') // Incluir la relación con el modelo Service
+            ->with('service')
             ->orderBy('created_at', 'desc')
             ->get();
 
