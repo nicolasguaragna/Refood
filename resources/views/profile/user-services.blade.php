@@ -32,42 +32,50 @@
                 <thead class="table-success text-center">
                     <tr>
                         <th style="width: 10%;">Servicio</th>
-                        <th style="width: 10%;">Detalles</th>
+                        <th class="d-none d-md-table-cell" style="width: 10%;">Detalles</th> <!-- Oculto en móviles -->
                         <th style="width: 10%;">Fecha</th>
                         <th style="width: 10%;">Pago</th>
-                        <th style="width: 10%;">Feedback</th>
+                        <th class="d-none d-md-table-cell" style="width: 10%;">Feedback</th> <!-- Oculto en móviles -->
                         <th style="width: 10%;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($services as $service)
                     <tr>
-                        <td class="text-center">{{ $service->service->name ?? 'No disponible' }}</td>
-
-                        <!-- Texto de detalles clickeable para abrir el modal -->
-                        <td>
-                            <a href="#" class="details-link" data-bs-toggle="modal" data-bs-target="#detailsModal{{ $service->id }}">
-                                {{ Str::limit($service->details, 50, '...') }}
+                        <!-- Hacer que el servicio sea clickeable solo en móviles -->
+                        <td class="text-center">
+                            <a href="#" class="service-link text-decoration-none text-success fw-bold"
+                                data-bs-toggle="modal" data-bs-target="#detailsModal{{ $service->id }}"
+                                onclick="handleModalClick(event)" role="button">
+                                {{ $service->service->name ?? 'No disponible' }}
                             </a>
                         </td>
 
-                        <td class="text-center">{{ $service->rescue_date ? $service->rescue_date->format('d/m/Y') : 'No especificado' }}</td>
+                        <!-- Ocultar detalles en móviles -->
+                        <td class="text-truncate d-none d-md-table-cell" style="max-width: 200px;">
+                            <a href="#" class="details-link" data-bs-toggle="modal" data-bs-target="#detailsModal{{ $service->id }}">
+                                {{ Str::limit($service->details, 30, '...') }}
+                            </a>
+                        </td>
 
-                        <!-- Columna 'Pago' -->
+                        <td class="text-center text-truncate" style="max-width: 100px;">
+                            {{ $service->rescue_date ? $service->rescue_date->format('d/m/Y') : 'No especificado' }}
+                        </td>
+
+                        <!-- Ocultar feedback en móviles -->
                         <td class="text-center">
                             <span class="badge {{ $service->is_paid ? 'badge-success' : 'badge-warning' }}">
                                 {{ $service->is_paid ? 'Pagado' : 'Pendiente' }}
                             </span>
                         </td>
 
-                        <!-- Columna 'Feedback' -->
-                        <td class="text-center">
+                        <td class="text-center d-none d-md-table-cell">
                             <span class="badge badge-{{ $service->status === 'Pendiente' ? 'warning' : ($service->status === 'Visto' ? 'primary' : 'success') }}">
                                 {{ $service->status }}
                             </span>
                         </td>
 
-                        <!-- Columna Acciones (corregida) -->
+                        <!-- Columna Acciones -->
                         <td class="text-center">
                             @if(!$service->is_paid)
                             <a href="{{ route('services.edit', $service->id) }}" class="btn btn-primary btn-sm">Editar</a>
@@ -118,6 +126,16 @@
         @endif
     </div>
 
+    <script>
+        function handleModalClick(event) {
+            // Detectar el tamaño de la pantalla
+            if (window.innerWidth > 768) {
+                event.preventDefault(); // Evita que el modal se abra en escritorio
+            }
+        }
+    </script>
+
+
     <!-- JavaScript para ocultar el mensaje automáticamente -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -131,4 +149,6 @@
             }
         });
     </script>
+
+
 </x-layout>

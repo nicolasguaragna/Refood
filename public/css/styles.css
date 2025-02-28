@@ -809,3 +809,24 @@ a {
     background-color: #e2e3e5;
     color: #6c757d;
 }
+
+/* Scroll horizontal en móviles */
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+        font-size: 0.9rem; /* Reduce el tamaño del texto */
+    }
+
+    .badge {
+        font-size: 0.75rem; /* Reduce tamaño de etiquetas */
+    }
+
+    .btn-sm {
+        font-size: 0.8rem; /* Botones más pequeños en móvil */
+        padding: 5px 8px;
+    }
+}
