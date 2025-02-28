@@ -747,11 +747,11 @@ a {
 
 .btn-danger {
     background-color: #dc3545;
-    color: white;
+    color: #fff;
 }
 
 .btn-danger:hover {
-    background-color: #a71d2a;
+    background-color: #741821;
 }
 
 .btn-primary {

@@ -30,10 +30,13 @@
                     </tr>
                     <tr>
                         <td colspan="5">
+                            <!-- Sección colapsable que muestra los rescates de cada usuario -->
                             <div class="collapse" id="rescates-{{ $user->id }}">
                                 @if($user->rescueRequests->isEmpty())
                                 <p class="text-center mt-2">No ha solicitado rescates.</p>
                                 @else
+
+                                <!-- Tabla interna que muestra los detalles de los rescates -->
                                 <table class="table table-sm table-bordered mt-2">
                                     <thead class="table-light">
                                         <tr>
@@ -51,26 +54,28 @@
                                             <td>{{ $rescue->location }}</td>
                                             <td>{{ $rescue->details }}</td>
                                             <td>{{ $rescue->rescue_date->format('d/m/Y') }}</td>
+
+                                            <!-- Columna que muestra si el rescate ha sido pagado -->
                                             <td>
                                                 @if($rescue->is_paid)
-                                                <span class="badge bg-success">Pagado</span>
+                                                <span class="badge badge-success">Pagado</span>
                                                 @else
-                                                <span class="badge bg-warning">Pendiente</span>
+                                                <span class="badge badge-warning">Pendiente</span>
                                                 @endif
                                             </td>
 
-                                            <!-- Columna de Prioridad -->
+                                            <!-- Columna de Prioridad alimentos con colores según el nivel -->
                                             <td class="text-center">
                                                 @if($rescue->priority == 'Alta')
                                                 <span class="badge bg-danger">🔴 Alta</span>
                                                 @elseif($rescue->priority == 'Media')
-                                                <span class="badge bg-warning">🟡 Media</span>
+                                                <span class="badge badge-warning">🟡 Media</span>
                                                 @else
-                                                <span class="badge bg-success">🟢 Baja</span>
+                                                <span class="badge badge-success">🟢 Baja</span>
                                                 @endif
                                             </td>
 
-                                            <!-- Columna de Estado -->
+                                            <!-- Columna de Estado con un menú desplegable para cambiar el estado -->
                                             <td class="text-center">
                                                 <form action="{{ route('admin.rescue.updateStatus', $rescue->id) }}" method="POST">
                                                     @csrf
