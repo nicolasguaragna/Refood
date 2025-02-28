@@ -9,10 +9,10 @@ class Rol extends Model
 {
     use HasFactory;
 
-    // Especifica el nombre de la tabla en la base de datos
+    // Especifico el nombre de la tabla en la base de datos
     protected $table = 'roles';
 
-    // Especifica los atributos que se pueden asignar en masa
+    // Especifico los atributos que se pueden asignar en masa
     protected $fillable = ['name'];
 
     // Relación con el modelo User (muchos a muchos)

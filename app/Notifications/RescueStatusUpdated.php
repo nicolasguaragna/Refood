@@ -11,18 +11,40 @@ class RescueStatusUpdated extends Notification
 {
     use Queueable;
 
+    /**
+     * Instancia del rescate cuyo estado ha cambiado.
+     *
+     * @var \App\Models\RescueRequest
+     */
     protected $rescue;
 
+    /**
+     * Constructor de la notificación.
+     *
+     * @param \App\Models\RescueRequest $rescue
+     */
     public function __construct($rescue)
     {
         $this->rescue = $rescue;
     }
 
+    /**
+     * Defino los canales de entrega de la notificación.
+     *
+     * @param mixed $notifiable
+     * @return array
+     */
     public function via($notifiable)
     {
-        return ['mail', 'database']; // Puedes agregar 'database' o 'whatsapp' si integras Twilio o similar
+        return ['mail', 'database']; 
     }
 
+    /**
+     * Construyo el mensaje de correo electrónico.
+     *
+     * @param mixed $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
     public function toMail($notifiable)
     {
         return (new MailMessage)
@@ -33,6 +55,12 @@ class RescueStatusUpdated extends Notification
             ->line('Gracias por usar Refood.');
     }
 
+    /**
+     * Obtengo la representación de la notificación en una base de datos.
+     *
+     * @param mixed $notifiable
+     * @return array
+     */
     public function toArray($notifiable)
     {
         return [
