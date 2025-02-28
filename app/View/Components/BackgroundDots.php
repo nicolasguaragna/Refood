@@ -9,7 +9,7 @@ use Illuminate\View\Component;
 class BackgroundDots extends Component
 {
     /**
-     * Create a new component instance.
+     * Creo una nueva instancia del componente.
      */
     public function __construct()
     {
@@ -17,7 +17,9 @@ class BackgroundDots extends Component
     }
 
     /**
-     * Get the view / contents that represent the component.
+     * Obtengo la vista o contenido que representa el componente.
+     *
+     * @return View|Closure|string
      */
     public function render(): View|Closure|string
     {
