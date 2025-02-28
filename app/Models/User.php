@@ -12,7 +12,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que pueden ser asignados masivamente.
      *
      * @var array<int, string>
      */
@@ -24,7 +24,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Los atributos que deben estar ocultos para la serialización.
      *
      * @var array<int, string>
      */
@@ -34,7 +34,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Defino los atributos que deben ser casteados a tipos específicos.
      *
      * @return array<string, string>
      */
@@ -47,7 +47,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Define la relación de muchos a muchos con el modelo Rol.
+     * Relación de muchos a muchos con el modelo Rol.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -56,20 +56,29 @@ class User extends Authenticatable
         return $this->belongsToMany(Rol::class, 'rol_user');
     }
 
-    // Método para verificar si el usuario tiene un rol específico
+    /**
+     * Verifico si el usuario tiene un rol específico.
+     *
+     * @param string $roleName
+     * @return bool
+     */
     public function hasRole($roleName)
     {
         return $this->roles()->where('name', $roleName)->exists();
     }
 
-    // Relación con las solicitudes de rescate
+    /**
+     * Relación uno a muchos con las solicitudes de rescate.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function rescueRequests()
     {
         return $this->hasMany(RescueRequest::class, 'user_id');
     }
 
     /**
-     * Obtener el número de contacto del usuario.
+     * Obtengo el número de contacto del usuario.
      * Si el usuario no tiene un número en `users`, se toma el más reciente de `rescue_requests`.
      *
      * @return string|null

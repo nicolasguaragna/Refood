@@ -7,8 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Noticia extends Model
 {
+    /**
+     * Especifico el nombre de la tabla en la base de datos.
+     *
+     * @var string
+     */
     protected $table = 'noticias';
-    // Campos permitidos para asignación masiva
+
+    /**
+     * Defino los atributos que pueden ser asignados masivamente.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'titulo',
         'contenido',
@@ -16,9 +26,9 @@ class Noticia extends Model
     ];
 
     /**
-     * Acceso para obtener la URL completa de la imagen.
+     * Obtengo la URL completa de la imagen de la noticia.
      *
-     * Si no hay imagen, devuelve un placeholder predeterminado.
+     * @return string
      */
     public function getImagenUrlAttribute()
     {
