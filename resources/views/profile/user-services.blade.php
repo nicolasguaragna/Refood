@@ -14,13 +14,18 @@
         </div>
         @endif
 
-        <!-- 🔹 Notificaciones del cambio de estado -->
+        <!-- Notificaciones del cambio de estado -->
         @if (Auth::user()->unreadNotifications->count() > 0)
-        <div class="alert alert-info">
-            <h5>📢 Notificaciones:</h5>
-            @foreach (Auth::user()->unreadNotifications as $notification)
-            <p>{{ $notification->data['message'] }}</p>
-            @endforeach
+        <div id="custom-notification" class="custom-alert">
+            <div class="d-flex align-items-center">
+                <span class="icon me-2">🔔</span>
+                <p class="mb-0">
+                    @foreach (Auth::user()->unreadNotifications as $notification)
+                    {{ $notification->data['message'] }}
+                    @endforeach
+                </p>
+            </div>
+            <button type="button" class="close-btn" onclick="closeNotification()">✖</button>
         </div>
         @endif
 
@@ -44,7 +49,7 @@
                     <tr>
                         <!-- Hacer que el servicio sea clickeable solo en móviles -->
                         <td class="text-center">
-                            <a href="#" class="service-link text-decoration-none text-success fw-bold"
+                            <a href="#" class="details-link"
                                 data-bs-toggle="modal" data-bs-target="#detailsModal{{ $service->id }}"
                                 onclick="handleModalClick(event)" role="button">
                                 {{ $service->service->name ?? 'No disponible' }}
@@ -86,7 +91,7 @@
                             </form>
                             <a href="{{ route('services.pay', $service->id) }}" class="btn btn-success btn-sm">Pagar</a>
                             @else
-                            <span class="badge bg-secondary">Sin acciones</span>
+                            <span class="badge badge-secondary">Sin acciones</span>
                             @endif
                         </td>
                     </tr>
@@ -127,14 +132,13 @@
     </div>
 
     <script>
-        function handleModalClick(event) {
-            // Detectar el tamaño de la pantalla
-            if (window.innerWidth > 768) {
-                event.preventDefault(); // Evita que el modal se abra en escritorio
-            }
+        function closeNotification() {
+            document.getElementById("custom-notification").style.display = "none";
         }
-    </script>
 
+        // Cierra automáticamente después de 7 segundos
+        setTimeout(closeNotification, 7000);
+    </script>
 
     <!-- JavaScript para ocultar el mensaje automáticamente -->
     <script>
