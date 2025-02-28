@@ -32,10 +32,7 @@
                 <thead class="table-success text-center">
                     <tr>
                         <th style="width: 10%;">Servicio</th>
-                        <th style="width: 10%;">Precio</th>
-                        <th style="width: 12%;">Contacto</th>
-                        <th style="width: 18%;">Ubicación</th>
-                        <th style="width: 20%;">Detalles</th>
+                        <th style="width: 10%;">Detalles</th>
                         <th style="width: 10%;">Fecha</th>
                         <th style="width: 10%;">Pago</th>
                         <th style="width: 10%;">Feedback</th>
@@ -46,38 +43,31 @@
                     @foreach($services as $service)
                     <tr>
                         <td class="text-center">{{ $service->service->name ?? 'No disponible' }}</td>
-                        <td class="text-center">${{ $service->service ? number_format($service->service->price, 2) : '0.00' }}</td>
-                        <td class="text-center">{{ $service->contact }}</td>
-                        <td class="text-truncate" style="max-width: 200px;">{{ $service->location }}</td>
-                        <td class="text-truncate" style="max-width: 250px;">{{ $service->details }}</td>
+
+                        <!-- Texto de detalles clickeable para abrir el modal -->
+                        <td>
+                            <a href="#" class="details-link" data-bs-toggle="modal" data-bs-target="#detailsModal{{ $service->id }}">
+                                {{ Str::limit($service->details, 50, '...') }}
+                            </a>
+                        </td>
+
                         <td class="text-center">{{ $service->rescue_date ? $service->rescue_date->format('d/m/Y') : 'No especificado' }}</td>
 
                         <!-- Columna 'Pago' -->
-
                         <td class="text-center">
-                            @if($service->is_paid)
-                            <span class="badge badge-success">Pagado</span>
-                            @else
-                            <span class="badge badge-warning">Pendiente</span>
-                            @endif
+                            <span class="badge {{ $service->is_paid ? 'badge-success' : 'badge-warning' }}">
+                                {{ $service->is_paid ? 'Pagado' : 'Pendiente' }}
+                            </span>
                         </td>
 
-                        <!-- Columna Feedback Refood -->
+                        <!-- Columna 'Feedback' -->
                         <td class="text-center">
-                            @if($service->status === 'Pendiente')
-                            <span class="badge badge-warning">Pendiente</span>
-                            @elseif($service->status === 'Visto')
-                            <span class="badge badge-primary">Visto</span>
-                            @elseif($service->status === 'Para ser retirado')
-                            <span class="badge badge-primary">Para ser retirado</span>
-                            @elseif($service->status === 'Retirado')
-                            <span class="badge badge-success">Retirado</span>
-                            @else
-                            <span class="badge badge-secondary">{{ $service->status }}</span>
-                            @endif
+                            <span class="badge badge-{{ $service->status === 'Pendiente' ? 'warning' : ($service->status === 'Visto' ? 'primary' : 'success') }}">
+                                {{ $service->status }}
+                            </span>
                         </td>
 
-                        <!-- Ultima columna Acciones -->
+                        <!-- Columna Acciones (corregida) -->
                         <td class="text-center">
                             @if(!$service->is_paid)
                             <a href="{{ route('services.edit', $service->id) }}" class="btn btn-primary btn-sm">Editar</a>
@@ -92,10 +82,39 @@
                             @endif
                         </td>
                     </tr>
+
+                    <!-- Modal para Ver Detalles -->
+                    <div class="modal fade" id="detailsModal{{ $service->id }}" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="detailsModalLabel">Detalles del Servicio</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Servicio:</strong> {{ $service->service->name ?? 'No disponible' }}</p>
+                                    <p><strong>Precio:</strong> ${{ number_format($service->service->price ?? 0, 2) }}</p>
+                                    <p><strong>Contacto:</strong> {{ $service->contact }}</p>
+                                    <p><strong>Ubicación:</strong> {{ $service->location }}</p>
+                                    <p><strong>Detalles:</strong> {{ $service->details }}</p>
+                                    <p><strong>Fecha de Rescate:</strong> {{ $service->rescue_date ? $service->rescue_date->format('d/m/Y') : 'No especificado' }}</p>
+                                    <p><strong>Estado del Pago:</strong>
+                                        <span class="badge {{ $service->is_paid ? 'badge-success' : 'badge-warning' }}">
+                                            {{ $service->is_paid ? 'Pagado' : 'Pendiente' }}
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     @endforeach
                 </tbody>
             </table>
         </div>
+
         @endif
     </div>
 

@@ -763,6 +763,25 @@ a {
     background-color: #0056b3;
 }
 
+
+/* Hace que la tabla sea completamente responsive */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Estilo para el enlace de detalles */
+.details-link {
+    color: #6bc097;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.details-link:hover {
+    text-decoration: underline;
+    color: #1e7e34;
+}
+
 /* --- Etiquetas (feedback) --- */
 .badge {
     border-radius: 10px;
