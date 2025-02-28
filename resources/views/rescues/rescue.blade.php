@@ -2,7 +2,7 @@
     <x-slot:title>Solicitud de Rescate</x-slot:title>
 
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Solicitar de Rescate</h1>
+        <h1 class="text-center mb-4">Solicitar Rescate</h1>
 
         <!-- Mostrar errores de validación -->
         @if ($errors->any())
@@ -31,8 +31,10 @@
             <!-- Campo de contacto -->
             <div class="mb-3">
                 <label for="contact" class="form-label">Contacto</label>
-                <input type="text" class="form-control" id="contact" name="contact" placeholder="Teléfono de contacto" required pattern="[0-9]+" maxlength="15">
-                <small class="text-danger d-none" id="contact-error">Solo se permiten números.</small>
+                <input type="text" class="form-control" id="contact" name="contact"
+                    placeholder="Teléfono de contacto" required pattern="[0-9]{1,12}"
+                    maxlength="12">
+                <small class="text-danger d-none" id="contact-error">Solo se permiten números y máximo 12 caracteres.</small>
             </div>
 
             <!-- Campo para la ubicación con Google Places API -->
