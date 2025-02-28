@@ -2,6 +2,7 @@
     <x-slot:title>Quiénes Somos</x-slot>
 
         <div class="container mt-4">
+            <!-- Título principal -->
             <h1 class="text-center mb-5 fw-bold ">Quiénes Somos</h1>
 
             <div class="row align-items-center g-4">
@@ -10,14 +11,18 @@
                     <img src="{{ asset('images/equipo4.jpeg') }}" class="img-fluid rounded-3 shadow-lg zoom-in">
                 </div>
 
-                <!-- Contenido informativo -->
+                <!-- Sección de Contenido Informativo -->
                 <div class="col-md-6">
+
+                    <!-- Historia de la organización -->
                     <h2 class="fw-bold text-secondary">Nuestra Historia</h2>
                     <p>Refood nació con la misión de reducir el desperdicio de alimentos y alimentar a quienes más lo necesitan. Nos comprometemos a cambiar el mundo, un plato a la vez.</p>
 
+                    <!-- Misión de la organización -->
                     <h2 class="fw-bold text-secondary">Nuestra Misión</h2>
                     <p>Nos enfocamos en la recolección de alimentos no utilizados de comercios, empresas y hogares, para redistribuirlos a comunidades en situación vulnerable.</p>
 
+                    <!-- Valores de la organización -->
                     <h2 class="fw-bold text-secondary">Nuestros Valores</h2>
                     <ul class="list-unstyled">
                         <li>✅ <strong>Sostenibilidad:</strong> Nos esforzamos por un mundo sin desperdicio.</li>
@@ -45,6 +50,7 @@
             @endif
         </div>
 
+        <!-- Animación para la imagen -->
         <style>
             .zoom-in {
                 opacity: 0;

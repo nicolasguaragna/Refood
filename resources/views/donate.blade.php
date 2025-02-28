@@ -3,6 +3,7 @@
 
         <div class="container mt-4">
             <h1 class="text-center mb-4">Donar un Plato</h1>
+
             <div class="row align-items-stretch d-flex">
                 <!-- Columna de la imagen -->
                 <div class="col-md-6 d-flex align-items-stretch">
@@ -12,6 +13,7 @@
                         class="img-fluid rounded-3 shadow-lg zoom-in flex-grow-1"
                         style="object-fit: cover; height: 100%;">
                 </div>
+
                 <!-- Columna del contenido -->
                 <div class="col-md-6 d-flex flex-column justify-content-center">
                     <h2 class="fw-bold text-secondary">¿Por qué Donar?</h2>
@@ -27,6 +29,7 @@
                     </p>
 
                     <h2 class="fw-bold text-secondary">Haz tu Donación</h2>
+
                     <!-- Botón generado dinámicamente por Mercado Pago -->
                     <div id="wallet_container"></div>
 
@@ -44,6 +47,7 @@
                 </div>
             </div>
         </div>
+
         <style>
             .zoom-in {
                 opacity: 0;

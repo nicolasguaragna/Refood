@@ -1,15 +1,20 @@
 <x-layout>
     <x-slot:title>Página Principal</x-slot>
-        <!-- Sección principal -->
+
+        <!-- Sección Principal del Banner -->
         <section class="landing-banner d-flex align-items-center justify-content-between" style="overflow: visible;">
             <div class="container text-start">
+
+                <!-- Título principal con énfasis en el mensaje clave -->
                 <h1 class="display-4 fw-bold">
                     Cada plato cuenta <br><span class="text-success">para un mundo <br>sin desperdicio</span>
                 </h1>
                 <p class="lead">Un sitio para reducir el excedente de alimentos <br>y redistribuirlos a quienes más lo necesitan.</p>
+
+                <!-- Botón de llamada a la acción para donar -->
                 <a href="{{ route('donate.index') }}" class="btn btn-success btn-lg mt-3">Doná Ahora</a>
 
-                <!-- Clientes felices -->
+                <!-- Sección de Clientes Felices con imágenes circulares y calificación -->
                 <div class="d-flex align-items-center mt-4">
                     <div class="client-images me-3">
                         <img src="{{ asset('images/Elipse1.jpg') }}" alt="Cliente 1" class="rounded-circle" style="width: 40px; height: 40px;">
@@ -127,6 +132,7 @@
             </div>
         </section>
 
+        <!-- Sección CTA (Call To Action) -->
         <section class="cta-section text-center mt-5">
             <div class="cta-container d-flex justify-content-between align-items-center">
                 <img src="{{ asset('images/marca-final.png') }}" alt="Refood Logo" class="cta-logo">
