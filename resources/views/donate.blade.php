@@ -3,16 +3,17 @@
 
         <div class="container mt-4">
             <h1 class="text-center mb-4">Donar un Plato</h1>
-            <div class="row align-items-center">
+            <div class="row align-items-stretch d-flex">
                 <!-- Columna de la imagen -->
-                <div class="col-md-6 text-center">
+                <div class="col-md-6 d-flex align-items-stretch">
                     <img
                         src="{{ asset('images/voluntarios-sirviendo.jpg') }}"
                         alt="Voluntarios sirviendo comida"
-                        class="img-fluid rounded-3 shadow-lg zoom-in">
+                        class="img-fluid rounded-3 shadow-lg zoom-in flex-grow-1"
+                        style="object-fit: cover; height: 100%;">
                 </div>
                 <!-- Columna del contenido -->
-                <div class="col-md-6">
+                <div class="col-md-6 d-flex flex-column justify-content-center">
                     <h2 class="fw-bold text-secondary">¿Por qué Donar?</h2>
                     <p>
                         En Refood, creemos que cada plato cuenta. Tu donación nos ayuda a reducir el desperdicio de alimentos
