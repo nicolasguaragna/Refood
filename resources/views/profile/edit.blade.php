@@ -6,13 +6,15 @@
 
         <div class="row justify-content-center">
             <div class="col-md-6">
+                <!-- Tarjeta para la edición del perfil -->
                 <div class="card shadow-lg border-0 rounded-4">
                     <div class="card-body">
                         <h5 class="card-title text-center mb-3">📌 Actualiza tu información personal</h5>
 
+                        <!-- Formulario para actualizar el perfil del usuario -->
                         <form method="POST" action="{{ route('profile.update') }}">
-                            @csrf
-                            @method('PUT')
+                            @csrf <!-- Token CSRF para seguridad -->
+                            @method('PUT') <!-- Método PUT para actualizar los datos -->
 
                             <!-- Nombre -->
                             <div class="mb-3">
@@ -66,7 +68,7 @@
                                 </div>
                             </div>
 
-                            <!-- Botones -->
+                            <!-- Botones de Cancelar y Guardar Cambios -->
                             <div class="d-flex justify-content-between mt-4">
                                 <a href="{{ route('profile.show') }}" class="btn btn-secondary">🔙 Cancelar</a>
                                 <button type="submit" class="btn btn-success">💾 Guardar Cambios</button>

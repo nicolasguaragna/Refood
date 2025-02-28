@@ -10,20 +10,25 @@
         </div>
         @endif
 
+        <!-- Encabezado del perfil -->
         <h1 class="text-center mb-4">👤 Mi Perfil</h1>
 
         <div class="row justify-content-center">
             <div class="col-md-6">
+
+                <!-- Tarjeta de perfil del usuario -->
                 <div class="card shadow-lg border-0 rounded-4">
                     <div class="card-body text-center">
                         <h5 class="card-title mb-3">📌 Información Personal</h5>
 
+                        <!-- Datos del usuario -->
                         <p><strong>👤 Nombre:</strong> {{ $user->name }}</p>
                         <p><strong>📧 Email:</strong> {{ $user->email }}</p>
                         <p><strong>📞 Contacto:</strong> {{ auth()->user()->phone ?? 'No registrado' }}</p>
 
                         <hr>
 
+                        <!-- Botón para editar el perfil -->
                         <a href="{{ route('profile.edit') }}" class="btn btn-primary w-100">
                             ✏️ Editar Perfil
                         </a>

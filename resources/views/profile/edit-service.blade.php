@@ -6,10 +6,12 @@
 
         <div class="row justify-content-center">
             <div class="col-md-6">
+                <!-- Tarjeta de edición del servicio -->
                 <div class="card shadow-lg border-0 rounded-4">
                     <div class="card-body">
                         <h5 class="card-title text-center mb-3">📌 Modifica los detalles del servicio</h5>
 
+                        <!-- Formulario para actualizar un servicio -->
                         <form action="{{ route('services.update', $service->id) }}" method="POST">
                             @csrf
                             @method('PUT')
@@ -43,7 +45,7 @@
                                 @enderror
                             </div>
 
-                            <!-- Botones -->
+                            <!-- Botones de Cancelar y Guardar Cambios -->
                             <div class="d-flex justify-content-between mt-4">
                                 <a href="{{ route('user.services') }}" class="btn btn-secondary">Cancelar</a>
                                 <button type="submit" class="btn btn-success">Guardar Cambios</button>
