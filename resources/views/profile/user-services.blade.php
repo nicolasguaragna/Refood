@@ -36,9 +36,9 @@
                         <th style="width: 12%;">Contacto</th>
                         <th style="width: 18%;">Ubicación</th>
                         <th style="width: 20%;">Detalles</th>
-                        <th style="width: 10%;">Fecha de Rescate</th>
+                        <th style="width: 10%;">Fecha</th>
                         <th style="width: 10%;">Pago</th>
-                        <th style="width: 10%;">Feedback Refood</th>
+                        <th style="width: 10%;">Feedback</th>
                         <th style="width: 10%;">Acciones</th>
                     </tr>
                 </thead>
@@ -56,25 +56,24 @@
 
                         <td class="text-center">
                             @if($service->is_paid)
-                            <span class="badge bg-success">Pagado</span>
+                            <span class="badge badge-success">Pagado</span>
                             @else
-                            <span class="badge bg-warning text-dark">Pendiente</span>
+                            <span class="badge badge-warning">Pendiente</span>
                             @endif
                         </td>
 
                         <!-- Columna Feedback Refood -->
                         <td class="text-center">
-                            <!-- 🔹 Estado actualizado del rescate -->
                             @if($service->status === 'Pendiente')
-                            <span class="badge bg-warning text-dark">Pendiente</span>
+                            <span class="badge badge-warning">Pendiente</span>
                             @elseif($service->status === 'Visto')
-                            <span class="badge bg-info text-white">Visto</span>
+                            <span class="badge badge-primary">Visto</span>
                             @elseif($service->status === 'Para ser retirado')
-                            <span class="badge bg-primary text-white">Para ser retirado</span>
+                            <span class="badge badge-primary">Para ser retirado</span>
                             @elseif($service->status === 'Retirado')
-                            <span class="badge bg-success">Retirado</span>
+                            <span class="badge badge-success">Retirado</span>
                             @else
-                            <span class="badge bg-secondary">{{ $service->status }}</span>
+                            <span class="badge badge-secondary">{{ $service->status }}</span>
                             @endif
                         </td>
 
