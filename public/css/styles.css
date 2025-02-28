@@ -876,3 +876,30 @@ a {
 .custom-alert {
     animation: fadeIn 0.8s ease-in-out;
 }
+
+.notification-alert {
+    background-color: #eef9f3; /* Fondo verde claro, en sintonía con la marca */
+    color: #035f13; /* Verde oscuro para el texto */
+    border-left: 5px solid #6bc097; /* Borde distintivo a la izquierda */
+    font-size: 14px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.notification-alert .close-btn {
+    background: none;
+    border: none;
+    color: #035f13;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.notification-alert .close-btn:hover {
+    color: #033d0c;
+}

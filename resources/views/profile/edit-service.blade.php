@@ -45,8 +45,8 @@
 
                             <!-- Botones -->
                             <div class="d-flex justify-content-between mt-4">
-                                <a href="{{ route('user.services') }}" class="btn btn-secondary">🔙 Cancelar</a>
-                                <button type="submit" class="btn btn-success">💾 Guardar Cambios</button>
+                                <a href="{{ route('user.services') }}" class="btn btn-secondary">Cancelar</a>
+                                <button type="submit" class="btn btn-success">Guardar Cambios</button>
                             </div>
                         </form>
                     </div>

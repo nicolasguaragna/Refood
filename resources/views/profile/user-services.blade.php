@@ -4,25 +4,21 @@
     <div class="container mt-4">
         <h1 class="text-center">Mis Servicios</h1>
 
-        <!-- Mostrar mensajes de éxito o error si existen -->
-        @if (session('success') || session('error'))
-        <div id="flash-message" class="alert 
-            {{ session('success') ? 'alert-success' : 'alert-danger' }} 
-            alert-dismissible fade show" role="alert">
-            {{ session('success') ?? session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-
-        <!-- Notificaciones del cambio de estado -->
-        @if (Auth::user()->unreadNotifications->count() > 0)
+        <!-- 🔔 Notificación de Feedback, Edición o Cancelación -->
+        @if (session('success') || session('error') || Auth::user()->unreadNotifications->count() > 0)
         <div id="custom-notification" class="custom-alert">
             <div class="d-flex align-items-center">
                 <span class="icon me-2">🔔</span>
                 <p class="mb-0">
+                    @if (session('success'))
+                    {{ session('success') }}
+                    @elseif (session('error'))
+                    {{ session('error') }}
+                    @elseif (Auth::user()->unreadNotifications->count() > 0)
                     @foreach (Auth::user()->unreadNotifications as $notification)
                     {{ $notification->data['message'] }}
                     @endforeach
+                    @endif
                 </p>
             </div>
             <button type="button" class="close-btn" onclick="closeNotification()">✖</button>
@@ -140,18 +136,13 @@
         setTimeout(closeNotification, 7000);
     </script>
 
-    <!-- JavaScript para ocultar el mensaje automáticamente -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const flashMessage = document.getElementById("flash-message");
-            if (flashMessage) {
-                setTimeout(() => {
-                    flashMessage.classList.remove("show");
-                    flashMessage.classList.add("fade");
-                    setTimeout(() => flashMessage.style.display = "none", 500);
-                }, 7000); // Desaparece después de 7 segundos
+        function handleModalClick(event) {
+            // Si la pantalla es de escritorio, evita abrir el modal
+            if (window.innerWidth > 768) {
+                event.preventDefault();
             }
-        });
+        }
     </script>
 
 
