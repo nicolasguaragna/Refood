@@ -16,7 +16,7 @@ class Noticia extends Model
     ];
 
     /**
-     * Accesor para obtener la URL completa de la imagen.
+     * Acceso para obtener la URL completa de la imagen.
      *
      * Si no hay imagen, devuelve un placeholder predeterminado.
      */

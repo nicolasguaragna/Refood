@@ -9,8 +9,18 @@ class RescueRequest extends Model
 {
     use HasFactory;
 
+    /**
+     * Defino la tabla asociada al modelo.
+     * 
+     * @var string
+     */
     protected $table = 'rescue_requests';
 
+    /**
+     * Especifico los campos que pueden ser asignados masivamente.
+     *
+     * @var array
+     */
     protected $fillable = [
         'user_id',
         'name',
@@ -28,16 +38,16 @@ class RescueRequest extends Model
 
 
     /**
-     * Cast attributes to specific types.
+     * Defino los atributos que deben ser convertidos a tipos específicos.
      *
-     * This ensures that rescue_date is always treated as a datetime object.
+     * @var array
      */
     protected $casts = [
         'rescue_date' => 'datetime',
     ];
 
     /**
-     * Define the relationship with the User model.
+     * Relación con el modelo User (Usuario que creó la solicitud de rescate).
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -47,7 +57,7 @@ class RescueRequest extends Model
     }
 
     /**
-     * Define the relationship with the Service model.
+     * Relación con el modelo Service (Servicio asociado a la solicitud de rescate).
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -56,15 +66,20 @@ class RescueRequest extends Model
         return $this->belongsTo(Service::class, 'service_id');
     }
 
+    /**
+     * Determino la prioridad de la solicitud en función de las palabras clave en los detalles.
+     *
+     * @return string
+     */
     public function getPriorityAttribute()
     {
         $highPriorityKeywords = ['carne', 'lácteo', 'tomate', 'lechuga', 'banana', 'frutilla', 'palta', 'espinaca', 'uva', 'embutidos', 'verdura fresca', 'pollo', 'pescado', 'queso', 'huevo', 'alimentos cocidos', 'manteca'];
         $mediumPriorityKeywords = ['pan', 'harina', 'verdura no perecedera', 'fruta', 'leche en polvo', 'pasta', 'fideos', 'granos', 'tubérculo', 'galletas'];
 
-        // Convertir a minúsculas para evitar problemas de mayúsculas/minúsculas
+        // Convierto a minúsculas para evitar problemas de mayúsculas/minúsculas
         $detailsLower = strtolower($this->details);
 
-        // Verificar si alguna palabra clave está en los detalles
+        // Verifico si alguna palabra clave está en los detalles
         foreach ($highPriorityKeywords as $word) {
             if (str_contains($detailsLower, $word)) {
                 return 'Alta';
