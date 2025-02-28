@@ -9,13 +9,22 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // Muestra el formulario de registro
+    /**
+     * Muestro el formulario de registro.
+     *
+     * @return \Illuminate\View\View
+     */
     public function showRegisterForm()
     {
         return view('auth.register');
     }
 
-    // Se procesa el registro de usuario
+    /**
+     * Proceso el registro de un nuevo usuario.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function register(Request $request)
     {
         $request->validate([
@@ -35,13 +44,22 @@ class AuthController extends Controller
         return redirect()->route('home')->with('message', 'Registro exitoso. ¡Bienvenido!');
     }
 
-    // Muestra el formulario de login
+    /**
+     * Muestro el formulario de inicio de sesión.
+     *
+     * @return \Illuminate\View\View
+     */
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    // Se procesa el inicio de sesión de usuario
+    /**
+     * Proceso el inicio de sesión del usuario.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
         $request->validate([
@@ -56,7 +74,11 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'Las credenciales no coinciden con nuestros registros.']);
     }
 
-    // Cierra la sesión del usuario
+    /**
+     * Cierro la sesión del usuario y redirijo a la página principal.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout()
     {
         Auth::logout();

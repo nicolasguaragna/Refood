@@ -7,14 +7,23 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    // Método para mostrar la lista de todos los usuarios
+    /**
+     * Muestro la lista de todos los usuarios registrados.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $users = User::all();
         return view('admin.users.users', compact('users'));
     }
 
-    // Método para mostrar los detalles de un usuario específico, incluyendo rescates y servicios
+    /**
+     * Muestro los detalles de un usuario específico, incluyendo sus rescates y servicios asociados.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
     public function show($id)
     {
         // Cargo el usuario junto con sus rescates y los servicios asociados

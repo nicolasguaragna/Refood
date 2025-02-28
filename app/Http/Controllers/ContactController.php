@@ -7,13 +7,22 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    // Método para mostrar la vista de contacto
+    /**
+     * Muestro la vista de contacto.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         return view('contact');
     }
 
-    // Método para manejar el envío del formulario de contacto y guardar el mensaje en la base de datos
+    /**
+     * Manejo el envío del formulario de contacto y guarda el mensaje en la base de datos.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         // Valido los datos del formulario

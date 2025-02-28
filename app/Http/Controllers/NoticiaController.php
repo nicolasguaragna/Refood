@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Storage;
 class NoticiaController extends Controller
 {
     /**
-     * Muestro una lista paginada de noticias
+     * Muestro una lista paginada de noticias.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -17,7 +19,11 @@ class NoticiaController extends Controller
         return view('noticias.index', compact('noticias'));
     }
 
-    // Método para la vista de administración (Solo para Admin)
+    /**
+     * Muestro la vista de administración de noticias (solo para administradores).
+     *
+     * @return \Illuminate\View\View
+     */
     public function admin()
     {
         $noticias = Noticia::all(); // Obtengo todas las noticias
@@ -25,7 +31,9 @@ class NoticiaController extends Controller
     }
 
     /**
-     * Muestro el formulario de creacion de una noticia.
+     * Muestro el formulario de creación de una noticia.
+     *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -33,7 +41,10 @@ class NoticiaController extends Controller
     }
 
     /**
-     * Almaceno una nueva noticia en la base de datos
+     * Almaceno una nueva noticia en la base de datos.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -60,6 +71,9 @@ class NoticiaController extends Controller
 
     /**
      * Muestro una noticia específica.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
@@ -69,6 +83,9 @@ class NoticiaController extends Controller
 
     /**
      * Muestro el formulario de edición de una noticia.
+     *
+     * @param Noticia $noticia
+     * @return \Illuminate\View\View
      */
     public function edit(Noticia $noticia)
     {
@@ -77,6 +94,10 @@ class NoticiaController extends Controller
 
     /**
      * Actualizo una noticia en la base de datos.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -103,8 +124,12 @@ class NoticiaController extends Controller
         return redirect()->route('noticias.admin')->with('success', 'Noticia actualizada con éxito.');
     }
 
+
     /**
      * Elimino una noticia de la base de datos.
+     *
+     * @param Noticia $noticia
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Noticia $noticia)
     {

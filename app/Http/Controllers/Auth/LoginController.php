@@ -8,42 +8,37 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
+    /**
+     * Uso el trait AuthenticatesUsers para manejar la autenticación de usuarios.
+     */
 
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
+     * Redirección después de un inicio de sesión exitoso.
      *
      * @var string
      */
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
+     * Creo una nueva instancia del controlador.
      *
-     * @return void
+     * Aplicp middleware:
+     * - 'guest' para evitar que usuarios autenticados accedan al login.
+     * - 'auth' solo para el método logout.
      */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }
-    
-        /**
-     * Log the user out of the application.
+
+    /**
+     * Cierro la sesión del usuario.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function logout(Request $request)
     {

@@ -10,30 +10,23 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+    /**
+     * Uso el trait RegistersUsers para manejar el registro de usuarios.
+     */
 
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
+     * Redirección después de un registro exitoso.
      *
      * @var string
      */
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
+     * Creo una nueva instancia del controlador.
      *
-     * @return void
+     * Aplico middleware 'guest' para evitar que usuarios autenticados accedan al registro.
      */
     public function __construct()
     {
@@ -41,7 +34,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Valido los datos de registro del usuario.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
@@ -56,7 +49,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Creo una nueva instancia de usuario después de un registro válido.
      *
      * @param  array  $data
      * @return \App\Models\User

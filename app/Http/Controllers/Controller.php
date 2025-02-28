@@ -8,5 +8,8 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
+    /**
+     * Habilita la autorización y validación en todos los controladores que hereden de esta clase.
+     */
     use AuthorizesRequests, ValidatesRequests;
 }

@@ -7,30 +7,26 @@ use Illuminate\Foundation\Auth\VerifiesEmails;
 
 class VerificationController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Email Verification Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling email verification for any
-    | user that recently registered with the application. Emails may also
-    | be re-sent if the user didn't receive the original email message.
-    |
-    */
 
+    /**
+     * Uso el trait VerifiesEmails para manejar la verificación de correos electrónicos.
+     */
     use VerifiesEmails;
 
     /**
-     * Where to redirect users after verification.
+     * Redirijo a los usuarios después de la verificación del correo.
      *
      * @var string
      */
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
+     * Creo una nueva instancia del controlador.
      *
-     * @return void
+     * Aplico los siguientes middlewares:
+     * - 'auth' para asegurar que solo usuarios autenticados puedan acceder.
+     * - 'signed' solo en la verificación para asegurar enlaces firmados.
+     * - 'throttle' para limitar intentos de verificación y reenvío de correos.
      */
     public function __construct()
     {
